@@ -1,0 +1,66 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.14.0.0
+Copyright (C) 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: zhou matebook D, rehe, LIC=HF801-CCHGT-23TM4-FAB3Q-TM53P-RT9Z9
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Professional  Version: 5.14.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.05 update 1 (build 106)
+Assembler:       Armasm.exe V5.05 update 1 (build 106)
+Linker/Locator:  ArmLink.exe V5.05 update 1 (build 106)
+Library Manager: ArmAr.exe V5.05 update 1 (build 106)
+Hex Converter:   FromElf.exe V5.05 update 1 (build 106)
+CPU DLL:         SARMCM3.DLL V5.14.0.0
+Dialog DLL:      DCM.DLL V1.13.1.0
+Target DLL:      Segger\JL2CM3.dll V2.99.13.0
+Dialog DLL:      TCM.DLL V1.14.4.0
+ 
+<h2>Project:</h2>
+E:\zhoubocheng\work\foodline\foodline\foodline20200305_V1.6\MZ-SYS.uvprojx
+Project File Date:  04/08/2020
+
+<h2>Output:</h2>
+Build target 'MZ-SYS'
+compiling FoodlineControl.c...
+Utilities\FoodlineControl.c(598): warning:  #177-D: variable "j" was declared but never referenced
+      static u8 i = 0,j = 0, k = 0;
+Utilities\FoodlineControl.c(598): warning:  #177-D: variable "k" was declared but never referenced
+      static u8 i = 0,j = 0, k = 0;
+Utilities\FoodlineControl.c(600): warning:  #177-D: variable "myselfMachineFlag" was declared but never referenced
+        static bool myselfMachineFlag = FALSE;
+Utilities\FoodlineControl.c(601): warning:  #177-D: variable "foodOverNum" was declared but never referenced
+        u8 foodOverNum = 0;
+Utilities\FoodlineControl.c(705): warning:  #177-D: function "NextEnabled" was declared but never referenced
+  static bool NextEnabled(u8 areaIndex,u8 index)
+Utilities\FoodlineControl.c: 5 warnings, 0 errors
+linking...
+Program Size: Code=81536 RO-data=1104 RW-data=4632 ZI-data=49408  
+FromELF: creating hex file...
+After Build - User command #1: C:\Keil_v5\ARM\ARMCC\bin\fromelf.exe --bin --output ./Output/MZ-SYS.bin ./Output/MZ-SYS.axf
+".\Output\MZ-SYS.axf" - 0 Error(s), 5 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.4.2.0.pack
+                ARM::CMSIS:CORE:3.40.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 3.40.0
+
+<h2>Collection of Component include folders:</h2>
+  E:\zhoubocheng\work\foodline\foodline\foodline20200305_V1.6\RTE
+  C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include
+  C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:3.40.0
+      Source file:   CMSIS\UserCodeTemplates\ARM\ITM_Retarget.c
+</pre>
+</body>
+</html>
