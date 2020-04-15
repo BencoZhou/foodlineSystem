@@ -2378,71 +2378,71 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-        32          0          0          0          0        540   core_cm3.o
-        42          0          0          0          0        276   cpu_a.o
-      1336         88          0          0          0      10299   cpu_c.o
-        80          0          0          0          0        615   delay.o
-       132         20          0          8          0       1099   dispatcher.o
-       752         54          0          2          0       2846   displaypara.o
-      1932         68          0         13       4128      10904   displayprotocol.o
-       414          0          0          0          0       5526   flash.o
-      4106        146          0         42         76       9686   foodlinecontrol.o
-       192         20          0          4          0        899   main.o
-       220         22          0          0          0       3457   misc.o
-      1600        120        256         52       3832      14591   os_core.o
-       152         30          0          0          0        316   os_cpu_a.o
-       244          6          0          0          0       2545   os_cpu_c.o
-       968         16          0          0          0       4050   os_mbox.o
-      1472         42          0          0          0      12572   os_mutex.o
-      1488         28          0          0          0       5417   os_q.o
-       916         18          0          0          0       3798   os_sem.o
-      1448         64          0          0          0       5010   os_task.o
-       428         26          0          0          0       1798   os_time.o
-      3300         68        256          8       1024      15683   os_wrap.o
-      1088         26          0          6          0       2283   page10towersout.o
-      1736         32          0          9          0       2657   page11towersoutconfig.o
-      1792          0          0          0          0       2283   page12s1s2control.o
-      2232         28          0          3          0       3051   page13linkconfig .o
-       668          6          0          1          0       1960   page14w1control.o
-      1820         12          0          0          0       2228   page15w2control.o
-       586          0          0          0          0       1779   page16e1e2control.o
-      2244          4          0          1          0       2592   page17c1control.o
-      1872         10          0          0          0       2236   page18c2control.o
-       588          4          0          1          0       1920   page19n1control.o
-       540         22          0          2         80       2775   page1flinepathconfig.o
-       612          6          0          0          0       1720   page20n2control.o
-      2036         32          0          3          0       3300   page2pathconfig.o
-      1844         30          0          9          0       2618   page3flinedevice.o
-       840         22          0         12          0       1956   page5revise.o
-      1084         16          0          2          0       2290   page6readpathconfig.o
-      1200         24          0          6          0       2331   page7controlfline.o
-       976         20          0          6          0       2272   page8switchvalve.o
-      1044         22          0          9          0       2418   page9switchvalveconfig.o
-      2228         84          0         29      14014      13276   parasettinglib.o
-      2136         86        104         20          0     239560   rtc.o
-       224         12          0          0         18     228637   spi.o
-       672         12          0          0          0       3741   spiflash.o
-      1760        114          0         12         64       5694   statemachine.o
-       164         50        327       4096          0        500   stm32f10x.o
-       196          8          0          0          0       3424   stm32f10x_bkp.o
-      1468         34          0          0          0      14358   stm32f10x_flash.o
-       860         38          0          0          0      13993   stm32f10x_gpio.o
-       668         44          0          6        128       9145   stm32f10x_it.o
-        64          6          0          0          0       1249   stm32f10x_iwdg.o
-       204         14          0          0          0       1899   stm32f10x_pwr.o
-       932         36          0         20          0      17536   stm32f10x_rcc.o
-       328          4          0          0          0       2650   stm32f10x_rtc.o
-       780         14          0          0          0      13422   stm32f10x_spi.o
-      1032         22          0          0          0      14396   stm32f10x_usart.o
-       920        172          0         59      24930       5666   systeminit.o
-         0          0          0          0          0      24820   time.o
-       836         38          0          0          0       2074   uart.o
-        44          0          0          0          0        622   wdg.o
-      2736         64          0          2         36       5574   wirelessapp.o
-       672         24          0          0          0       2406   wlan4gapp.o
+        32          0          0          0          0        548   core_cm3.o
+        42          0          0          0          0        284   cpu_a.o
+      1336         88          0          0          0      10323   cpu_c.o
+        80          0          0          0          0        627   delay.o
+       132         20          0          8          0       1123   dispatcher.o
+       752         54          0          2          0       2866   displaypara.o
+      1932         68          0         13       4128      10940   displayprotocol.o
+       414          0          0          0          0       5566   flash.o
+      4106        146          0         42         76       9738   foodlinecontrol.o
+       192         20          0          4          0        923   main.o
+       220         22          0          0          0       3485   misc.o
+      1600        120        256         52       3832      14635   os_core.o
+       152         30          0          0          0        328   os_cpu_a.o
+       244          6          0          0          0       2573   os_cpu_c.o
+       968         16          0          0          0       4070   os_mbox.o
+      1472         42          0          0          0      12608   os_mutex.o
+      1488         28          0          0          0       5437   os_q.o
+       916         18          0          0          0       3814   os_sem.o
+      1448         64          0          0          0       5034   os_task.o
+       428         26          0          0          0       1810   os_time.o
+      3300         68        256          8       1024      15719   os_wrap.o
+      1088         26          0          6          0       2315   page10towersout.o
+      1736         32          0          9          0       2689   page11towersoutconfig.o
+      1792          0          0          0          0       2307   page12s1s2control.o
+      2232         28          0          3          0       3087   page13linkconfig .o
+       668          6          0          1          0       1988   page14w1control.o
+      1820         12          0          0          0       2252   page15w2control.o
+       586          0          0          0          0       1803   page16e1e2control.o
+      2244          4          0          1          0       2620   page17c1control.o
+      1872         10          0          0          0       2260   page18c2control.o
+       588          4          0          1          0       1948   page19n1control.o
+       540         22          0          2         80       2823   page1flinepathconfig.o
+       612          6          0          0          0       1744   page20n2control.o
+      2036         32          0          3          0       3328   page2pathconfig.o
+      1844         30          0          9          0       2654   page3flinedevice.o
+       840         22          0         12          0       1984   page5revise.o
+      1084         16          0          2          0       2322   page6readpathconfig.o
+      1200         24          0          6          0       2359   page7controlfline.o
+       976         20          0          6          0       2300   page8switchvalve.o
+      1044         22          0          9          0       2454   page9switchvalveconfig.o
+      2228         84          0         29      14014      13320   parasettinglib.o
+      2136         86        104         20          0     239664   rtc.o
+       224         12          0          0         18     228733   spi.o
+       672         12          0          0          0       3765   spiflash.o
+      1760        114          0         12         64       5730   statemachine.o
+       164         50        327       4096          0        512   stm32f10x.o
+       196          8          0          0          0       3444   stm32f10x_bkp.o
+      1468         34          0          0          0      14390   stm32f10x_flash.o
+       860         38          0          0          0      14029   stm32f10x_gpio.o
+       668         44          0          6        128       9181   stm32f10x_it.o
+        64          6          0          0          0       1261   stm32f10x_iwdg.o
+       204         14          0          0          0       1911   stm32f10x_pwr.o
+       932         36          0         20          0      17580   stm32f10x_rcc.o
+       328          4          0          0          0       2662   stm32f10x_rtc.o
+       780         14          0          0          0      13454   stm32f10x_spi.o
+      1032         22          0          0          0      14428   stm32f10x_usart.o
+       920        172          0         59      24930       5726   systeminit.o
+         0          0          0          0          0      24860   time.o
+       836         38          0          0          0       2086   uart.o
+        44          0          0          0          0        634   wdg.o
+      2736         64          0          2         36       5610   wirelessapp.o
+       672         24          0          0          0       2426   wlan4gapp.o
 
     ----------------------------------------------------------------------
-     64988       2028        976       4472      48336     781238   Object Totals
+     64988       2028        976       4472      48336     783094   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          8          0          1         29          6          0   (incl. Padding)
 
@@ -2527,8 +2527,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     81536       3130       1104       4632      49408    1035347   Grand Totals
-     81536       3130       1104         92      49408    1035347   ELF Image Totals (compressed)
+     81536       3130       1104       4632      49408    1037203   Grand Totals
+     81536       3130       1104         92      49408    1037203   ELF Image Totals (compressed)
      81536       3130       1104         92          0          0   ROM Totals
 
 ==============================================================================

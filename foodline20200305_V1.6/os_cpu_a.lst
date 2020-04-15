@@ -426,11 +426,11 @@ ARM Macro Assembler    Page 7
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
 ork --depend=.\output\os_cpu_a.d -o.\output\os_cpu_a.o -IE:\zhoubocheng\work\fo
-odline\foodline\foodline20200305_V1.6\RTE -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0
-\CMSIS\Include -IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include -I
-C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5 --predefine="__UVISION_VERSION SET
-A 514" --predefine="_RTE_ SETA 1" --predefine="STM32F10X_HD SETA 1" --list=.\os
-_cpu_a.lst uCos\Ports\os_cpu_a.asm
+odline\food\foodlineSystem\foodline20200305_V1.6\RTE -IC:\Keil_v5\ARM\PACK\ARM\
+CMSIS\4.2.0\CMSIS\Include -IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device
+\Include -IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5 --predefine="__UVISION_
+VERSION SETA 514" --predefine="_RTE_ SETA 1" --predefine="STM32F10X_HD SETA 1" 
+--list=.\os_cpu_a.lst uCos\Ports\os_cpu_a.asm
 
 
 
