@@ -595,7 +595,7 @@ void DeviceControlAndInquire(void)
     INPUT_EVENT event;
     static u8 index = SING_LINK_DEVICE_TOTAL_NUMBER-1,  areaIndex = AREA_DEVICE_TOTAL_NUMBER - 1;
    // static bool isFinish;
-    static u8 i = 0,j = 0, k = 0;
+    u8 i = 0;
 	u8 gIndex = 0;
 	static bool myselfMachineFlag = FALSE;
 	u8 foodOverNum = 0;
@@ -629,7 +629,7 @@ void DeviceControlAndInquire(void)
 		}	
 		index = gIndex - 1;		
     }
-
+	
 	if(DeviceSendCmd(areaIndex ,index, SEND_TYPE_INQUIRE) == FALSE)    //查询状态，无论有没有完成控制功能都会先查询状态。  
 		return;    //   加入通讯失败异常代码
 
@@ -667,14 +667,14 @@ void DeviceControlAndInquire(void)
 					areaIndex = AREA_DEVICE_TOTAL_NUMBER - 1;
 					break;
 				}																
-				if(AllTheControlParaGet(areaIndex,0)->cDevice.placeNew.device != 0)          //  此处条件可换成判断是否是分机地址
+				if(AllTheControlParaGet(areaIndex,0)->cDevice.placeNew.useID != 0)          //  此处条件可换成判断是否是分机地址
 				{
 					if(AllTheControlParaGet(areaIndex,0)->cDevice.place.area == DEVICE_AREA_S || 
 						AllTheControlParaGet(areaIndex,0)->cDevice.place.area == DEVICE_AREA_C  ||
 						DeviceControlParaGet()->controlArea[areaIndex] == TRUE   )
 						// 如果不是主机区域，其余的不再预览，节约资源。
 					{
-						while(AllTheControlParaGet(areaIndex,i)->cDevice.placeNew.device != 0)   // 得到当前料线的设备数量
+						while(AllTheControlParaGet(areaIndex,i)->cDevice.placeNew.useID != 0)   // 得到当前料线的设备数量
 						{
 							if(i < (SING_LINK_DEVICE_TOTAL_NUMBER-1))
 							{
@@ -686,7 +686,7 @@ void DeviceControlAndInquire(void)
 								break;
 							}
 						}
-						index = i;
+						index = (i>0)?(i-1):0;
 						DeviceControlParaGet()->controlArea[areaIndex] = FALSE ;  //当前区域控制完成，
 						i = 0;
 						break;
@@ -697,7 +697,42 @@ void DeviceControlAndInquire(void)
 		else
 		{
 			index -= 1;
-		}    
+			if(AllTheControlParaGet(areaIndex,index)->cDevice.place.type == DEVICE_NAME_CONTROL)  //如果是主机则需要另外查询索引
+			{
+				if(areaIndex > 0)
+					areaIndex -= 1;
+				else
+					areaIndex = AREA_DEVICE_TOTAL_NUMBER - 1;
+				while(1)
+				{
+					if(AllTheControlParaGet(areaIndex,0)->cDevice.placeNew.useID != 0)  
+					{
+						while(AllTheControlParaGet(areaIndex,i)->cDevice.placeNew.useID != 0)   // 得到当前料线的设备数量
+						{
+							if(i < (SING_LINK_DEVICE_TOTAL_NUMBER-1))
+							{
+								i++;
+							}
+							else
+							{
+								i = SING_LINK_DEVICE_TOTAL_NUMBER-1;
+								break;
+							}
+						}
+						index = (i>0)?(i-1):0;	
+						break;
+					}
+					else
+					{
+						if(areaIndex > 0)
+							areaIndex -= 1;
+						else
+							areaIndex = AREA_DEVICE_TOTAL_NUMBER - 1;						
+					}
+				}				
+			}
+		}  
+		
 	}            
     
 }

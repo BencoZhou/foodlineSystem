@@ -60,9 +60,9 @@ void Page19N1ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
     {
         DeviceControlParaGet()->isClickShutdown = FALSE;
 
-        if(DeviceControlParaGet()->stateMachineState == STATE_CHANGE_SUSPEND)
+        if(DeviceControlParaGet()->stateMachineState[DEVICE_AREA_N] == STATE_CHANGE_SUSPEND)
         {
-            DeviceControlParaGet()->stateMachineState = STATE_CHANGE_SUSPENDING;   
+            DeviceControlParaGet()->stateMachineState[DEVICE_AREA_N] = STATE_CHANGE_SUSPENDING;   
         }
         else
         {
@@ -123,7 +123,7 @@ void Page19N1ControlRefresh(void)
         
 
         DisplayCommIconSend(PAGE19_N1_DELAYTIME     , AllTheControlParaGet((DEVICE_AREA_N - 1),0x05)->time);
-        DisplayCommIconSend(PAGE19_STATE_MACHINE_STATE     , DeviceControlParaGet()->stateMachineState);
+        DisplayCommIconSend(PAGE19_STATE_MACHINE_STATE     , DeviceControlParaGet()->stateMachineState[DEVICE_AREA_N]);
         OSTimeDly(2);
 	   
     }

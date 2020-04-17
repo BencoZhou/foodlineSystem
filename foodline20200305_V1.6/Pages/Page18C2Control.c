@@ -66,9 +66,9 @@ void Page18C2ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
     {
         DeviceControlParaGet()->isClickShutdown = FALSE;
 
-        if(DeviceControlParaGet()->stateMachineState == STATE_CHANGE_SUSPEND)
+        if(DeviceControlParaGet()->stateMachineState[DEVICE_AREA_C] == STATE_CHANGE_SUSPEND)
         {
-            DeviceControlParaGet()->stateMachineState = STATE_CHANGE_SUSPENDING;   
+            DeviceControlParaGet()->stateMachineState[DEVICE_AREA_C] = STATE_CHANGE_SUSPENDING;   
         }
         else
         {
@@ -221,7 +221,7 @@ void Page18C2ControlRefresh(void)
 				DisplayCommIconSend((PAGE18_CONTROL_C2|PAGE18_STATE) + 0x40 + i - AreaC1Num - 1  , AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState);
 				DisplayCommIconSend((PAGE18_CONTROL_C2|PAGE18_ALARM) + 0x40 + i - AreaC1Num - 1  , AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm);			
 			}
-			DisplayCommIconSend(PAGE18_STATE_MACHINE_STATE     , DeviceControlParaGet()->stateMachineState);
+			DisplayCommIconSend(PAGE18_STATE_MACHINE_STATE     , DeviceControlParaGet()->stateMachineState[DEVICE_AREA_C]);
 			
 			
 			OSTimeDly(2);

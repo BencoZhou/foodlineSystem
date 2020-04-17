@@ -48,7 +48,7 @@ static void StateChange(State *state)
 
 static void IdleStateEntry(void)
 {
-    DeviceControlParaGet()->stateMachineState = STATE_CHANGE_IDLE;
+    DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S] = STATE_CHANGE_IDLE;
 }
 
 static void IdleStateExit(void)
@@ -64,14 +64,21 @@ static void DeviceExistCal(void)
 	
 	for(j = 0; j < AREA_DEVICE_TOTAL_NUMBER; j++)    //  有待优化， 这种查询方式太耗资源。
 	{
-		for(i = 0; i < SING_LINK_DEVICE_TOTAL_NUMBER; i++)
-		{		   
-			if(AllTheControlParaGet(j,i)->isSelect == TRUE)
-			{
-				DeviceControlParaGet()->isHaveDevice = TRUE;
-				break;
+		if(AllTheControlParaGet(j,0)->cDevice.placeNew.useID != 0 )
+		{
+			for(i = 0; i < SING_LINK_DEVICE_TOTAL_NUMBER; i++)
+			{		   
+				if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID != 0 )
+				{
+					if(AllTheControlParaGet(j,i)->isSelect == TRUE)
+					{
+						DeviceControlParaGet()->isHaveDevice = TRUE;
+						break;
+					}
+				}
+				else
+					break;		   
 			}
-		   
 		}
 	}
 	if(AllTheControlParaGet(areaIndex,0)->cDevice.placeNew.useID != 0 )    //刷选出有设备的区域
@@ -116,17 +123,18 @@ static void DeviceExistCalReady(void)
 			}
 		}
 	}
-    SendTypeInquire(areaIndex,equipIndex);   
-  
-	if(equipIndex > SING_LINK_DEVICE_TOTAL_NUMBER)
-	{
-		areaIndex = (++areaIndex >= AREA_DEVICE_TOTAL_NUMBER)?0:areaIndex;
-		equipIndex = 0;		
-	}
-	else
-	{
-		equipIndex++;
-	}	
+//    SendTypeInquire(areaIndex,equipIndex); 
+//	
+//  
+//	if(equipIndex > SING_LINK_DEVICE_TOTAL_NUMBER)
+//	{
+//		areaIndex = (++areaIndex >= AREA_DEVICE_TOTAL_NUMBER)?0:areaIndex;
+//		equipIndex = 0;		
+//	}
+//	else
+//	{
+//		equipIndex++;
+//	}	
 }
 
 static void DeviceAlarmCal(void)
@@ -255,7 +263,7 @@ static void IdleStateProcess(void)
     DeviceExistCal();
  	if(DeviceControlParaGet()->isHaveDevice)
  		StateChange(&gStateReady); 
-	for(i = 0; i < AREA_DEVICE_TOTAL_NUMBER; i++)   // 检查个区域的快关延时状态
+	for(i = 0; i < AREA_DEVICE_TOTAL_NUMBER; i++)   // 检查个区域的开关延时状态
 	{
 		if(DeviceControlParaGet()->controlStopArea[i] == TRUE)
 		{
@@ -291,9 +299,13 @@ static void IdleStateInit(void)
 	gStateIdle.Process = IdleStateProcess;
 	for(j = 0; j < AREA_DEVICE_TOTAL_NUMBER; j++)    //  有待优化， 这种查询方式太耗资源。
 	{
+		if(AllTheControlParaGet(j,0)->cDevice.placeNew.useID != 0 )
 		for(i = 0; i < SING_LINK_DEVICE_TOTAL_NUMBER; i++)
 		{
-			AllTheControlParaGet(j,i)->isCommAlarm = TRUE;
+			if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID != 0 )
+				AllTheControlParaGet(j,i)->isCommAlarm = TRUE;
+			else
+				break;
 			
 		}    
 	}
@@ -328,16 +340,25 @@ static void ReadyStateProcess(void)
  		StateChange(&gStateRunning);
 	for(j = 0; j < AREA_DEVICE_TOTAL_NUMBER; j++)    //  有待优化， 这种查询方式太耗资源。
 	{
-		for(i = 0 ;i <SING_LINK_DEVICE_TOTAL_NUMBER; i++)
+		if(AllTheControlParaGet(j,0)->cDevice.placeNew.useID != 0 )
 		{
-			if(AllTheControlParaGet(j,i)->cState == DEVICE_STATE_CLOSE)
-				deviceCloseNum++;
+			for(i = 0 ;i <SING_LINK_DEVICE_TOTAL_NUMBER; i++)
+			{
+				if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID != 0 )
+				{
+					if(AllTheControlParaGet(j,i)->cState == DEVICE_STATE_CLOSE)
+						deviceCloseNum++;
+				}
+				else 
+					break;
+			}
+			if(deviceCloseNum == i)
+			{
+					DeviceControlParaGet()->stateMachineState[j] = STATE_CHANGE_READY;
+			}
 		}
 	}
-    if(deviceCloseNum == SING_LINK_DEVICE_TOTAL_NUMBER)
-    {
-        DeviceControlParaGet()->stateMachineState = STATE_CHANGE_READY;
-    }
+
 }
 
 static void ReadyStateInit(void)
@@ -361,7 +382,7 @@ static void RunningStateEntry(void)
     {
         AllTheControlParaGet(DEVICE_AREA_S,0x04)->time = *FoodLineTimeGet(S2_FOOD_LINE_TIME);
     }          
-    DeviceControlParaGet()->stateMachineState = STATE_CHANGE_RUNNING;
+    DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S] = STATE_CHANGE_RUNNING;
 }
 
 static void RunningStateExit(void)
@@ -371,7 +392,7 @@ static void RunningStateExit(void)
 
 static void RunningStateProcess(void)
 {
-    DeviceControlParaGet()->stateMachineState = STATE_CHANGE_RUNNING;
+    DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S] = STATE_CHANGE_RUNNING;
     DeviceControlAndInquire();
     DeviceAlarmCal();
     DeviceNormalStopCondition();
@@ -405,7 +426,7 @@ static void SuspendStateEntry(void)
     DeviceControlParaGet()->isClickStart = FALSE;
     DeviceControlParaGet()->isClickStop = TRUE;
     DeviceControlParaGet()->isEemergencyStop = FALSE;
-    DeviceControlParaGet()->stateMachineState = STATE_CHANGE_SUSPEND;
+    DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S] = STATE_CHANGE_SUSPEND;
 
 }
 
@@ -425,7 +446,8 @@ static void SuspendStateProcess(void)
  		StateChange(&gStateIdle);
     if(DeviceControlParaGet()->isClickShutdown == FALSE)
  		StateChange(&gStateReady);    
-    DeviceControlParaGet()->stateMachineState = STATE_CHANGE_SUSPEND;
+	
+    DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S] = STATE_CHANGE_SUSPEND;
 }
 
 static void SuspendStateInit(void)

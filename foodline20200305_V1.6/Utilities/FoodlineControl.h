@@ -49,7 +49,7 @@ typedef struct
     bool isClickReshutdown;   // 点击恢复停止按钮
     DevicePara  rcDevice;     // 刚发送数据设备
     u32  maxTime[10];       // 测试发送到接收时间长短
-    u8   stateMachineState;
+    u8   stateMachineState[AREA_DEVICE_TOTAL_NUMBER];
 	bool   controlArea[AREA_DEVICE_TOTAL_NUMBER];		//控制区域
 	bool   controlStopArea[AREA_DEVICE_TOTAL_NUMBER];	//控制设备停止区域 
 	bool   controlShutdownArea[AREA_DEVICE_TOTAL_NUMBER];	//控制设备停止区域 

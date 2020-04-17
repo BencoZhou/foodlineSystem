@@ -172,10 +172,20 @@
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>areaIndex</ItemText>
+          <ItemText>gAllTheControlPara</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>areaIndex</ItemText>
+        </Ww>
+        <Ww>
+          <count>2</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>gIndex</ItemText>
+        </Ww>
+        <Ww>
+          <count>3</count>
           <WinNumber>1</WinNumber>
           <ItemText>index</ItemText>
         </Ww>
@@ -1754,7 +1764,7 @@
       <GroupNumber>9</GroupNumber>
       <FileNumber>58</FileNumber>
       <FileType>1</FileType>
-      <tvExp>0</tvExp>
+      <tvExp>1</tvExp>
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
