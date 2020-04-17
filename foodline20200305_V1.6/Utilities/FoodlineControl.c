@@ -835,17 +835,19 @@ void DeviceShutdown(void)
 		}
 	}
     OSTimeDly(100);
+ 	
 	for(j = 0; j < AREA_DEVICE_TOTAL_NUMBER; j++)
 	{
+ 		
 		if(DeviceControlParaGet()->controlShutdownArea[j] == TRUE)//  只关闭被标记的区域
 		{
 			for(i = 0; i < SING_LINK_DEVICE_TOTAL_NUMBER; i++)
 			{ 
+
 				if(DeviceSendCmd(j, i, SEND_TYPE_INQUIRE) == FALSE)
 				{           
 					return; 
-				}   
-
+				} 
 				if(AllTheControlParaGet(j,i)->cDevice.place.type == DEVICE_NAME_FLINE)
 				{
 					if(AllTheControlParaGet(j,i)->cState != DEVICE_STATE_CLOSE)

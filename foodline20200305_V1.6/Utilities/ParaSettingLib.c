@@ -316,12 +316,13 @@ typedef enum			// ¥Ê¥¢Œª÷√∞≤≈≈
 {
 	MASS_STORAGE_PARA_SAVE_VERSION		= 0,
 	MASS_STORAGE_PARA_SAVE_LINK 		= 1,
-	MASS_STORAGE_PARA_SAVE_DELAY 		= 2,
+//	MASS_STORAGE_PARA_SAVE_LINK2 		= 2,
 	MASS_STORAGE_PARA_SAVE_PARAPATH     = 3,
+	MASS_STORAGE_PARA_SAVE_DELAY 		= 4,
 }MASS_STORAGE_PARA_SAVE;
 
 #define SECTOR_SIZE										(4*1024)
-#define VERSON_HISTORY						            (0x0B)
+#define VERSON_HISTORY						            (0x0C)
 #define HISTORY_MAGIC_NUMBER				            (0xA5)
 
 static ParaMassStorageHead gHead;
@@ -356,7 +357,10 @@ void ParaMassStorageInit(void)
         for(i = 0; i < AREA_DEVICE_TOTAL_NUMBER; i++)
         {
             for(j = 0; j < SING_LINK_DEVICE_TOTAL_NUMBER; j++)
+			{	
+				
                 gAllTheControlPara[i][j].cDevice.place.device = FOODLINE_STATE;
+			}
         } 		
         for(i = 0; i < 10; i++)
         {
@@ -369,6 +373,7 @@ void ParaMassStorageInit(void)
 	}
     else
     {
+		memset(gAllTheControlPara, 0, sizeof(gAllTheControlPara));
     	ParaPathParaRead();
 		ParaLinkParaRead();
 		ParaDelayParaRead();
@@ -396,12 +401,18 @@ void ParaLinkParaSave(void)
 	SPI_Flash_Write((u8*)&gAllTheControlPara,
 		SECTOR_SIZE * MASS_STORAGE_PARA_SAVE_LINK,
 		sizeof(gAllTheControlPara));
+//	SPI_Flash_Write((u8*)(gAllTheControlPara+(SING_LINK_DEVICE_TOTAL_NUMBER*3)),
+//		SECTOR_SIZE * MASS_STORAGE_PARA_SAVE_LINK2,
+//		sizeof(gAllTheControlPara));
 }
 void ParaLinkParaRead(void)
 {
 	SPI_Flash_Read((u8*)&gAllTheControlPara,
 		SECTOR_SIZE * MASS_STORAGE_PARA_SAVE_LINK,
 		sizeof(gAllTheControlPara));
+//	SPI_Flash_Write((u8*)(gAllTheControlPara+(SING_LINK_DEVICE_TOTAL_NUMBER*3)),
+//		SECTOR_SIZE * MASS_STORAGE_PARA_SAVE_LINK2,
+//		(sizeof(gAllTheControlPara)/2));	
 }
 void ParaPathParaSave(void)
 {

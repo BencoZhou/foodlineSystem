@@ -73,7 +73,7 @@ void Page12S1S2ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
         {
             DeviceControlParaGet()->stateMachineState = STATE_CHANGE_SUSPENDING;   
         }
-        else
+       // else
         {
             DeviceControlParaGet()->isClickStart = TRUE;
             DeviceControlParaGet()->isClickStop = FALSE;

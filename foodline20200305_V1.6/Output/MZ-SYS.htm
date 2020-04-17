@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Output\MZ-SYS.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Output\MZ-SYS.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Tue Apr 14 17:22:43 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Fri Apr 17 08:50:20 2020
 <BR><P>
 <H3>Maximum Stack Usage =        772 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1745,7 +1745,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[248]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AnalyseCommPacket
 </UL>
 
-<P><STRONG><a name="[142]"></a>WirelessApp_RcvMsg</STRONG> (Thumb, 2350 bytes, Stack size 88 bytes, wirelessapp.o(.text))
+<P><STRONG><a name="[142]"></a>WirelessApp_RcvMsg</STRONG> (Thumb, 2366 bytes, Stack size 88 bytes, wirelessapp.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 492 + Unknown Stack Size
 <LI>Call Chain = WirelessApp_RcvMsg &rArr; ParaAnswer &rArr; ParaSettingSendData &rArr; WirelessApp_SendData &rArr; WirelessComm_SendData &rArr; OS_MsgBoxSend_Ex &rArr; OSQPostOpt &rArr; OS_EventTaskRdy &rArr; OS_EventTaskRemove
 </UL>
@@ -3567,7 +3567,7 @@ Global Symbols
 <LI><a href="#[1e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Page2PathConfigProcess
 </UL>
 
-<P><STRONG><a name="[203]"></a>ParaMassStorageInit</STRONG> (Thumb, 244 bytes, Stack size 16 bytes, parasettinglib.o(.text))
+<P><STRONG><a name="[203]"></a>ParaMassStorageInit</STRONG> (Thumb, 254 bytes, Stack size 16 bytes, parasettinglib.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = ParaMassStorageInit &rArr; ParaPathParaSave &rArr; SPI_Flash_Write &rArr; SPI_Flash_Write_NoCheck &rArr; SPI_Flash_Write_Page &rArr; SPI_Flash_Wait_Busy &rArr; SPI_Flash_ReadSR &rArr; SPI1_ReadWriteByte
 </UL>
 <BR>[Calls]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_Feed
@@ -3689,7 +3689,7 @@ Global Symbols
 <LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Page12S1S2ControlProcess
 </UL>
 
-<P><STRONG><a name="[207]"></a>ControlPareState</STRONG> (Thumb, 1408 bytes, Stack size 12 bytes, parasettinglib.o(.text))
+<P><STRONG><a name="[207]"></a>ControlPareState</STRONG> (Thumb, 1406 bytes, Stack size 12 bytes, parasettinglib.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = ControlPareState
 </UL>
 <BR>[Calls]<UL><LI><a href="#[14d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AllTheControlParaGet
@@ -4677,7 +4677,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[1d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DisplayPageJump
 </UL>
 
-<P><STRONG><a name="[1f0]"></a>Page12S1S2ControlProcess</STRONG> (Thumb, 426 bytes, Stack size 32 bytes, page12s1s2control.o(.text))
+<P><STRONG><a name="[1f0]"></a>Page12S1S2ControlProcess</STRONG> (Thumb, 424 bytes, Stack size 32 bytes, page12s1s2control.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 220 + Unknown Stack Size
 <LI>Call Chain = Page12S1S2ControlProcess &rArr; Page12S1S2ControlRefresh &rArr; DisplayCommIconSend &rArr; DisplayComm_SendData &rArr; OS_MsgBoxSend &rArr; OSQPostOpt &rArr; OS_EventTaskRdy &rArr; OS_EventTaskRemove
 </UL>
@@ -6019,7 +6019,7 @@ Local Symbols
 <P><STRONG><a name="[52]"></a>IdleStateExit</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, statemachine.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> statemachine.o(.text)
 </UL>
-<P><STRONG><a name="[21c]"></a>DeviceExistCal</STRONG> (Thumb, 158 bytes, Stack size 16 bytes, statemachine.o(.text))
+<P><STRONG><a name="[21c]"></a>DeviceExistCal</STRONG> (Thumb, 238 bytes, Stack size 16 bytes, statemachine.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 492 + Unknown Stack Size
 <LI>Call Chain = DeviceExistCal &rArr; SendTypeInquire &rArr; DeviceSendCmd &rArr; ParaSettingSendData &rArr; WirelessApp_SendData &rArr; WirelessComm_SendData &rArr; OS_MsgBoxSend_Ex &rArr; OSQPostOpt &rArr; OS_EventTaskRdy &rArr; OS_EventTaskRemove
 </UL>
@@ -6031,7 +6031,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IdleStateProcess
 </UL>
 
-<P><STRONG><a name="[21d]"></a>DeviceExistCalReady</STRONG> (Thumb, 128 bytes, Stack size 16 bytes, statemachine.o(.text))
+<P><STRONG><a name="[21d]"></a>DeviceExistCalReady</STRONG> (Thumb, 142 bytes, Stack size 16 bytes, statemachine.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 492 + Unknown Stack Size
 <LI>Call Chain = DeviceExistCalReady &rArr; SendTypeInquire &rArr; DeviceSendCmd &rArr; ParaSettingSendData &rArr; WirelessApp_SendData &rArr; WirelessComm_SendData &rArr; OS_MsgBoxSend_Ex &rArr; OSQPostOpt &rArr; OS_EventTaskRdy &rArr; OS_EventTaskRemove
 </UL>
@@ -6074,7 +6074,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadyStateProcess
 </UL>
 
-<P><STRONG><a name="[53]"></a>IdleStateProcess</STRONG> (Thumb, 106 bytes, Stack size 24 bytes, statemachine.o(.text))
+<P><STRONG><a name="[53]"></a>IdleStateProcess</STRONG> (Thumb, 142 bytes, Stack size 24 bytes, statemachine.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 516 + Unknown Stack Size
 <LI>Call Chain = IdleStateProcess &rArr; DeviceExistCal &rArr; SendTypeInquire &rArr; DeviceSendCmd &rArr; ParaSettingSendData &rArr; WirelessApp_SendData &rArr; WirelessComm_SendData &rArr; OS_MsgBoxSend_Ex &rArr; OSQPostOpt &rArr; OS_EventTaskRdy &rArr; OS_EventTaskRemove
 </UL>
@@ -6084,7 +6084,7 @@ Local Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> statemachine.o(.text)
 </UL>
-<P><STRONG><a name="[223]"></a>IdleStateInit</STRONG> (Thumb, 106 bytes, Stack size 16 bytes, statemachine.o(.text))
+<P><STRONG><a name="[223]"></a>IdleStateInit</STRONG> (Thumb, 58 bytes, Stack size 16 bytes, statemachine.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = IdleStateInit
 </UL>
 <BR>[Calls]<UL><LI><a href="#[14d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AllTheControlParaGet

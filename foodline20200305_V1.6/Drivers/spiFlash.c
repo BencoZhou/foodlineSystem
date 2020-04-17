@@ -166,7 +166,7 @@ void SPI_Flash_Write(u8* pBuffer,u32 WriteAddr,u16 NumByteToWrite)
 	while(1) 
 	{	
 		SPI_Flash_Erase_Sector(secpos);
-		SPI_Flash_Write_NoCheck(pBuffer,WriteAddr,secremain);	
+ 		SPI_Flash_Write_NoCheck(pBuffer,WriteAddr,secremain);	
 		
 		if(NumByteToWrite==secremain)
 		{

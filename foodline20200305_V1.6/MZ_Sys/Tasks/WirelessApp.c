@@ -300,7 +300,8 @@ void WirelessApp_RcvMsg(u8 cmd, u16 seq, u8 *msg, u16 len, u32 saddr, u32 daddr,
 						{
 							for(i = 0; i < SING_LINK_DEVICE_TOTAL_NUMBER; i++)
 							{
-								if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID == tempDevice.placeNew.useID)
+								if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID != 0 &&
+									AllTheControlParaGet(j,i)->cDevice.placeNew.useID == tempDevice.placeNew.useID)
 								{
 									deviceConfirmFlag = 1;
 									break;

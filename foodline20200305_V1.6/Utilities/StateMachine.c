@@ -65,8 +65,7 @@ static void DeviceExistCal(void)
 	for(j = 0; j < AREA_DEVICE_TOTAL_NUMBER; j++)    //  有待优化， 这种查询方式太耗资源。
 	{
 		for(i = 0; i < SING_LINK_DEVICE_TOTAL_NUMBER; i++)
-		{
-		   
+		{		   
 			if(AllTheControlParaGet(j,i)->isSelect == TRUE)
 			{
 				DeviceControlParaGet()->isHaveDevice = TRUE;
@@ -75,22 +74,24 @@ static void DeviceExistCal(void)
 		   
 		}
 	}
-    SendTypeInquire(areaIndex,equipIndex);   
-    if(AllTheControlParaGet(areaIndex,0)->isCommAlarm == TRUE)
-	{
-		equipIndex = 0;		
-	}
-	else
-	{
-		if(equipIndex > SING_LINK_DEVICE_TOTAL_NUMBER)
+	if(AllTheControlParaGet(areaIndex,0)->cDevice.placeNew.useID != 0 )    //刷选出有设备的区域
+	{		
+		if(AllTheControlParaGet(areaIndex,equipIndex)->cDevice.placeNew.useID != 0 )  //选出不为空的数据 
 		{
-			areaIndex = (++areaIndex >= AREA_DEVICE_TOTAL_NUMBER)?0:areaIndex;
-			equipIndex = 0;		
+			if(AllTheControlParaGet(areaIndex,equipIndex)->cDevice.place.type != DEVICE_NAME_CONTROL)
+			SendTypeInquire(areaIndex,equipIndex); 
+			equipIndex = (++equipIndex >= SING_LINK_DEVICE_TOTAL_NUMBER)?0:equipIndex;			
 		}
 		else
 		{
-			equipIndex++;
-		}	
+			areaIndex = (++areaIndex >= AREA_DEVICE_TOTAL_NUMBER)?0:areaIndex;	
+			equipIndex = 0;
+		}
+	}
+	else
+	{
+		areaIndex = (++areaIndex >= AREA_DEVICE_TOTAL_NUMBER)?0:areaIndex;	
+		equipIndex = 0;
 	}
 
     OSTimeDly(100);
@@ -102,13 +103,16 @@ static void DeviceExistCalReady(void)
     DeviceControlParaGet()->isHaveDevice = FALSE;
 	for(j = 0; j < AREA_DEVICE_TOTAL_NUMBER; j++)    //  有待优化， 这种查询方式太耗资源。
 	{
-		for(i = 0; i < SING_LINK_DEVICE_TOTAL_NUMBER; i++)
+		if(AllTheControlParaGet(j,0)->cDevice.placeNew.useID != 0)
 		{
-		   
-			if(AllTheControlParaGet(j,i)->isSelect == TRUE)
+			for(i = 0; i < SING_LINK_DEVICE_TOTAL_NUMBER; i++)
 			{
-				DeviceControlParaGet()->isHaveDevice = TRUE;
-				break;
+			   
+				if(AllTheControlParaGet(j,i)->isSelect == TRUE)
+				{
+					DeviceControlParaGet()->isHaveDevice = TRUE;
+					break;
+				}
 			}
 		}
 	}
@@ -246,7 +250,7 @@ static void DeviceTriggerStartCondition(void)
 }
 static void IdleStateProcess(void)
 {
-	u8 stopAreaNum, delayAreaNum, starAreaNum;
+	u8 stopAreaNum = 0, delayAreaNum = 0, starAreaNum = 0;
 	u8 i;
     DeviceExistCal();
  	if(DeviceControlParaGet()->isHaveDevice)
