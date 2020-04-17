@@ -128,7 +128,7 @@ void WirelessApp_RcvMsg(u8 cmd, u16 seq, u8 *msg, u16 len, u32 saddr, u32 daddr,
 {
     DevicePara tempDevice, tempLocal, tempdaddr;
     u8 i,j;
-	u8 deviceConfirmFlag;
+	u8 deviceConfirmFlag = 0;
     INPUT_EVENT evt;
     tempDevice.id = 0;
     tempLocal.id = 0; 
@@ -233,18 +233,19 @@ void WirelessApp_RcvMsg(u8 cmd, u16 seq, u8 *msg, u16 len, u32 saddr, u32 daddr,
                 case DEVICE_CMD_READ_PATH:
                     if(len - 7 > 0 && ReadPathGet()->path == msg[5])
                     {
-                        u8 i, num;
+                        u8 k, num;
                         num = (len - 7) / 2;
-                        for(i = 0; i < num; i++)
+                        for(k = 0; k < num; k++)
                         {
-                            ReadPathGet()->rcPara[i].placeRc.rc0 = msg[7+i*2];
-                            ReadPathGet()->rcPara[i].placeRc.rc1 = msg[8+i*2];
-                            if(ReadPathGet()->rcPara[i].placeNew.useID == 0)
+                            ReadPathGet()->rcPara[k].placeRc.rc0 = msg[7+i*2];
+                            ReadPathGet()->rcPara[k].placeRc.rc1 = msg[8+i*2];
+                            if(ReadPathGet()->rcPara[k].placeNew.useID == 0)
                                 break;
                         }
                     }
                     break;
-                case DEVICE_CMD_FLINE_SET:    
+                case DEVICE_CMD_FLINE_SET:
+					
 					ParaAnswer(saddr);
 					if(IsSeqInRecord(FindSrcAddrIndex(saddr),msg[4]) == TRUE)
                     {
@@ -256,21 +257,26 @@ void WirelessApp_RcvMsg(u8 cmd, u16 seq, u8 *msg, u16 len, u32 saddr, u32 daddr,
                     OS_MsgBoxSend(gControlSendNotify_Queue, &evt, OS_NO_DELAY, FALSE);
 					for(j = 0; j < AREA_DEVICE_TOTAL_NUMBER; j++)
 					{
-						if(AllTheControlParaGet(j,0)->cDevice.place.area == tempDevice.place.area)
+						if(AllTheControlParaGet(j,0)->cDevice.placeNew.useID != 0)
 						{
 							for(i = 0; i < SING_LINK_DEVICE_TOTAL_NUMBER; i++)
 							{
-								if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID == tempDevice.placeNew.useID)
+								if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID != 0 )
 								{
-									deviceConfirmFlag = 1;
-									break;
+									if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID == tempDevice.placeNew.useID)
+									{
+										deviceConfirmFlag = 1;
+										break;
+									}
 								}
+								else
+									break;
 							}
 							if(deviceConfirmFlag)
 							{
 								deviceConfirmFlag = 0;
 								break;
-							}							
+							}
 						}
 					}
                     if(tempDevice.place.type == DEVICE_NAME_FLINE)
@@ -300,12 +306,16 @@ void WirelessApp_RcvMsg(u8 cmd, u16 seq, u8 *msg, u16 len, u32 saddr, u32 daddr,
 						{
 							for(i = 0; i < SING_LINK_DEVICE_TOTAL_NUMBER; i++)
 							{
-								if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID != 0 &&
-									AllTheControlParaGet(j,i)->cDevice.placeNew.useID == tempDevice.placeNew.useID)
+								if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID != 0 )
 								{
-									deviceConfirmFlag = 1;
-									break;
+									if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID == tempDevice.placeNew.useID)
+									{
+										deviceConfirmFlag = 1;
+										break;
+									}
 								}
+								else
+									break;
 							}
 							if(deviceConfirmFlag)
 							{
