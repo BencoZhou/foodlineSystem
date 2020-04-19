@@ -48,7 +48,7 @@ static void StateChange(State *state)
 
 static void IdleStateEntry(void)
 {
-    DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S] = STATE_CHANGE_IDLE;
+    DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S - 1] = STATE_CHANGE_IDLE;
 }
 
 static void IdleStateExit(void)
@@ -260,6 +260,7 @@ static void IdleStateProcess(void)
 {
 	u8 stopAreaNum = 0, delayAreaNum = 0, starAreaNum = 0;
 	u8 i;
+	DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S - 1] = STATE_CHANGE_IDLE;
     DeviceExistCal();
  	if(DeviceControlParaGet()->isHaveDevice)
  		StateChange(&gStateReady); 
@@ -332,13 +333,8 @@ static void ReadyStateProcess(void)
     DeviceExistCalReady();
     DeviceAlarmCal();
     DeviceTriggerStartCondition();
- 	if(DeviceControlParaGet()->isHaveDevice == FALSE)
- 		StateChange(&gStateIdle);
-    else if(DeviceControlParaGet()->isHaveAlarm == TRUE)
- 		StateChange(&gStateSuspend);
-    else if(DeviceControlParaGet()->isClickStart == TRUE)
- 		StateChange(&gStateRunning);
-	for(j = 0; j < AREA_DEVICE_TOTAL_NUMBER; j++)    //  有待优化， 这种查询方式太耗资源。
+
+	for(j = 0; j < AREA_DEVICE_TOTAL_NUMBER; j++)    //  判断状态是否需要显示为准备提示
 	{
 		if(AllTheControlParaGet(j,0)->cDevice.placeNew.useID != 0 )
 		{
@@ -350,14 +346,24 @@ static void ReadyStateProcess(void)
 						deviceCloseNum++;
 				}
 				else 
+				{
+					i = (i > 0)?(i-1):0;
+					if(deviceCloseNum == i)
+					{
+						DeviceControlParaGet()->stateMachineState[j] = STATE_CHANGE_READY;
+					}					
 					break;
+				}
 			}
-			if(deviceCloseNum == i)
-			{
-					DeviceControlParaGet()->stateMachineState[j] = STATE_CHANGE_READY;
-			}
+
 		}
 	}
+ 	if(DeviceControlParaGet()->isHaveDevice == FALSE)
+ 		StateChange(&gStateIdle);
+    else if(DeviceControlParaGet()->isHaveAlarm == TRUE)
+ 		StateChange(&gStateSuspend);
+    else if(DeviceControlParaGet()->isClickStart == TRUE)
+ 		StateChange(&gStateRunning);	
 
 }
 
@@ -382,7 +388,7 @@ static void RunningStateEntry(void)
     {
         AllTheControlParaGet(DEVICE_AREA_S,0x04)->time = *FoodLineTimeGet(S2_FOOD_LINE_TIME);
     }          
-    DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S] = STATE_CHANGE_RUNNING;
+    DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S-1] = STATE_CHANGE_RUNNING;
 }
 
 static void RunningStateExit(void)
@@ -392,7 +398,7 @@ static void RunningStateExit(void)
 
 static void RunningStateProcess(void)
 {
-    DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S] = STATE_CHANGE_RUNNING;
+    DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S-1] = STATE_CHANGE_RUNNING;
     DeviceControlAndInquire();
     DeviceAlarmCal();
     DeviceNormalStopCondition();
@@ -426,7 +432,7 @@ static void SuspendStateEntry(void)
     DeviceControlParaGet()->isClickStart = FALSE;
     DeviceControlParaGet()->isClickStop = TRUE;
     DeviceControlParaGet()->isEemergencyStop = FALSE;
-    DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S] = STATE_CHANGE_SUSPEND;
+    DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S-1] = STATE_CHANGE_SUSPEND;
 
 }
 
@@ -447,7 +453,7 @@ static void SuspendStateProcess(void)
     if(DeviceControlParaGet()->isClickShutdown == FALSE)
  		StateChange(&gStateReady);    
 	
-    DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S] = STATE_CHANGE_SUSPEND;
+    DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S-1] = STATE_CHANGE_SUSPEND;
 }
 
 static void SuspendStateInit(void)

@@ -62,13 +62,16 @@ AllTheControlPara gAllTheControlPara[AREA_DEVICE_TOTAL_NUMBER][SING_LINK_DEVICE_
 
 void S1S2ParaInit(void)
 {
-//    u8 i, index;
+    u8 i,j, index;
 
-//    for(i = 0; i < SING_LINK_DEVICE_TOTAL_NUMBER; i++)
-//    {
-//        gAllTheControlPara[0][i].cDevice.placeNew.device = FOODLINE_STATE;
-//    }
-//    index = 0;
+	for(j = 0;j < AREA_DEVICE_TOTAL_NUMBER; j++)
+	{
+		for(i = 0; i < SING_LINK_DEVICE_TOTAL_NUMBER; i++)
+		{
+			gAllTheControlPara[j][i].cDevice.placeNew.device = FOODLINE_STATE;
+		}
+	}
+    index = 0;
 
 }
 
@@ -318,7 +321,7 @@ typedef enum			// ´æ´¢Î»ÖÃ°²ÅÅ
 	MASS_STORAGE_PARA_SAVE_LINK 		= 1,
 //	MASS_STORAGE_PARA_SAVE_LINK2 		= 2,
 	MASS_STORAGE_PARA_SAVE_PARAPATH     = 3,
-	MASS_STORAGE_PARA_SAVE_DELAY 		= 4,
+	MASS_STORAGE_PARA_SAVE_DELAY 		= 5,
 }MASS_STORAGE_PARA_SAVE;
 
 #define SECTOR_SIZE										(4*1024)

@@ -26,8 +26,21 @@ Project File Date:  04/08/2020
 
 <h2>Output:</h2>
 Build target 'MZ-SYS'
+compiling StateMachine.c...
+Utilities\StateMachine.c(109): warning:  #177-D: variable "equipIndex" was declared but never referenced
+      static u8 equipIndex = 0,areaIndex = 0 ;
+Utilities\StateMachine.c(109): warning:  #177-D: variable "areaIndex" was declared but never referenced
+      static u8 equipIndex = 0,areaIndex = 0 ;
+Utilities\StateMachine.c(231): warning:  #177-D: variable "j" was declared but never referenced
+        u8 i,j;
+Utilities\StateMachine.c(180): warning:  #177-D: function "DevicEemergencyStopCal" was declared but never referenced
+  static void DevicEemergencyStopCal(void)
+Utilities\StateMachine.c: 4 warnings, 0 errors
+linking...
+Program Size: Code=81976 RO-data=1104 RW-data=4628 ZI-data=49412  
+FromELF: creating hex file...
 After Build - User command #1: C:\Keil_v5\ARM\ARMCC\bin\fromelf.exe --bin --output ./Output/MZ-SYS.bin ./Output/MZ-SYS.axf
-".\Output\MZ-SYS.axf" - 0 Error(s), 0 Warning(s).
+".\Output\MZ-SYS.axf" - 0 Error(s), 4 Warning(s).
 
 <h2>Software Packages used:</h2>
 

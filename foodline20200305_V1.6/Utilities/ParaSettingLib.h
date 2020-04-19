@@ -248,7 +248,7 @@ typedef struct
 {
     DevicePara cDevice;
 	DevicePara prevDevice;   //关联设备的ID
-    bool isSelect;
+    bool isSelect ;
     bool isCommAlarm;     //通讯故障告警标志位
 	bool isMyself;		//是否属于本机控制区域	
     u8   cAlarm;

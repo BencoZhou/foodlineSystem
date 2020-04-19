@@ -75,9 +75,11 @@ void Page13LinkConfigDelete(u8 areaIndex,u8 index)
 	{
         gAllTheControlPara[areaIndex][i].cDevice.id = gAllTheControlPara[areaIndex][i+1].cDevice.id;
         gAllTheControlPara[areaIndex][i].prevDevice.id = gAllTheControlPara[areaIndex][i+1].prevDevice.id;
+//		memcpy(&gAllTheControlPara[areaIndex][i],&gAllTheControlPara[areaIndex][i+1],sizeof(gAllTheControlPara));
 	}
     gAllTheControlPara[areaIndex][num-1].cDevice.placeNew.useID = 0;
     gAllTheControlPara[areaIndex][num-1].prevDevice.placeNew.useID = 0;
+//	memset(&gAllTheControlPara[areaIndex][num-1],0,sizeof(gAllTheControlPara));
 }
 /*
 功能：录入控件数据，区域为数组一维，行数为数组二维

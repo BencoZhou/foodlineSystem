@@ -69,15 +69,16 @@ void Page12S1S2ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
     {
         DeviceControlParaGet()->isClickShutdown = FALSE;
 
-        if(DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S] == STATE_CHANGE_SUSPEND)
+        if(DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S-1] == STATE_CHANGE_SUSPEND)
         {
-            DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S] = STATE_CHANGE_SUSPENDING;   
+            DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S-1] = STATE_CHANGE_SUSPENDING;   
         }
        // else
         {
             DeviceControlParaGet()->isClickStart = TRUE;
             DeviceControlParaGet()->isClickStop = FALSE;
 			DeviceControlParaGet()->controlArea[(DEVICE_AREA_S - 1)] = TRUE;
+			DeviceControlParaGet()->controlStopArea[(DEVICE_AREA_S - 1)] = FALSE;
         }
     }
     if(addr == PAGE12_STOP_BUTTON)
@@ -86,6 +87,7 @@ void Page12S1S2ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
         DeviceControlParaGet()->isClickStop = TRUE;
         DeviceControlParaGet()->isClickShutdown = FALSE;
 		DeviceControlParaGet()->controlStopArea[(DEVICE_AREA_S - 1)] = TRUE;
+		DeviceControlParaGet()->controlArea[(DEVICE_AREA_S - 1)] = FALSE;
     }
     if(addr == PAGE12_EMERGENCY_STOP_BUTTON)
     {
@@ -93,12 +95,16 @@ void Page12S1S2ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
         DeviceControlParaGet()->isClickStop = FALSE;
         DeviceControlParaGet()->isClickShutdown = TRUE;
 		DeviceControlParaGet()->controlShutdownArea[(DEVICE_AREA_S - 1)] = TRUE;
+		DeviceControlParaGet()->controlArea[(DEVICE_AREA_S - 1)] = FALSE;
+		DeviceControlParaGet()->controlStopArea[(DEVICE_AREA_S - 1)] = FALSE;
     }     
     if(addr == PAGE12_STOP_RENEW_BUTTON)
     {
 
         DeviceControlParaGet()->isClickShutdown = FALSE;
 		DeviceControlParaGet()->controlShutdownArea[(DEVICE_AREA_S - 1)] = FALSE;
+		DeviceControlParaGet()->controlArea[(DEVICE_AREA_S - 1)] = FALSE;
+		DeviceControlParaGet()->controlStopArea[(DEVICE_AREA_S - 1)] = FALSE;		
     }       
     if(addr == PAGE12_S1_DELAYTIME)
     {
@@ -229,7 +235,7 @@ void Page12S1S2ControlRefresh(void)
 			DisplayCommIconSend((PAGE12_TOWERSOUT_S1_10|PAGE12_ALARM) + (i-1)     , AllTheControlParaGet((DEVICE_AREA_S - 1),i)->cAlarm);
 			DisplayCommIconSend(PAGE12_S1_DELAYTIME     , AllTheControlParaGet((DEVICE_AREA_S - 1),0x03)->time);
 			DisplayCommIconSend(PAGE12_S2_DELAYTIME     , AllTheControlParaGet((DEVICE_AREA_S - 1),0x05)->time);
-			DisplayCommIconSend(PAGE12_STATE_MACHINE_STATE     , DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S]);
+			DisplayCommIconSend(PAGE12_STATE_MACHINE_STATE     , DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S - 1]);
 			
 			
 			OSTimeDly(2);

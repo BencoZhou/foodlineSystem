@@ -182,12 +182,7 @@
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>gIndex</ItemText>
-        </Ww>
-        <Ww>
-          <count>3</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>index</ItemText>
+          <ItemText>equipIndex</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
@@ -1764,7 +1759,7 @@
       <GroupNumber>9</GroupNumber>
       <FileNumber>58</FileNumber>
       <FileType>1</FileType>
-      <tvExp>1</tvExp>
+      <tvExp>0</tvExp>
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>

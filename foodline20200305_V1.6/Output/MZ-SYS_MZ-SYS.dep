@@ -214,7 +214,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -269,7 +269,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -422,7 +422,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -476,7 +476,7 @@ I (MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\System.h)(0x5DE8A60C)
 I (MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
@@ -512,7 +512,7 @@ I (.\uCos\Cpu\cpu_def.h)(0x5C232672)
 I (.\MZ_Sys\Debug.h)(0x5C9E337C)
 I (.\MZ_Sys\Os_TaskPrio.h)(0x5DEA3550)
 I (.\Drivers\wdg.h)(0x5C23266C)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\System.h)(0x5DE8A60C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5475F300)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5475F300)
@@ -591,7 +591,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -631,7 +631,7 @@ I (MZ_Sys\Tasks\Wlan4GApp.h)(0x5C8B4468)
 I (MZ_Sys\Tasks\AirIap.h)(0x5D0C8A5E)
 I (MZ_Sys\Tasks\CtrlOperate.h)(0x5C232670)
 I (MZ_Sys\Tasks\SensorStat.h)(0x5C232672)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\System.h)(0x5DE8A60C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5475F300)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5475F300)
@@ -703,7 +703,7 @@ I (MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\System.h)(0x5DE8A60C)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -778,7 +778,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -1156,7 +1156,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -1180,8 +1180,8 @@ I (.\Pages\Page18C2Control.h)(0x5E8D7AA5)
 I (.\Pages\Page19N1Control.h)(0x5E8D7BD3)
 I (.\Pages\Page20N2Control.h)(0x5E8D7C3D)
 I (.\Pages\Page16E1E2Control.h)(0x5E8D780F)
-F (.\Utilities\ParaSettingLib.c)(0x5E96D3BC)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\Drivers\Lib -I.\Drivers\Lib\inc -I.\MZ_Sys -I.\Drivers -I.\MZ_Sys\Pages -I.\FatFS -I.\uCos -I.\uCos\Cpu -I.\uCos\Ports -I.\uCos\Lib -I.\MZ_Sys\MZ_Gui -I.\MZ_Sys\MZ_Heap -I.\Drivers\UsbLib\inc -I.\Drivers\Usb\inc -I.\MZ_Sys\CtrlObj -I.\MZ_Sys\MZ_Find -I.\MZ_Sys\MZ_Find\MZ_Crypto -I.\MZ_Sys\MZ_Find\MZ_USB -I.\MZ_Sys\MZ_Find\MZ_Search -I.\MZ_Sys\MZ_Find\MZ_Pinyin -I.\MZ_Sys\MZ_Find\MZ_Config -I.\MZ_Sys\MZ_Find\MZ_Irda -I.\MZ_Sys\MZ_Find\MZ_Pic -I.\Utilities -I.\Pages -I.\MZ_Sys\Tasks-I E:\zhoubocheng\work\foodline\food\foodlineSystem\foodline20200305_V1.6\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD-o .\output\parasettinglib.o --omf_browse .\output\parasettinglib.crf --depend .\output\parasettinglib.d)
-I (Utilities\ParaSettingLib.h)(0x5E8EC822)
+F (.\Utilities\ParaSettingLib.c)(0x5E9C03CE)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\Drivers\Lib -I.\Drivers\Lib\inc -I.\MZ_Sys -I.\Drivers -I.\MZ_Sys\Pages -I.\FatFS -I.\uCos -I.\uCos\Cpu -I.\uCos\Ports -I.\uCos\Lib -I.\MZ_Sys\MZ_Gui -I.\MZ_Sys\MZ_Heap -I.\Drivers\UsbLib\inc -I.\Drivers\Usb\inc -I.\MZ_Sys\CtrlObj -I.\MZ_Sys\MZ_Find -I.\MZ_Sys\MZ_Find\MZ_Crypto -I.\MZ_Sys\MZ_Find\MZ_USB -I.\MZ_Sys\MZ_Find\MZ_Search -I.\MZ_Sys\MZ_Find\MZ_Pinyin -I.\MZ_Sys\MZ_Find\MZ_Config -I.\MZ_Sys\MZ_Find\MZ_Irda -I.\MZ_Sys\MZ_Find\MZ_Pic -I.\Utilities -I.\Pages -I.\MZ_Sys\Tasks-I E:\zhoubocheng\work\foodline\food\foodlineSystem\foodline20200305_V1.6\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD-o .\output\parasettinglib.o --omf_browse .\output\parasettinglib.crf --depend .\output\parasettinglib.d)
+I (Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\System.h)(0x5DE8A60C)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5475F300)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5475F300)
@@ -1231,7 +1231,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -1286,12 +1286,12 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
 I (Utilities\StateMachine.h)(0x5DFA16DC)
-F (.\Utilities\StateMachine.c)(0x5E995DFA)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\Drivers\Lib -I.\Drivers\Lib\inc -I.\MZ_Sys -I.\Drivers -I.\MZ_Sys\Pages -I.\FatFS -I.\uCos -I.\uCos\Cpu -I.\uCos\Ports -I.\uCos\Lib -I.\MZ_Sys\MZ_Gui -I.\MZ_Sys\MZ_Heap -I.\Drivers\UsbLib\inc -I.\Drivers\Usb\inc -I.\MZ_Sys\CtrlObj -I.\MZ_Sys\MZ_Find -I.\MZ_Sys\MZ_Find\MZ_Crypto -I.\MZ_Sys\MZ_Find\MZ_USB -I.\MZ_Sys\MZ_Find\MZ_Search -I.\MZ_Sys\MZ_Find\MZ_Pinyin -I.\MZ_Sys\MZ_Find\MZ_Config -I.\MZ_Sys\MZ_Find\MZ_Irda -I.\MZ_Sys\MZ_Find\MZ_Pic -I.\Utilities -I.\Pages -I.\MZ_Sys\Tasks-I E:\zhoubocheng\work\foodline\food\foodlineSystem\foodline20200305_V1.6\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD-o .\output\statemachine.o --omf_browse .\output\statemachine.crf --depend .\output\statemachine.d)
+F (.\Utilities\StateMachine.c)(0x5E9C040F)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\Drivers\Lib -I.\Drivers\Lib\inc -I.\MZ_Sys -I.\Drivers -I.\MZ_Sys\Pages -I.\FatFS -I.\uCos -I.\uCos\Cpu -I.\uCos\Ports -I.\uCos\Lib -I.\MZ_Sys\MZ_Gui -I.\MZ_Sys\MZ_Heap -I.\Drivers\UsbLib\inc -I.\Drivers\Usb\inc -I.\MZ_Sys\CtrlObj -I.\MZ_Sys\MZ_Find -I.\MZ_Sys\MZ_Find\MZ_Crypto -I.\MZ_Sys\MZ_Find\MZ_USB -I.\MZ_Sys\MZ_Find\MZ_Search -I.\MZ_Sys\MZ_Find\MZ_Pinyin -I.\MZ_Sys\MZ_Find\MZ_Config -I.\MZ_Sys\MZ_Find\MZ_Irda -I.\MZ_Sys\MZ_Find\MZ_Pic -I.\Utilities -I.\Pages -I.\MZ_Sys\Tasks-I E:\zhoubocheng\work\foodline\food\foodlineSystem\foodline20200305_V1.6\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD-o .\output\statemachine.o --omf_browse .\output\statemachine.crf --depend .\output\statemachine.d)
 I (Utilities\StateMachine.h)(0x5DFA16DC)
 I (.\MZ_Sys\System.h)(0x5DE8A60C)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5475F300)
@@ -1342,7 +1342,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -1398,7 +1398,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -1453,7 +1453,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -1508,7 +1508,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -1563,7 +1563,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -1618,7 +1618,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -1673,7 +1673,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -1728,7 +1728,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -1783,7 +1783,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -1838,7 +1838,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -1893,11 +1893,11 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
-F (.\Pages\Page12S1S2Control.c)(0x5E991BCE)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\Drivers\Lib -I.\Drivers\Lib\inc -I.\MZ_Sys -I.\Drivers -I.\MZ_Sys\Pages -I.\FatFS -I.\uCos -I.\uCos\Cpu -I.\uCos\Ports -I.\uCos\Lib -I.\MZ_Sys\MZ_Gui -I.\MZ_Sys\MZ_Heap -I.\Drivers\UsbLib\inc -I.\Drivers\Usb\inc -I.\MZ_Sys\CtrlObj -I.\MZ_Sys\MZ_Find -I.\MZ_Sys\MZ_Find\MZ_Crypto -I.\MZ_Sys\MZ_Find\MZ_USB -I.\MZ_Sys\MZ_Find\MZ_Search -I.\MZ_Sys\MZ_Find\MZ_Pinyin -I.\MZ_Sys\MZ_Find\MZ_Config -I.\MZ_Sys\MZ_Find\MZ_Irda -I.\MZ_Sys\MZ_Find\MZ_Pic -I.\Utilities -I.\Pages -I.\MZ_Sys\Tasks-I E:\zhoubocheng\work\foodline\food\foodlineSystem\foodline20200305_V1.6\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD-o .\output\page12s1s2control.o --omf_browse .\output\page12s1s2control.crf --depend .\output\page12s1s2control.d)
+F (.\Pages\Page12S1S2Control.c)(0x5E9A6C06)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\Drivers\Lib -I.\Drivers\Lib\inc -I.\MZ_Sys -I.\Drivers -I.\MZ_Sys\Pages -I.\FatFS -I.\uCos -I.\uCos\Cpu -I.\uCos\Ports -I.\uCos\Lib -I.\MZ_Sys\MZ_Gui -I.\MZ_Sys\MZ_Heap -I.\Drivers\UsbLib\inc -I.\Drivers\Usb\inc -I.\MZ_Sys\CtrlObj -I.\MZ_Sys\MZ_Find -I.\MZ_Sys\MZ_Find\MZ_Crypto -I.\MZ_Sys\MZ_Find\MZ_USB -I.\MZ_Sys\MZ_Find\MZ_Search -I.\MZ_Sys\MZ_Find\MZ_Pinyin -I.\MZ_Sys\MZ_Find\MZ_Config -I.\MZ_Sys\MZ_Find\MZ_Irda -I.\MZ_Sys\MZ_Find\MZ_Pic -I.\Utilities -I.\Pages -I.\MZ_Sys\Tasks-I E:\zhoubocheng\work\foodline\food\foodlineSystem\foodline20200305_V1.6\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD-o .\output\page12s1s2control.o --omf_browse .\output\page12s1s2control.crf --depend .\output\page12s1s2control.d)
 I (Pages\Page12S1S2Control.h)(0x5E708A8C)
 I (.\MZ_Sys\System.h)(0x5DE8A60C)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5475F300)
@@ -1948,13 +1948,13 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
 I (.\Utilities\FoodlineControl.h)(0x5E991A60)
 I (.\Utilities\StateMachine.h)(0x5DFA16DC)
-F (.\Pages\Page13LinkConfig .c)(0x5E8C3866)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\Drivers\Lib -I.\Drivers\Lib\inc -I.\MZ_Sys -I.\Drivers -I.\MZ_Sys\Pages -I.\FatFS -I.\uCos -I.\uCos\Cpu -I.\uCos\Ports -I.\uCos\Lib -I.\MZ_Sys\MZ_Gui -I.\MZ_Sys\MZ_Heap -I.\Drivers\UsbLib\inc -I.\Drivers\Usb\inc -I.\MZ_Sys\CtrlObj -I.\MZ_Sys\MZ_Find -I.\MZ_Sys\MZ_Find\MZ_Crypto -I.\MZ_Sys\MZ_Find\MZ_USB -I.\MZ_Sys\MZ_Find\MZ_Search -I.\MZ_Sys\MZ_Find\MZ_Pinyin -I.\MZ_Sys\MZ_Find\MZ_Config -I.\MZ_Sys\MZ_Find\MZ_Irda -I.\MZ_Sys\MZ_Find\MZ_Pic -I.\Utilities -I.\Pages -I.\MZ_Sys\Tasks-I E:\zhoubocheng\work\foodline\food\foodlineSystem\foodline20200305_V1.6\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD-o ".\output\page13linkconfig .o" --omf_browse ".\output\page13linkconfig .crf" --depend ".\output\page13linkconfig .d")
+F (.\Pages\Page13LinkConfig .c)(0x5E9BB5AA)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\Drivers\Lib -I.\Drivers\Lib\inc -I.\MZ_Sys -I.\Drivers -I.\MZ_Sys\Pages -I.\FatFS -I.\uCos -I.\uCos\Cpu -I.\uCos\Ports -I.\uCos\Lib -I.\MZ_Sys\MZ_Gui -I.\MZ_Sys\MZ_Heap -I.\Drivers\UsbLib\inc -I.\Drivers\Usb\inc -I.\MZ_Sys\CtrlObj -I.\MZ_Sys\MZ_Find -I.\MZ_Sys\MZ_Find\MZ_Crypto -I.\MZ_Sys\MZ_Find\MZ_USB -I.\MZ_Sys\MZ_Find\MZ_Search -I.\MZ_Sys\MZ_Find\MZ_Pinyin -I.\MZ_Sys\MZ_Find\MZ_Config -I.\MZ_Sys\MZ_Find\MZ_Irda -I.\MZ_Sys\MZ_Find\MZ_Pic -I.\Utilities -I.\Pages -I.\MZ_Sys\Tasks-I E:\zhoubocheng\work\foodline\food\foodlineSystem\foodline20200305_V1.6\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD-o ".\output\page13linkconfig .o" --omf_browse ".\output\page13linkconfig .crf" --depend ".\output\page13linkconfig .d")
 I (Pages\Page13LinkConfig.h)(0x5E670B54)
 I (.\MZ_Sys\System.h)(0x5DE8A60C)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5475F300)
@@ -2005,7 +2005,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -2060,7 +2060,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -2117,7 +2117,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -2174,7 +2174,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -2231,7 +2231,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -2288,7 +2288,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -2345,7 +2345,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
@@ -2402,7 +2402,7 @@ I (.\MZ_Sys\Tasks/WirelessApp.h)(0x5C2326A4)
 I (.\MZ_Sys\Tasks/Wlan4GComm.h)(0x5C8B4452)
 I (.\MZ_Sys\Tasks/Wlan4GApp.h)(0x5C8B4468)
 I (.\MZ_Sys\Tasks/AirIap.h)(0x5D0C8A5E)
-I (.\Utilities\ParaSettingLib.h)(0x5E8EC822)
+I (.\Utilities\ParaSettingLib.h)(0x5E9AD62E)
 I (.\MZ_Sys\DisplayProtocol.h)(0x5C3733BA)
 I (.\Utilities\Display.h)(0x5DDE5EB6)
 I (.\Drivers\spiFlash.h)(0x5C23266A)
