@@ -8,7 +8,7 @@
 ******************************************************************/
 #include "ParaSettingLib.h"
 
-static u16 FoodLineTime[10];
+static u16 FoodLineTime[10] = {0};
 
 
 void S1S2ParaInit(void);
@@ -62,17 +62,17 @@ AllTheControlPara gAllTheControlPara[AREA_DEVICE_TOTAL_NUMBER][SING_LINK_DEVICE_
 
 void S1S2ParaInit(void)
 {
-    u8 i,j, index;
+    u8 i,j;
 
 	for(j = 0;j < AREA_DEVICE_TOTAL_NUMBER; j++)
 	{
 		for(i = 0; i < SING_LINK_DEVICE_TOTAL_NUMBER; i++)
 		{
 			gAllTheControlPara[j][i].cDevice.placeNew.device = FOODLINE_STATE;
+			gAllTheControlPara[j][i].isSelect = FALSE;
+			gAllTheControlPara[j][i].time = 0;
 		}
 	}
-    index = 0;
-
 }
 
 void ControlPareState(u8 deciceArea , u8 i)

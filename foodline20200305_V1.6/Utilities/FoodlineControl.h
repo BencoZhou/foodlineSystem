@@ -65,6 +65,7 @@ bool SendTypeInquire(u8 areaIndex,u8 index);
 //void ControlSend_Task(void *Task_Parameters);
 void StateMachine_Task(void *Task_Parameters);
 void DeviceShutdown(void);   // 强制关机  
+void DelayShutDown(u8 areaIndex,u8 index,RTC_TIME overTimer );   //延时关机
 
 #endif // _FOODLINECONTROL_H_
 

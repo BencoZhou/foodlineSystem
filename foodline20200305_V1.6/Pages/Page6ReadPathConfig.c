@@ -7,9 +7,9 @@
  *
 ******************************************************************/
 #include "Page6ReadPathConfig.h"
-static u8 gP6Table;
+static u8 gP6Table = 0 ;
 //static u8 gP6Index;
-static u8 gPage6Seq; // –Ú∫≈£¨¿€º”
+static u8 gPage6Seq = 0; // –Ú∫≈£¨¿€º”
 
 void Page6PathConfigTurn(u8 table);
 void Page6PathConfigTouchRefresh(void);

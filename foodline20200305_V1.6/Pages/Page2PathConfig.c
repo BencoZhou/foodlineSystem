@@ -7,9 +7,9 @@
  *
 ******************************************************************/
 #include "Page2PathConfig.h"
-static u8 gP2Table, gIndex;
+static u8 gP2Table = 0, gIndex = 0;
 //static u8 gCountdown;
-static u8 gPage2Seq; // –Ú∫≈£¨¿€º”
+static u8 gPage2Seq = 0; // –Ú∫≈£¨¿€º”
 
 void Page2PathConfigTurn(u8 table);
 void Page2PathConfigTouchRefresh(void);

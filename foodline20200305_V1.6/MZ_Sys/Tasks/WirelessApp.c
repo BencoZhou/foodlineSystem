@@ -129,6 +129,7 @@ void WirelessApp_RcvMsg(u8 cmd, u16 seq, u8 *msg, u16 len, u32 saddr, u32 daddr,
     DevicePara tempDevice, tempLocal, tempdaddr;
     u8 i,j;
 	u8 deviceConfirmFlag = 0;
+	
     INPUT_EVENT evt;
     tempDevice.id = 0;
     tempLocal.id = 0; 
@@ -237,8 +238,8 @@ void WirelessApp_RcvMsg(u8 cmd, u16 seq, u8 *msg, u16 len, u32 saddr, u32 daddr,
                         num = (len - 7) / 2;
                         for(k = 0; k < num; k++)
                         {
-                            ReadPathGet()->rcPara[k].placeRc.rc0 = msg[7+i*2];
-                            ReadPathGet()->rcPara[k].placeRc.rc1 = msg[8+i*2];
+                            ReadPathGet()->rcPara[k].placeRc.rc0 = msg[7+k*2];
+                            ReadPathGet()->rcPara[k].placeRc.rc1 = msg[8+k*2];
                             if(ReadPathGet()->rcPara[k].placeNew.useID == 0)
                                 break;
                         }
@@ -415,7 +416,7 @@ void WirelessApp_RcvMsg(u8 cmd, u16 seq, u8 *msg, u16 len, u32 saddr, u32 daddr,
                     {
                         if(TOWERS_OUT_RC_DATA_LEN == msg[7])
                         {
-                            u8 index = 8;
+                            
 //                            if(PageXIdGet()->placeNew.useID == tempDevice.placeNew.useID)
 //                            {
 //                                FoodlineControlGet()->currentA = (msg[index]<<8 | msg[index+1]);

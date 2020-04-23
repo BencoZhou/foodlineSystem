@@ -108,13 +108,13 @@ void Page12S1S2ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
     }       
     if(addr == PAGE12_S1_DELAYTIME)
     {
-        AllTheControlParaGet((DEVICE_AREA_S - 1),0x02)->time = data;
+        AllTheControlParaGet((DEVICE_AREA_S - 1),0x03)->time = data;
 		*FoodLineTimeGet(S1_FOOD_LINE_TIME) = data;
 		ParaDelayParaSave();
     }    
     if(addr == PAGE12_S2_DELAYTIME)
     {
-        AllTheControlParaGet((DEVICE_AREA_S - 1),0x04)->time = data; 
+        AllTheControlParaGet((DEVICE_AREA_S - 1),0x05)->time = data; 
 		*FoodLineTimeGet(S2_FOOD_LINE_TIME) = data;
 		ParaDelayParaSave();
     }    

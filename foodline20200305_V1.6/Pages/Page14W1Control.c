@@ -66,9 +66,9 @@ void Page14W1ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
     {
         DeviceControlParaGet()->isClickShutdown = FALSE;
 
-        if(DeviceControlParaGet()->stateMachineState[DEVICE_AREA_W] == STATE_CHANGE_SUSPEND)
+        if(DeviceControlParaGet()->stateMachineState[DEVICE_AREA_W-1] == STATE_CHANGE_SUSPEND)
         {
-            DeviceControlParaGet()->stateMachineState[DEVICE_AREA_W] = STATE_CHANGE_SUSPENDING;   
+            DeviceControlParaGet()->stateMachineState[DEVICE_AREA_W-1] = STATE_CHANGE_SUSPENDING;   
         }
         else
         {
@@ -133,7 +133,7 @@ void Page14W1ControlRefresh(void)
 			
 			}
 			DisplayCommIconSend(PAGE14_W1_DELAYTIME     , AllTheControlParaGet((DEVICE_AREA_W - 1),0x02)->time);
-			DisplayCommIconSend(PAGE14_STATE_MACHINE_STATE     , DeviceControlParaGet()->stateMachineState[DEVICE_AREA_W]);
+			DisplayCommIconSend(PAGE14_STATE_MACHINE_STATE     , DeviceControlParaGet()->stateMachineState[DEVICE_AREA_W-1]);
 			OSTimeDly(2);
 		}
 		AreaW1Num = W1Num;

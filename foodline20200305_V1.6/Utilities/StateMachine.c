@@ -167,7 +167,8 @@ static void DeviceAlarmCal(void)
 					if(AllTheControlParaGet(j,i)->manualAuto != AUTO_GEARS)   //  不再自动状态则退出
 					{
 						//加入手动状态提示图标。
-						DeviceControlParaGet()->isHaveAlarm = TRUE;
+//						DeviceControlParaGet()->isClickStop  = TRUE;
+//						DeviceControlParaGet()->controlStopArea[j] = TRUE;
 						break;
 					
 					}    
@@ -249,7 +250,7 @@ static void DeviceTriggerStartCondition(void)
 	{
 		if(starAreaNum != 0)
 		{
-			DeviceControlParaGet()->isClickStop = FALSE;
+//			DeviceControlParaGet()->isClickStop = FALSE;
 			DeviceControlParaGet()->isClickStart = TRUE;
 			NormalStopFlag = TRUE;
 		}
@@ -281,14 +282,18 @@ static void IdleStateProcess(void)
 	}	
 	if(stopAreaNum || delayAreaNum)
 	{
+		DeviceControlParaGet()->isClickStop = TRUE;
+//		DeviceControlParaGet()->isClickStart = FALSE;
 		StateChange(&gStateReady); 
 	}
 	else if(starAreaNum)
 	{
+		DeviceControlParaGet()->isClickStart = TRUE;
+//		DeviceControlParaGet()->isClickStop = FALSE;
 		StateChange(&gStateRunning);
 	}
-//    else if(DeviceControlParaGet()->isHaveAlarm == TRUE)
-// 		StateChange(&gStateSuspend);
+    else if(DeviceControlParaGet()->isHaveAlarm == TRUE)
+ 		StateChange(&gStateSuspend);
 }
 
 static void IdleStateInit(void)
@@ -380,13 +385,13 @@ static void RunningStateEntry(void)
     INPUT_EVENT evt;
     OS_MsgBoxSend(gControlStartRe_Queue, &evt, OS_NO_DELAY, FALSE);
     OS_MsgBoxSend(gControlStopRe_Queue, &evt, OS_NO_DELAY, FALSE);
-    if(AllTheControlParaGet(DEVICE_AREA_S,0x02)->time == 0)
+    if(AllTheControlParaGet(DEVICE_AREA_S-1,0x03)->time == 0)
     {
-        AllTheControlParaGet(DEVICE_AREA_S,0x02)->time = *FoodLineTimeGet(S1_FOOD_LINE_TIME);
+        AllTheControlParaGet(DEVICE_AREA_S-1,0x03)->time = *FoodLineTimeGet(S1_FOOD_LINE_TIME);
     }
-    if(AllTheControlParaGet(DEVICE_AREA_S,0x04)->time == 0)
+    if(AllTheControlParaGet(DEVICE_AREA_S-1,0x05)->time == 0)
     {
-        AllTheControlParaGet(DEVICE_AREA_S,0x04)->time = *FoodLineTimeGet(S2_FOOD_LINE_TIME);
+        AllTheControlParaGet(DEVICE_AREA_S-1,0x05)->time = *FoodLineTimeGet(S2_FOOD_LINE_TIME);
     }          
     DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S-1] = STATE_CHANGE_RUNNING;
 }
@@ -405,11 +410,11 @@ static void RunningStateProcess(void)
 //    DevicEemergencyStopCal();
     if(DeviceControlParaGet()->isHaveAlarm == TRUE)
  		StateChange(&gStateSuspend);
-    if(DeviceControlParaGet()->isClickStop == TRUE)
+    else if(DeviceControlParaGet()->isClickStop == TRUE)
  		StateChange(&gStateReady);
-    if(DeviceControlParaGet()->isClickShutdown == TRUE)
+    else if(DeviceControlParaGet()->isClickShutdown == TRUE)
  		StateChange(&gStateSuspend);
-    if(DeviceControlParaGet()->isEemergencyStop == TRUE)
+    else if(DeviceControlParaGet()->isEemergencyStop == TRUE)
  		StateChange(&gStateSuspend);
 }
 
@@ -476,12 +481,10 @@ void StateMachineInit(void)
 
 void StateMachineProcess(void)
 {
-
 	if(gState != NULL)
 	{
 		if(gState->Process)
 			gState->Process(); 
 	}
- 
 }
 

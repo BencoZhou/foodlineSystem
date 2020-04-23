@@ -18,6 +18,8 @@ OS_MsgBoxHandle gControlSendNotify_Queue;
 
 static u8 gFlineCtrlSeq; // 序号，累加
 extern bool NormalStopFlag;   //  位置  StateMachine.h
+static u8 startNum[AREA_DEVICE_TOTAL_NUMBER] = {0},stopNum[AREA_DEVICE_TOTAL_NUMBER] = {0}, selectNum[AREA_DEVICE_TOTAL_NUMBER] = {0};
+
 
 //static u32 retryTime = 1000;//400;   // *5ms重发间隔时间，根据路径中设备个数确定
 
@@ -157,10 +159,17 @@ static bool DeviceSendCmd(u8 areaIndex, u8 index, SEND_TYPE type)
     else if(type == SEND_TYPE_CONTROL_START)
     {
         WirlessParaGet()->buffer[indexBuf++] = DEVICE_CMD_FLINE_SET;
-		if(AllTheControlParaGet(areaIndex,index)->rotationDirection == TOWERSOUT_CONTROL_FOREWARD)  //如果是要求正转
-			WirlessParaGet()->buffer[indexBuf++] = TOWERSOUT_CONTROL_FOREWARD;    //正转
-		else  
-			WirlessParaGet()->buffer[indexBuf++] = TOWERSOUT_CONTROL_REVERSAL;     //反转
+		if(AllTheControlParaGet(areaIndex,index)->cDevice.place.type == DEVICE_NAME_TOWERS_OUT )
+		{
+			if(AllTheControlParaGet(areaIndex,index)->rotationDirection == TOWERSOUT_CONTROL_FOREWARD)  //如果是要求正转
+				WirlessParaGet()->buffer[indexBuf++] = TOWERSOUT_CONTROL_FOREWARD;    //正转
+			else  
+				WirlessParaGet()->buffer[indexBuf++] = TOWERSOUT_CONTROL_REVERSAL;     //反转
+		}
+		else
+		{
+			WirlessParaGet()->buffer[indexBuf++] = 1;  
+		}
     }
     else if(type == SEND_TYPE_CONTROL_STOP)
     {
@@ -335,13 +344,15 @@ bool SingleDeviceControl(u8 areaIndex,u8 index)
 // 对于料塔三通，绞龙，副料线的缺料满料都将视为不可控制
 bool DeviceControlStateInquire(u8 areaIndex,u8 index)
 {
+
+	
     if(AllTheControlParaGet(areaIndex,index)->isSelect == TRUE)
-    {
+    { 
         if(AllTheControlParaGet(areaIndex,index)->cDevice.place.type == DEVICE_NAME_IN_TOWERS )      //  料塔三通
         {
             if(AllTheControlParaGet(areaIndex,index)->stateByte == SWITCH_VALVE_PARA_OPEN 
                 || AllTheControlParaGet(areaIndex,index)->stateByte == SWITCH_VALVE_PARA_OPENING)
-            {                    
+            {                 
                 return FALSE;
             }
             else
@@ -587,7 +598,68 @@ static void continueControlJudge(u8 areaIndex,u8 index)
 	}
 }
 
+void judgeControlArea(u8 areaIndex,u8 index)//判断某个区域的设备是否全部开启成功，如果是，则将该区域的开启标志位置0
+{
+	u8 i = 0, j = 0;
+	selectNum[areaIndex] = 0;
+	startNum[areaIndex] = 0;
+	for(i = 0 ;i < SING_LINK_DEVICE_TOTAL_NUMBER-1; i++)
+	{   
+		//判断有多少个设备被选择
+		if(AllTheControlParaGet(areaIndex,i)->cDevice.placeNew.useID != 0)
+		{
+			if(AllTheControlParaGet(areaIndex,i)->isSelect == TRUE)
+			{
+				selectNum[areaIndex]++;				
+			}
+		}
+        if(AllTheControlParaGet(areaIndex,i)->cDevice.place.type == DEVICE_NAME_IN_TOWERS )      //  料塔三通
+        {
+            if(AllTheControlParaGet(areaIndex,i)->stateByte == SWITCH_VALVE_PARA_OPEN )
+            {                 
+                startNum[areaIndex]++;
+            }
 
+        }
+		else if(AllTheControlParaGet(areaIndex,i)->cDevice.place.type == DEVICE_NAME_MAIN_VICE)   // 主副闸三通
+		{
+            if(AllTheControlParaGet(areaIndex,i)->stateByte == SWITCH_VALVE_PARA_OPEN )
+            {                    
+               startNum[areaIndex]++;
+            }
+		
+		}
+        else if(AllTheControlParaGet(areaIndex,i)->cDevice.place.type == DEVICE_NAME_FLINE)  //料线驱动
+        {
+            if(AllTheControlParaGet(areaIndex,i)->stateByte == FOODLINE_PARA_OPEN)
+            {                    
+                startNum[areaIndex]++;
+            }
+        }
+        else if(AllTheControlParaGet(areaIndex,i)->cDevice.place.type == DEVICE_NAME_VICE_FLINE)   // 副料线驱动
+        {
+            if(AllTheControlParaGet(areaIndex,i)->stateByte == VICE_FOODLINE_PARA_OPEN)
+            {
+					startNum[areaIndex]++;
+            }
+        }		
+        else if(AllTheControlParaGet(areaIndex,index)->cDevice.place.type == DEVICE_NAME_TOWERS_OUT)    //绞龙
+        {
+            if(AllTheControlParaGet(areaIndex,index)->stateByte == TOWERSOUT_PARA_FOREWARD 
+                || AllTheControlParaGet(areaIndex,index)->stateByte == TOWERSOUT_PARA_FOREWARDING
+				|| AllTheControlParaGet(areaIndex,index)->stateByte == TOWERSOUT_PARA_REVERSALING
+				|| AllTheControlParaGet(areaIndex,index)->stateByte == TOWERSOUT_PARA_REVERSAL)
+            {                    						
+                startNum[areaIndex]++;
+            }         		
+        }		
+		OSTimeDly(5);
+	}
+	if(startNum[areaIndex] == selectNum[areaIndex])
+	{
+		DeviceControlParaGet()->controlArea[areaIndex] = FALSE ;  //当前区域控制完成，
+	}
+}
 
 void DeviceControlAndInquire(void)
 {
@@ -597,14 +669,13 @@ void DeviceControlAndInquire(void)
    // static bool isFinish;
     u8 i = 0;
 	u8 gIndex = 0;
-	static bool myselfMachineFlag = FALSE;
-	u8 foodOverNum = 0;
+
+
 	
     err = OS_MsgBoxReceive(gControlStartRe_Queue, &event, OS_NO_DELAY);
     if (err == OS_NO_ERR)
     {	
 		// 得到需要控制的料线条数，以及相应料线中的设备数量，如果是分机那么只要控制
-	
 		while(DeviceControlParaGet()->controlArea[areaIndex] == FALSE)
 		{
 			areaIndex--;			
@@ -614,7 +685,7 @@ void DeviceControlAndInquire(void)
 				break;
 			}
 			OSTimeDly(20);
-		}
+		}	
 		while(AllTheControlParaGet(areaIndex,gIndex)->cDevice.placeNew.useID != 0) 
 		{
 			if(gIndex < (SING_LINK_DEVICE_TOTAL_NUMBER-1))
@@ -632,13 +703,14 @@ void DeviceControlAndInquire(void)
 	
 	if(DeviceSendCmd(areaIndex ,index, SEND_TYPE_INQUIRE) == FALSE)    //查询状态，无论有没有完成控制功能都会先查询状态。  
 		return;    //   加入通讯失败异常代码
-
-	if(AllTheControlParaGet(areaIndex,index)->manualAuto != AUTO_GEARS)   //  不再自动状态则退出
+	judgeControlArea(areaIndex,index);//判断某个区域的设备是否全部开启成功，如果是，则将该区域的开启标志位置0
+	if(AllTheControlParaGet(areaIndex,index)->manualAuto != AUTO_GEARS)   //  不再自动状态则控制下一个区域
 	{
 		//加入手动状态提示图标。
-		DeviceControlParaGet()->isHaveAlarm = TRUE;
+	//	DeviceControlParaGet()->isHaveAlarm = TRUE;
 		index = SING_LINK_DEVICE_TOTAL_NUMBER - 1;
 		areaIndex = areaIndex - 1;
+		OS_MsgBoxSend(gControlStartRe_Queue, &event, OS_NO_DELAY, FALSE);
 		return;
 	}  
 	continueControlJudge(areaIndex,index);   //  检查料塔、副料线的缺料满料情况，并处理
@@ -647,54 +719,53 @@ void DeviceControlAndInquire(void)
 	if(DeviceControlStateInquire(areaIndex,index) == TRUE)    //如果此设备可以控制   设备是被选择并且是打开状态。
 	{            
 		if(SingleDeviceControl(areaIndex,index) == FALSE)   //  发送控制命令并加入超时异常代码    
-			return  ;      
+			return  ;          
 	}
-		//  如果是主副闸三通阀，则不是开状态就不能进行下一个控件的操作    此判断不合理，有些料线主副闸的开合是用来决定不同料线的输料情况
-	//if(NextEnabled(areaIndex,index))   
+		//  如果是主副闸三通阀，则不是开状态就不能进行下一个控件的操作,如果没被选择则可以进行下一个设备的操作
+
+	if(index == 0)
 	{
-		if(index == 0)
+		index = SING_LINK_DEVICE_TOTAL_NUMBER-1;
+		while(1)
 		{
-			index = SING_LINK_DEVICE_TOTAL_NUMBER-1;
-			while(1)
+			if(areaIndex > 0)
 			{
-				if(areaIndex > 0)
-				{
-					areaIndex -= 1;
-				}
-				else
-				{
-					//isFinish = TRUE;
-					areaIndex = AREA_DEVICE_TOTAL_NUMBER - 1;
-					break;
-				}																
-				if(AllTheControlParaGet(areaIndex,0)->cDevice.placeNew.useID != 0)          //  此处条件可换成判断是否是分机地址
-				{
-					if(AllTheControlParaGet(areaIndex,0)->cDevice.place.area == DEVICE_AREA_S || 
-						AllTheControlParaGet(areaIndex,0)->cDevice.place.area == DEVICE_AREA_C  ||
-						DeviceControlParaGet()->controlArea[areaIndex] == TRUE   )
-						// 如果不是主机区域，其余的不再预览，节约资源。
-					{
-						while(AllTheControlParaGet(areaIndex,i)->cDevice.placeNew.useID != 0)   // 得到当前料线的设备数量
-						{
-							if(i < (SING_LINK_DEVICE_TOTAL_NUMBER-1))
-							{
-								i++;
-							}
-							else
-							{
-								i = SING_LINK_DEVICE_TOTAL_NUMBER-1;
-								break;
-							}
-						}
-						index = (i>0)?(i-1):0;
-						DeviceControlParaGet()->controlArea[areaIndex] = FALSE ;  //当前区域控制完成，
-						i = 0;
-						break;
-					}
-				}			
+				areaIndex -= 1;
 			}
+			else
+			{
+				areaIndex = AREA_DEVICE_TOTAL_NUMBER - 1;
+			}																
+			if(AllTheControlParaGet(areaIndex,0)->cDevice.placeNew.useID != 0)          //  只判断有设备的区域
+			{
+				if(DeviceControlParaGet()->controlArea[areaIndex] == TRUE )
+				{
+					while(AllTheControlParaGet(areaIndex,i)->cDevice.placeNew.useID != 0)   // 得到当前料线的设备数量
+					{
+
+						if(i < (SING_LINK_DEVICE_TOTAL_NUMBER-1))
+						{
+							i++;
+						}
+						else
+						{
+							i = SING_LINK_DEVICE_TOTAL_NUMBER-1;
+							break;
+						}
+						OSTimeDly(5);
+					}
+					index = (i>0)?(i-1):0;
+					
+					i = 0;
+					break;
+				}
+			}	
+			OSTimeDly(5);			
 		}
-		else
+	}
+	else
+	{
+		if(NextEnabled(areaIndex,index))   
 		{
 			index -= 1;
 			if(AllTheControlParaGet(areaIndex,index)->cDevice.place.type == DEVICE_NAME_CONTROL)  //如果是主机则需要另外查询索引
@@ -729,19 +800,21 @@ void DeviceControlAndInquire(void)
 						else
 							areaIndex = AREA_DEVICE_TOTAL_NUMBER - 1;						
 					}
+					OSTimeDly(5);
 				}				
 			}
-		}  
+		}
+	}  
 		
-	}            
+	    
     
 }
 
 static bool NextEnabled(u8 areaIndex,u8 index)
 {
-     if(AllTheControlParaGet(areaIndex,index)->isSelect == TRUE)
+     if(AllTheControlParaGet(areaIndex,index)->isSelect == TRUE)  
      {
-         if(AllTheControlParaGet(areaIndex,index)->cDevice.place.type == DEVICE_NAME_IN_TOWERS )
+         if(AllTheControlParaGet(areaIndex,index)->cDevice.place.type == DEVICE_NAME_MAIN_VICE )
            // || AllTheControlParaGet(areaIndex,index)->cDevice.place.type == DEVICE_NAME_MAIN_VICE)
          {
                 if(AllTheControlParaGet(areaIndex,index)->stateByte == SWITCH_VALVE_PARA_OPEN)
@@ -750,7 +823,78 @@ static bool NextEnabled(u8 areaIndex,u8 index)
                     return FALSE ;
          }
      }
+	 else
+	 {
+         if(AllTheControlParaGet(areaIndex,index)->cDevice.place.type == DEVICE_NAME_MAIN_VICE )
+         {
+                if(AllTheControlParaGet(areaIndex,index)->stateByte == SWITCH_VALVE_PARA_CLOSE)
+                    return TRUE ;
+                else 
+                    return FALSE ;
+         }		
+	 }
     return TRUE;
+}
+
+
+void judgeControlStopArea(u8 areaIndex,u8 index)//判断某个区域的设备是否全部开启成功，如果是，则将该区域的开启标志位置0
+{
+	u8 i = 0, j = 0;
+	selectNum[areaIndex] = 0;
+	stopNum[areaIndex] = 0;
+	for(i = 0 ;i < SING_LINK_DEVICE_TOTAL_NUMBER-1; i++)
+	{   
+		//判断有多少个设备被选择
+		if(AllTheControlParaGet(areaIndex,i)->cDevice.placeNew.useID != 0)
+		{
+			if(AllTheControlParaGet(areaIndex,i)->isSelect == TRUE)
+			{
+				selectNum[areaIndex]++;				
+			}
+		}
+        if(AllTheControlParaGet(areaIndex,i)->cDevice.place.type == DEVICE_NAME_IN_TOWERS )      //  料塔三通
+        {
+            if(AllTheControlParaGet(areaIndex,i)->stateByte == SWITCH_VALVE_PARA_CLOSE )
+            {                 
+                stopNum[areaIndex]++;
+            }
+
+        }
+		else if(AllTheControlParaGet(areaIndex,i)->cDevice.place.type == DEVICE_NAME_MAIN_VICE)   // 主副闸三通
+		{
+            if(AllTheControlParaGet(areaIndex,i)->stateByte == SWITCH_VALVE_PARA_CLOSING )
+            {                    
+               stopNum[areaIndex]++;
+            }
+		
+		}
+        else if(AllTheControlParaGet(areaIndex,i)->cDevice.place.type == DEVICE_NAME_FLINE)  //料线驱动
+        {
+            if(AllTheControlParaGet(areaIndex,i)->stateByte == FOODLINE_PARA_CLOSE)
+            {                    
+                stopNum[areaIndex]++;
+            }
+        }
+        else if(AllTheControlParaGet(areaIndex,i)->cDevice.place.type == DEVICE_NAME_VICE_FLINE)   // 副料线驱动
+        {
+            if(AllTheControlParaGet(areaIndex,i)->stateByte == VICE_FOODLINE_PARA_CLOSE)
+            {
+					stopNum[areaIndex]++;
+            }
+        }		
+        else if(AllTheControlParaGet(areaIndex,index)->cDevice.place.type == DEVICE_NAME_TOWERS_OUT)    //绞龙
+        {
+            if(AllTheControlParaGet(areaIndex,index)->stateByte == TOWERSOUT_PARA_SOTP )
+            {                    						
+                stopNum[areaIndex]++;
+            }         		
+        }		
+		OSTimeDly(5);
+	}
+	if(stopNum[areaIndex] == selectNum[areaIndex])
+	{
+		DeviceControlParaGet()->controlStopArea[areaIndex] = FALSE ;  //当前区域控制完成，
+	}
 }
 void DeviceStopAndInquire()
 {
@@ -781,34 +925,12 @@ void DeviceStopAndInquire()
     {           
         return; 
     }
+	judgeControlStopArea(areaIndex,index);//判断某个区域的设备是否全部关闭成功，如果是，则将该区域的开启标志位置0
 	continueControlJudge(areaIndex,index);   //  检查料塔、副料线的缺料满料情况，并处理 
 	// 延时处理功能需要更改	
     if(AllTheControlParaGet(areaIndex,index)->time)
     {        
-		DeviceControlParaGet()->controlStopDelayFlag[areaIndex] = TRUE;	// 将正在延时的料线标记好
-		if(AllTheControlParaGet(areaIndex,index)->startStopTime == 0)
-		{
-			AllTheControlParaGet(areaIndex,index)->startStopTime = RTC_GetTime(&overTimer);
-		}
-        if(AllTheControlParaGet(areaIndex,index)->stateByte == FOODLINE_PARA_OPEN)   //  如果料线驱动是开状态则开始时间递减
-        {
-            if(DeviceControlParaGet()->isClickShutdown == TRUE)     //如果按下了急停件，则停止计时
-            {
-                AllTheControlParaGet(areaIndex,index)->time = 0;  
-				AllTheControlParaGet(areaIndex,index)->startStopTime = 0;
-				DeviceControlParaGet()->controlStopDelayFlag[areaIndex] = FALSE;	// 将正在延时的料线取消标记
-            }
-			if(AllTheControlParaGet(areaIndex,index)->time > 0)
-			{
-				AllTheControlParaGet(areaIndex,index)->time -= (RTC_GetTime(&overTimer) - AllTheControlParaGet(areaIndex,index)->startStopTime) ;
-			}
-			else
-			{
-				AllTheControlParaGet(areaIndex,index)->startStopTime = 0;
-				DeviceControlParaGet()->controlStopDelayFlag[areaIndex] = FALSE;	// 将正在延时的料线取消标记
-			}
-        }
-
+		DelayShutDown(areaIndex, index, overTimer);
     }
 	else
 	{	  
@@ -836,21 +958,67 @@ void DeviceStopAndInquire()
 	{	
 		index = 0;									 
 	}    	
-	if(AllTheControlParaGet(areaIndex,index)->cDevice.placeNew.useID == 0)
+	if(AllTheControlParaGet(areaIndex,index)->cDevice.placeNew.useID == 0 )  //如果循环到第一个设备或者遇到主机，则索引往后移
 	{
-		DeviceControlParaGet()->controlStopArea[areaIndex] = FALSE;   //相关区域停机控制完成。
-		if(areaIndex  < (AREA_DEVICE_TOTAL_NUMBER - 1))
+		while(1)
 		{
-			areaIndex += 1;		
+			if(areaIndex  < (AREA_DEVICE_TOTAL_NUMBER - 1))
+			{
+				areaIndex += 1;		
+			}
+			else
+			{
+				areaIndex = 0;					
+			}
+			if(AllTheControlParaGet(areaIndex,0)->cDevice.placeNew.useID != 0)
+			{
+				break;
+			}
+		}	
+		index = 0;
+		if(AllTheControlParaGet(areaIndex,index)->cDevice.place.type == DEVICE_NAME_CONTROL)
+			index++;
+	}	              
+}
+
+void DelayShutDown(u8 areaIndex,u8 index,RTC_TIME overTimer)
+{
+	u32 nowTime = 0;
+	u16 timeQuantum = 0;
+	DeviceControlParaGet()->controlStopDelayFlag[areaIndex] = TRUE;	// 将正在延时的料线标记好
+	if(AllTheControlParaGet(areaIndex,index)->startStopTime == 0)
+	{
+		RTC_GetTime(&overTimer);
+		AllTheControlParaGet(areaIndex,index)->startStopTime = (overTimer.hour * 3600 + overTimer.min * 60 + overTimer.sec);
+	}
+	if(AllTheControlParaGet(areaIndex,index)->stateByte == FOODLINE_PARA_OPEN)   //  如果料线驱动是开状态则开始时间递减
+	{
+		if(DeviceControlParaGet()->isClickShutdown == TRUE)     //如果按下了急停件，则停止计时
+		{
+			AllTheControlParaGet(areaIndex,index)->time = 0;  
+			AllTheControlParaGet(areaIndex,index)->startStopTime = 0;
+			DeviceControlParaGet()->controlStopDelayFlag[areaIndex] = FALSE;	// 将正在延时的料线取消标记
+		}
+		if(AllTheControlParaGet(areaIndex,index)->time > 0)
+		{
+			RTC_GetTime(&overTimer);
+			nowTime = (overTimer.hour * 3600 + overTimer.min * 60 + overTimer.sec);
+			timeQuantum = (u16)(nowTime - AllTheControlParaGet(areaIndex,index)->startStopTime);
+			if(timeQuantum <= AllTheControlParaGet(areaIndex,index)->time)
+			{
+				AllTheControlParaGet(areaIndex,index)->time -=  timeQuantum;
+			}
+			else
+			{
+				AllTheControlParaGet(areaIndex,index)->time = 0;
+			}
 		}
 		else
 		{
-			areaIndex = 0;					
-		}		
-		index = 0;
-	}	             
-   
-    
+			AllTheControlParaGet(areaIndex,index)->startStopTime = 0;
+			DeviceControlParaGet()->controlStopDelayFlag[areaIndex] = FALSE;	// 将正在延时的料线取消标记
+		}
+	}	
 }
 // 强制关机
 void DeviceShutdown(void)
