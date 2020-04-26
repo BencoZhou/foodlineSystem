@@ -479,6 +479,7 @@ static void continueControlJudge(u8 areaIndex,u8 index)
 {
 	u8 foodOverNum = 0 ,foodLackFlag = 0,towersOutFoodLackNum;
 	u8 towersOutNum = 0 ;   // 记录绞龙数量
+	u8 inTowersNum = 0;		//料塔落料三通数量
 	u16 towersOutPrevDeviceId = 0;   //绞龙关联设备ID
 	u8 i,j;
 	//料塔或副料线满料处理程序
@@ -492,14 +493,21 @@ static void continueControlJudge(u8 areaIndex,u8 index)
 		{
 			for(i = 0;i < SING_LINK_DEVICE_TOTAL_NUMBER - 1; i++)
 			{
-				if(AllTheControlParaGet(areaIndex,i)->onoff.b.b0 == FOOD_UP_PLACE_NO
-					&& AllTheControlParaGet(areaIndex,i)->isSelect == TRUE)   //如果当前料线还有未满并选中的料塔
+				if(AllTheControlParaGet(areaIndex,i)->cDevice.placeNew.useID != 0) 
 				{
-					foodOverNum++;    //选中但未满的料塔数量
+					if( AllTheControlParaGet(areaIndex,i)->cDevice.place.type == DEVICE_NAME_IN_TOWERS
+						&& AllTheControlParaGet(areaIndex,i)->isSelect == TRUE												
+						)   //如果当前料线还有未满并选中的料塔
+					{
+						inTowersNum++;
+						if(AllTheControlParaGet(areaIndex,i)->onoff.b.b0 == FOOD_UP_PLACE_OK)
+						foodOverNum++;    //选中但未满的料塔数量
+					}
 				}
 			}
-			if(foodOverNum != 0)   // 如果还有未满的料塔，则只关闭当前的料塔
+			if(foodOverNum < inTowersNum)   // 如果还有未满的料塔，则只关闭当前的料塔
 			{
+				if(AllTheControlParaGet(areaIndex,index)->stateByte != SWITCH_VALVE_PARA_CLOSE)
 				SingleDeviceStop(areaIndex,index);   //停止当前三通	
 			}
 			else
@@ -930,7 +938,8 @@ void DeviceStopAndInquire()
 	// 延时处理功能需要更改	
     if(AllTheControlParaGet(areaIndex,index)->time)
     {        
-		DelayShutDown(areaIndex, index, overTimer);
+		DeviceControlParaGet()->controlStopDelayFlag[areaIndex] = TRUE;	// 将正在延时的料线标记好
+//		DelayShutDown(areaIndex, index, overTimer);
     }
 	else
 	{	  
@@ -949,16 +958,19 @@ void DeviceStopAndInquire()
 			}
 		}
 	}
-    
-	if(index < SING_LINK_DEVICE_TOTAL_NUMBER - 1)
+    if( DeviceControlParaGet()->controlStopDelayFlag[areaIndex] == FALSE )
 	{
-		index += 1;	
-	}
-	else
-	{	
-		index = 0;									 
-	}    	
-	if(AllTheControlParaGet(areaIndex,index)->cDevice.placeNew.useID == 0 )  //如果循环到第一个设备或者遇到主机，则索引往后移
+		if(index < SING_LINK_DEVICE_TOTAL_NUMBER - 1)
+		{
+			index += 1;	
+		}
+		else
+		{	
+			index = 0;									 
+		}    
+	}	
+	if(AllTheControlParaGet(areaIndex,index)->cDevice.placeNew.useID == 0     //如果循环到第一个设备或者遇到主机，则索引往后移
+		|| DeviceControlParaGet()->controlStopDelayFlag[areaIndex] == TRUE )  //如果循环到第一个设备或者遇到主机，则索引往后移
 	{
 		while(1)
 		{
@@ -985,7 +997,7 @@ void DelayShutDown(u8 areaIndex,u8 index,RTC_TIME overTimer)
 {
 	u32 nowTime = 0;
 	u16 timeQuantum = 0;
-	DeviceControlParaGet()->controlStopDelayFlag[areaIndex] = TRUE;	// 将正在延时的料线标记好
+//	DeviceControlParaGet()->controlStopDelayFlag[areaIndex] = TRUE;	// 将正在延时的料线标记好
 	if(AllTheControlParaGet(areaIndex,index)->startStopTime == 0)
 	{
 		RTC_GetTime(&overTimer);

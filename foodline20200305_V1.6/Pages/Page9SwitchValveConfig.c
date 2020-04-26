@@ -56,6 +56,9 @@ void Page9SwitchValveConfigSend(void)
     WirlessParaGet()->cmd = 0x30;
     WirlessParaGet()->len = index;
     
+	
+	// 用局部变量  直接用WirelessApp_SendData(gWirlessPara.cmd, FRAME_NEED_NO_ACK, gWirlessPara.buffer, gWirlessPara.len, srcaddr, dstaddr, dstaddr, 0);
+	//发送
     ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
 }
 

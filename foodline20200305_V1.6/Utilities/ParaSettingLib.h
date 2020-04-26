@@ -259,7 +259,7 @@ typedef struct
     u8   commTimes;     // 发送次数
     u8   stateByte;     // 设备发来的状态字节
     u8   alarmByte;     // 设备发来的报警字节
-    u8   RcControlAlarm;  // 命令结果:  1 设置成功。       2 设置失败。3 手动状态设置失败。              4  料位器打料料位器通讯失败通讯失败。                  5 单口双蛟龙不能反转。
+    u8   RcControlAlarm;  // 命令结果:  1 设置成功。   2 设置失败。3 手动状态设置失败。  4  料位器打料料位器通讯失败通讯失败。     5 单口双蛟龙不能反转。
     BitOperation onoff;   //    三通的开关状态
     u8 manualAuto;   // 手自动状态
 	u8 rotationDirection;		//蛟龙电机的正反转的控制标志

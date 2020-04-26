@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Output\MZ-SYS.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Output\MZ-SYS.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Thu Apr 23 15:38:12 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Sun Apr 26 11:57:11 2020
 <BR><P>
 <H3>Maximum Stack Usage =        780 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -382,7 +382,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RTC_WaitForLastTask
 <LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RTC_GetCounter
 </UL>
-<BR>[Called By]<UL><LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DelayShutDown
+<BR>[Called By]<UL><LI><a href="#[21d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DelayShutDown
 <LI><a href="#[274]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RcvAdjustTime
 </UL>
 
@@ -1130,7 +1130,7 @@ Global Symbols
 <LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LocalDeviceIdSet
 <LI><a href="#[21f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceExistCal
 <LI><a href="#[21e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceShutdown
-<LI><a href="#[21d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceStopAndInquire
+<LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceStopAndInquire
 <LI><a href="#[21b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;judgeControlStopArea
 <LI><a href="#[21a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceControlAndInquire
 <LI><a href="#[218]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;judgeControlArea
@@ -3266,7 +3266,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DisplayCommSend_Task
 <LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DisplayCommRecv_Task
 <LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Dispatcher_Task
-<LI><a href="#[21d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceStopAndInquire
+<LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceStopAndInquire
 <LI><a href="#[21a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceControlAndInquire
 <LI><a href="#[20c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceSendCmd
 <LI><a href="#[276]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AirIapDat_Task
@@ -3675,8 +3675,8 @@ Global Symbols
 <LI><a href="#[220]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceExistCalReady
 <LI><a href="#[21f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceExistCal
 <LI><a href="#[21e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceShutdown
-<LI><a href="#[21d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceStopAndInquire
-<LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DelayShutDown
+<LI><a href="#[21d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DelayShutDown
+<LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceStopAndInquire
 <LI><a href="#[21b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;judgeControlStopArea
 <LI><a href="#[21a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceControlAndInquire
 <LI><a href="#[218]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;judgeControlArea
@@ -3706,6 +3706,7 @@ Global Symbols
 <LI><a href="#[171]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Page19N1ControlRefresh
 <LI><a href="#[16e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Page16E1E2ControlRefresh
 <LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Page14W1ControlRefresh
+<LI><a href="#[16a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Page12S1S2ControlRefresh
 </UL>
 
 <P><STRONG><a name="[227]"></a>FoodLineTimeGet</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, parasettinglib.o(.text))
@@ -3902,8 +3903,8 @@ Global Symbols
 <LI><a href="#[21f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceExistCal
 <LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IdleStateEntry
 <LI><a href="#[21e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceShutdown
-<LI><a href="#[21d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceStopAndInquire
-<LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DelayShutDown
+<LI><a href="#[21d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DelayShutDown
+<LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceStopAndInquire
 <LI><a href="#[21b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;judgeControlStopArea
 <LI><a href="#[21a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceControlAndInquire
 <LI><a href="#[218]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;judgeControlArea
@@ -3953,7 +3954,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[20c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceSendCmd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[21d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceStopAndInquire
+<BR>[Called By]<UL><LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceStopAndInquire
 <LI><a href="#[216]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceControlStateInquire
 <LI><a href="#[217]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;continueControlJudge
 </UL>
@@ -3963,7 +3964,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[14d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AllTheControlParaGet
 </UL>
-<BR>[Called By]<UL><LI><a href="#[21d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceStopAndInquire
+<BR>[Called By]<UL><LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceStopAndInquire
 </UL>
 
 <P><STRONG><a name="[215]"></a>SingleDeviceControl</STRONG> (Thumb, 40 bytes, Stack size 16 bytes, foodlinecontrol.o(.text))
@@ -3987,7 +3988,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[21a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceControlAndInquire
 </UL>
 
-<P><STRONG><a name="[218]"></a>judgeControlArea</STRONG> (Thumb, 380 bytes, Stack size 24 bytes, foodlinecontrol.o(.text))
+<P><STRONG><a name="[218]"></a>judgeControlArea</STRONG> (Thumb, 366 bytes, Stack size 24 bytes, foodlinecontrol.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48 + Unknown Stack Size
 <LI>Call Chain = judgeControlArea &rArr; OSTimeDly &rArr; OS_Sched
 </UL>
@@ -3998,8 +3999,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[21a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceControlAndInquire
 </UL>
 
-<P><STRONG><a name="[21a]"></a>DeviceControlAndInquire</STRONG> (Thumb, 568 bytes, Stack size 24 bytes, foodlinecontrol.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 548 + Unknown Stack Size
+<P><STRONG><a name="[21a]"></a>DeviceControlAndInquire</STRONG> (Thumb, 588 bytes, Stack size 24 bytes, foodlinecontrol.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 556 + Unknown Stack Size
 <LI>Call Chain = DeviceControlAndInquire &rArr; continueControlJudge &rArr; SingleDeviceStop &rArr; DeviceSendCmd &rArr; ParaSettingSendData &rArr; WirelessApp_SendData &rArr; WirelessComm_SendData &rArr; OS_MsgBoxSend_Ex &rArr; OSQPostOpt &rArr; OS_EventTaskRdy &rArr; OS_EventTaskRemove
 </UL>
 <BR>[Calls]<UL><LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeDly
@@ -4017,7 +4018,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunningStateProcess
 </UL>
 
-<P><STRONG><a name="[21b]"></a>judgeControlStopArea</STRONG> (Thumb, 346 bytes, Stack size 24 bytes, foodlinecontrol.o(.text))
+<P><STRONG><a name="[21b]"></a>judgeControlStopArea</STRONG> (Thumb, 318 bytes, Stack size 24 bytes, foodlinecontrol.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48 + Unknown Stack Size
 <LI>Call Chain = judgeControlStopArea &rArr; OSTimeDly &rArr; OS_Sched
 </UL>
@@ -4025,20 +4026,10 @@ Global Symbols
 <LI><a href="#[144]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceControlParaGet
 <LI><a href="#[14d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AllTheControlParaGet
 </UL>
-<BR>[Called By]<UL><LI><a href="#[21d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceStopAndInquire
+<BR>[Called By]<UL><LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceStopAndInquire
 </UL>
 
-<P><STRONG><a name="[21c]"></a>DelayShutDown</STRONG> (Thumb, 272 bytes, Stack size 40 bytes, foodlinecontrol.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = DelayShutDown &rArr; RTC_GetTime
-</UL>
-<BR>[Calls]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RTC_GetTime
-<LI><a href="#[144]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceControlParaGet
-<LI><a href="#[14d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AllTheControlParaGet
-</UL>
-<BR>[Called By]<UL><LI><a href="#[21d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceStopAndInquire
-</UL>
-
-<P><STRONG><a name="[21d]"></a>DeviceStopAndInquire</STRONG> (Thumb, 394 bytes, Stack size 24 bytes, foodlinecontrol.o(.text))
+<P><STRONG><a name="[21c]"></a>DeviceStopAndInquire</STRONG> (Thumb, 422 bytes, Stack size 16 bytes, foodlinecontrol.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 548 + Unknown Stack Size
 <LI>Call Chain = DeviceStopAndInquire &rArr; continueControlJudge &rArr; SingleDeviceStop &rArr; DeviceSendCmd &rArr; ParaSettingSendData &rArr; WirelessApp_SendData &rArr; WirelessComm_SendData &rArr; OS_MsgBoxSend_Ex &rArr; OSQPostOpt &rArr; OS_EventTaskRdy &rArr; OS_EventTaskRemove
 </UL>
@@ -4046,7 +4037,6 @@ Global Symbols
 <LI><a href="#[144]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceControlParaGet
 <LI><a href="#[14d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AllTheControlParaGet
 <LI><a href="#[13b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_MsgBoxReceive
-<LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DelayShutDown
 <LI><a href="#[21b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;judgeControlStopArea
 <LI><a href="#[214]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceStopStateInquire
 <LI><a href="#[213]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SingleDeviceStop
@@ -4056,7 +4046,17 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadyStateProcess
 </UL>
 
-<P><STRONG><a name="[21e]"></a>DeviceShutdown</STRONG> (Thumb, 280 bytes, Stack size 16 bytes, foodlinecontrol.o(.text))
+<P><STRONG><a name="[21d]"></a>DelayShutDown</STRONG> (Thumb, 286 bytes, Stack size 40 bytes, foodlinecontrol.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = DelayShutDown &rArr; RTC_GetTime
+</UL>
+<BR>[Calls]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RTC_GetTime
+<LI><a href="#[144]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceControlParaGet
+<LI><a href="#[14d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AllTheControlParaGet
+</UL>
+<BR>[Called By]<UL><LI><a href="#[16a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Page12S1S2ControlRefresh
+</UL>
+
+<P><STRONG><a name="[21e]"></a>DeviceShutdown</STRONG> (Thumb, 258 bytes, Stack size 16 bytes, foodlinecontrol.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 476 + Unknown Stack Size
 <LI>Call Chain = DeviceShutdown &rArr; DeviceSendCmd &rArr; ParaSettingSendData &rArr; WirelessApp_SendData &rArr; WirelessComm_SendData &rArr; OS_MsgBoxSend_Ex &rArr; OSQPostOpt &rArr; OS_EventTaskRdy &rArr; OS_EventTaskRemove
 </UL>
@@ -4700,14 +4700,16 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[1e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DisplayPageDealProcess
 </UL>
 
-<P><STRONG><a name="[16a]"></a>Page12S1S2ControlRefresh</STRONG> (Thumb, 1358 bytes, Stack size 16 bytes, page12s1s2control.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 188 + Unknown Stack Size
+<P><STRONG><a name="[16a]"></a>Page12S1S2ControlRefresh</STRONG> (Thumb, 236 bytes, Stack size 24 bytes, page12s1s2control.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 196 + Unknown Stack Size
 <LI>Call Chain = Page12S1S2ControlRefresh &rArr; DisplayCommIconSend &rArr; DisplayComm_SendData &rArr; OS_MsgBoxSend &rArr; OSQPostOpt &rArr; OS_EventTaskRdy &rArr; OS_EventTaskRemove
 </UL>
 <BR>[Calls]<UL><LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeDly
 <LI><a href="#[176]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DisplayCommIconSend
 <LI><a href="#[144]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceControlParaGet
 <LI><a href="#[14d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AllTheControlParaGet
+<LI><a href="#[21d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DelayShutDown
+<LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ControlPareState
 </UL>
 <BR>[Called By]<UL><LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DisplayParaRefresh_Task
 <LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Page12S1S2ControlProcess
@@ -4715,7 +4717,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[1dc]"></a>Page12S1S2ControlInit</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, page12s1s2control.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 196 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 204 + Unknown Stack Size
 <LI>Call Chain = Page12S1S2ControlInit &rArr; Page12S1S2ControlRefresh &rArr; DisplayCommIconSend &rArr; DisplayComm_SendData &rArr; OS_MsgBoxSend &rArr; OSQPostOpt &rArr; OS_EventTaskRdy &rArr; OS_EventTaskRemove
 </UL>
 <BR>[Calls]<UL><LI><a href="#[16a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Page12S1S2ControlRefresh
@@ -4724,7 +4726,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[1f0]"></a>Page12S1S2ControlProcess</STRONG> (Thumb, 484 bytes, Stack size 32 bytes, page12s1s2control.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 220 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 228 + Unknown Stack Size
 <LI>Call Chain = Page12S1S2ControlProcess &rArr; Page12S1S2ControlRefresh &rArr; DisplayCommIconSend &rArr; DisplayComm_SendData &rArr; OS_MsgBoxSend &rArr; OSQPostOpt &rArr; OS_EventTaskRdy &rArr; OS_EventTaskRemove
 </UL>
 <BR>[Calls]<UL><LI><a href="#[16a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Page12S1S2ControlRefresh
@@ -6023,22 +6025,22 @@ Local Symbols
 <LI><a href="#[206]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParaSettingSendData
 </UL>
 <BR>[Called By]<UL><LI><a href="#[21e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceShutdown
-<LI><a href="#[21d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceStopAndInquire
+<LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceStopAndInquire
 <LI><a href="#[21a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceControlAndInquire
 <LI><a href="#[215]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SingleDeviceControl
 <LI><a href="#[213]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SingleDeviceStop
 <LI><a href="#[212]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendTypeInquire
 </UL>
 
-<P><STRONG><a name="[217]"></a>continueControlJudge</STRONG> (Thumb, 594 bytes, Stack size 48 bytes, foodlinecontrol.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 524 + Unknown Stack Size
+<P><STRONG><a name="[217]"></a>continueControlJudge</STRONG> (Thumb, 658 bytes, Stack size 56 bytes, foodlinecontrol.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 532 + Unknown Stack Size
 <LI>Call Chain = continueControlJudge &rArr; SingleDeviceStop &rArr; DeviceSendCmd &rArr; ParaSettingSendData &rArr; WirelessApp_SendData &rArr; WirelessComm_SendData &rArr; OS_MsgBoxSend_Ex &rArr; OSQPostOpt &rArr; OS_EventTaskRdy &rArr; OS_EventTaskRemove
 </UL>
 <BR>[Calls]<UL><LI><a href="#[144]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceControlParaGet
 <LI><a href="#[14d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AllTheControlParaGet
 <LI><a href="#[213]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SingleDeviceStop
 </UL>
-<BR>[Called By]<UL><LI><a href="#[21d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceStopAndInquire
+<BR>[Called By]<UL><LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceStopAndInquire
 <LI><a href="#[21a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceControlAndInquire
 </UL>
 
@@ -6161,7 +6163,7 @@ Local Symbols
 <LI><a href="#[221]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceAlarmCal
 <LI><a href="#[220]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceExistCalReady
 <LI><a href="#[225]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StateChange
-<LI><a href="#[21d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceStopAndInquire
+<LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceStopAndInquire
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> statemachine.o(.text)
 </UL>
@@ -6184,7 +6186,7 @@ Local Symbols
 <BR>[Address Reference Count : 1]<UL><LI> statemachine.o(.text)
 </UL>
 <P><STRONG><a name="[59]"></a>RunningStateProcess</STRONG> (Thumb, 96 bytes, Stack size 8 bytes, statemachine.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 556 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 564 + Unknown Stack Size
 <LI>Call Chain = RunningStateProcess &rArr; DeviceControlAndInquire &rArr; continueControlJudge &rArr; SingleDeviceStop &rArr; DeviceSendCmd &rArr; ParaSettingSendData &rArr; WirelessApp_SendData &rArr; WirelessComm_SendData &rArr; OS_MsgBoxSend_Ex &rArr; OSQPostOpt &rArr; OS_EventTaskRdy &rArr; OS_EventTaskRemove
 </UL>
 <BR>[Calls]<UL><LI><a href="#[144]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeviceControlParaGet

@@ -176,6 +176,7 @@ void ControlPareState(u8 deciceArea , u8 i)
 		else 
 			AllTheControlParaGet((deciceArea - 1),i)->cAlarm = 0;
 	}
+
 }
 u16 *FoodLineTimeGet(u8 index)
 {
