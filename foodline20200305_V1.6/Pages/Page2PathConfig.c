@@ -11,6 +11,7 @@ static u8 gP2Table = 0, gIndex = 0;
 //static u8 gCountdown;
 static u8 gPage2Seq = 0; // ÐòºÅ£¬ÀÛ¼Ó
 
+
 void Page2PathConfigTurn(u8 table);
 void Page2PathConfigTouchRefresh(void);
 
@@ -26,53 +27,59 @@ void Page2PathConfigInit(void)
 void Page2PathSendPath(void)
 {
     u8 index = 0, num, i;
+	WirlessPara gWirlessParaP2;
     gIndex = PathParameterGet()->index;
-    WirlessParaGet()->buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
-    WirlessParaGet()->buffer[index++] = LocalDeviceIdGet()&0xFF;
+    gWirlessParaP2.buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
+    gWirlessParaP2.buffer[index++] = LocalDeviceIdGet()&0xFF;
     for(num = 0; num < PATH_PER_INDEX; num++)
     {
         if(PathParameterGet()->dPara[gIndex][num].placeNew.useID == 0)
             break;
     }
-    WirlessParaGet()->buffer[index++] = (PathParameterGet()->dPara[gIndex][num-1].id>>8)&0xFF; 
-    WirlessParaGet()->buffer[index++] = PathParameterGet()->dPara[gIndex][num-1].id&0xFF;
-    WirlessParaGet()->buffer[index++] = gPage2Seq++;
-    WirlessParaGet()->buffer[index++] = gIndex;
-    WirlessParaGet()->buffer[index++] = 0x31;
-    WirlessParaGet()->buffer[index++] = LocalDeviceIdGet()&0xFF;
-    WirlessParaGet()->buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
+    gWirlessParaP2.buffer[index++] = (PathParameterGet()->dPara[gIndex][num-1].id>>8)&0xFF; 
+    gWirlessParaP2.buffer[index++] = PathParameterGet()->dPara[gIndex][num-1].id&0xFF;
+    gWirlessParaP2.buffer[index++] = gPage2Seq++;
+    gWirlessParaP2.buffer[index++] = gIndex;
+    gWirlessParaP2.buffer[index++] = 0x31;
+    gWirlessParaP2.buffer[index++] = LocalDeviceIdGet()&0xFF;
+    gWirlessParaP2.buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
     for(i = 0; i < num; i++)
     {
-        WirlessParaGet()->buffer[index++] = PathParameterGet()->dPara[gIndex][i].id&0xFF;
-        WirlessParaGet()->buffer[index++] = (PathParameterGet()->dPara[gIndex][i].id>>8)&0xFF; 
+        gWirlessParaP2.buffer[index++] = PathParameterGet()->dPara[gIndex][i].id&0xFF;
+        gWirlessParaP2.buffer[index++] = (PathParameterGet()->dPara[gIndex][i].id>>8)&0xFF; 
     }
     
-    WirlessParaGet()->cmd = 0x30;
-    WirlessParaGet()->len = index;
-    ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[gIndex][0].id);
+    gWirlessParaP2.cmd = 0x30;
+    gWirlessParaP2.len = index;
+//    ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[gIndex][0].id);
+	gWirlessParaP2.buffer[5] |= 0x80;
+    
+	WirelessApp_SendData(gWirlessParaP2.cmd, FRAME_NEED_NO_ACK, gWirlessParaP2.buffer, gWirlessParaP2.len, LocalDeviceIdGet(), PathParameterGet()->dPara[gIndex][0].id, PathParameterGet()->dPara[gIndex][0].id, 0);
 }
 
 void Page2PathSavePath(void)
 {
     u8 index = 0, num;
+	WirlessPara gWirlessParaP2;
     gIndex = PathParameterGet()->index;
-    WirlessParaGet()->buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
-    WirlessParaGet()->buffer[index++] = LocalDeviceIdGet()&0xFF;
+    gWirlessParaP2.buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
+    gWirlessParaP2.buffer[index++] = LocalDeviceIdGet()&0xFF;
     for(num = 0; num < PATH_PER_INDEX; num++)
     {
         if(PathParameterGet()->dPara[gIndex][num].placeNew.useID == 0)
             break;
     }
-    WirlessParaGet()->buffer[index++] = (PathParameterGet()->dPara[gIndex][num-1].id>>8)&0xFF; 
-    WirlessParaGet()->buffer[index++] = PathParameterGet()->dPara[gIndex][num-1].id&0xFF;
-    WirlessParaGet()->buffer[index++] = gPage2Seq++;
-    WirlessParaGet()->buffer[index++] = gIndex;
-    WirlessParaGet()->buffer[index++] = 0x30;
-    WirlessParaGet()->buffer[index++] = 1;
+    gWirlessParaP2.buffer[index++] = (PathParameterGet()->dPara[gIndex][num-1].id>>8)&0xFF; 
+    gWirlessParaP2.buffer[index++] = PathParameterGet()->dPara[gIndex][num-1].id&0xFF;
+    gWirlessParaP2.buffer[index++] = gPage2Seq++;
+    gWirlessParaP2.buffer[index++] = gIndex;
+    gWirlessParaP2.buffer[index++] = 0x30;
+    gWirlessParaP2.buffer[index++] = 1;
     
-    WirlessParaGet()->cmd = 0x30;
-    WirlessParaGet()->len = index;
-    ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[gIndex][0].id);
+    gWirlessParaP2.cmd = 0x30;
+    gWirlessParaP2.len = index;
+	gWirlessParaP2.buffer[5] |= 0x80;
+    WirelessApp_SendData(gWirlessParaP2.cmd, FRAME_NEED_NO_ACK, gWirlessParaP2.buffer, gWirlessParaP2.len, LocalDeviceIdGet(), PathParameterGet()->dPara[gIndex][0].id, PathParameterGet()->dPara[gIndex][0].id, 0);
 }
 
 void Page2PathConfigTurn(u8 table)

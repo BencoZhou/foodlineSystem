@@ -166,7 +166,7 @@ void WirelessApp_RcvMsg(u8 cmd, u16 seq, u8 *msg, u16 len, u32 saddr, u32 daddr,
             switch(msg[6])
             {
                 case DEVICE_CMD_PARA_CONFIG:
-                    if(tempDevice.place.type == DEVICE_NAME_FLINE)
+                    if(tempDevice.place.type == DEVICE_NAME_FLINE ||tempDevice.place.type == DEVICE_NAME_VICE_FLINE)
                     {
                         if(len == FOODLINEDEVICE_RC_DATA_LEN+7)
                         {
@@ -256,31 +256,31 @@ void WirelessApp_RcvMsg(u8 cmd, u16 seq, u8 *msg, u16 len, u32 saddr, u32 daddr,
                     evt.Info.b[0] = msg[4];
                     evt.Num = 1;
                     OS_MsgBoxSend(gControlSendNotify_Queue, &evt, OS_NO_DELAY, FALSE);
-					for(j = 0; j < AREA_DEVICE_TOTAL_NUMBER; j++)
-					{
-						if(AllTheControlParaGet(j,0)->cDevice.placeNew.useID != 0)
-						{
-							for(i = 0; i < SING_LINK_DEVICE_TOTAL_NUMBER; i++)
-							{
-								if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID != 0 )
-								{
-									if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID == tempDevice.placeNew.useID)
-									{
-										deviceConfirmFlag = 1;
-										break;
-									}
-								}
-								else
-									break;
-							}
-							if(deviceConfirmFlag)
-							{
-								deviceConfirmFlag = 0;
-								break;
-							}
-						}
-					}
-                    if(tempDevice.place.type == DEVICE_NAME_FLINE)
+//					for(j = 0; j < AREA_DEVICE_TOTAL_NUMBER; j++)
+//					{
+//						if(AllTheControlParaGet(j,0)->cDevice.placeNew.useID != 0)
+//						{
+//							for(i = 0; i < SING_LINK_DEVICE_TOTAL_NUMBER; i++)
+//							{
+//								if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID != 0 )
+//								{
+//									if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID == tempDevice.placeNew.useID)
+//									{
+//										deviceConfirmFlag = 1;
+//										break;
+//									}
+//								}
+//								else
+//									break;
+//							}
+//							if(deviceConfirmFlag)
+//							{
+//								deviceConfirmFlag = 0;
+//								break;
+//							}
+//						}
+//					}
+                    if(tempDevice.place.type == DEVICE_NAME_FLINE || tempDevice.place.type == DEVICE_NAME_VICE_FLINE)
                         FoodlineControlGet()->rcAlarm = msg[7];
                     else if(tempDevice.place.type == DEVICE_NAME_IN_TOWERS || tempDevice.place.type == DEVICE_NAME_MAIN_VICE)
                         SwitchValveControlGet()->rcAlarm = msg[7];
@@ -325,7 +325,7 @@ void WirelessApp_RcvMsg(u8 cmd, u16 seq, u8 *msg, u16 len, u32 saddr, u32 daddr,
 							}
 						}
 					}
-                    if(tempDevice.place.type == DEVICE_NAME_FLINE)
+                    if(tempDevice.place.type == DEVICE_NAME_FLINE || tempDevice.place.type == DEVICE_NAME_VICE_FLINE)
                     {
                         if(FOODLINECONTROL_RC_DATA_LEN == msg[7])
                         {
@@ -354,7 +354,7 @@ void WirelessApp_RcvMsg(u8 cmd, u16 seq, u8 *msg, u16 len, u32 saddr, u32 daddr,
 
                             }
                         }
-                    }
+                    }				
                     else if(tempDevice.place.type == DEVICE_NAME_IN_TOWERS || tempDevice.place.type == DEVICE_NAME_MAIN_VICE)
                     {
                         if(SVALVECONTROL_RC_DATA_LEN == msg[7])
@@ -412,45 +412,46 @@ void WirelessApp_RcvMsg(u8 cmd, u16 seq, u8 *msg, u16 len, u32 saddr, u32 daddr,
                             }
                         } 
                     }
-                   else if(tempDevice.place.type == DEVICE_NAME_VICE_FLINE)   // 副料线驱动
-                    {
-                        if(TOWERS_OUT_RC_DATA_LEN == msg[7])
-                        {
-                            
-//                            if(PageXIdGet()->placeNew.useID == tempDevice.placeNew.useID)
-//                            {
-//                                FoodlineControlGet()->currentA = (msg[index]<<8 | msg[index+1]);
-//                                index += 2;
-//                                FoodlineControlGet()->currentB = (msg[index]<<8 | msg[index+1]);
-//                                index += 2;
-//                                FoodlineControlGet()->currentC = (msg[index]<<8 | msg[index+1]);
-//                                index += 2;
-//                                FoodlineControlGet()->state = msg[index++];
-//                                FoodlineControlGet()->sensorState.buf = msg[index++];
-//                                FoodlineControlGet()->sensorComm.buf = msg[index++];
-//                                FoodlineControlGet()->alarm.buf = msg[index++];
-//                                FoodlineControlGet()->manualAuto = msg[index++];
-//                            }
-                            if(i != SING_LINK_DEVICE_TOTAL_NUMBER)
-                            {                       
-								AllTheControlParaGet(j,i)->onoff.buf = msg[8];
-                                if(AllTheControlParaGet(j,i)->onoff.b.b0 == 1)
-                                {
-                                  //  foodUpPlaceArrivalFlag = TRUE;
-                                }
-                                if(AllTheControlParaGet(j,i)->onoff.b.b1 == 1)
-                                {
-                                  //  foodDownPlaceArrivalFlag = TRUE;
-                                } 
-//                                AllTheControlParaGet(i)->stateByte = FoodlineControlGet()->state;
-                                AllTheControlParaGet(j,i)->stateByte = msg[14];
-//                                AllTheControlParaGet(i)->alarmByte = FoodlineControlGet()->alarm.buf;
-                                AllTheControlParaGet(j,i)->alarmByte = msg[17];
-                                AllTheControlParaGet(j,i)->manualAuto = msg [18];
+//					else if(tempDevice.place.type == DEVICE_NAME_VICE_FLINE)   // 副料线驱动
+//					{
+//						if(TOWERS_OUT_RC_DATA_LEN == msg[7])
+//						{
+//							 u8 index = 8;
+//							if(PageXIdGet()->placeNew.useID == tempDevice.placeNew.useID)
+//							{
+//								FoodlineControlGet()->currentA = (msg[index]<<8 | msg[index+1]);
+//								index += 2;
+//								FoodlineControlGet()->currentB = (msg[index]<<8 | msg[index+1]);
+//								index += 2;
+//								FoodlineControlGet()->currentC = (msg[index]<<8 | msg[index+1]);
+//								index += 2;
+//								FoodlineControlGet()->state = msg[index++];
+//								FoodlineControlGet()->sensorState.buf = msg[index++];
+//								FoodlineControlGet()->sensorComm.buf = msg[index++];
+//								FoodlineControlGet()->alarm.buf = msg[index++];
+//								FoodlineControlGet()->manualAuto = msg[index++];
+//							}
+//							if(i != SING_LINK_DEVICE_TOTAL_NUMBER)
+//							{                       
+//								AllTheControlParaGet(j,i)->onoff.buf = msg[8];
+//								if(AllTheControlParaGet(j,i)->onoff.b.b0 == 1)
+//								{
+//								  //  foodUpPlaceArrivalFlag = TRUE;
+//								}
+//								if(AllTheControlParaGet(j,i)->onoff.b.b1 == 1)
+//								{
+//								  //  foodDownPlaceArrivalFlag = TRUE;
+//								} 
+//	//                                AllTheControlParaGet(i)->stateByte = FoodlineControlGet()->state;
+//								AllTheControlParaGet(j,i)->stateByte = msg[14];
+//	//                                AllTheControlParaGet(i)->alarmByte = FoodlineControlGet()->alarm.buf;
+//								AllTheControlParaGet(j,i)->alarmByte = msg[17];
+//								AllTheControlParaGet(j,i)->manualAuto = msg [18];
 
-                            }
-                        } 
-                    }					
+//							}
+//						} 
+//					}						
+										
                     break;
             }
         }

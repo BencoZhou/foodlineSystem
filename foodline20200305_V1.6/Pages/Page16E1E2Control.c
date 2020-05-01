@@ -50,7 +50,7 @@ void Page16E1E2ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
 				}
                 else
 				{
-                    AllTheControlParaGet((DEVICE_AREA_E - 1),tempIndex)->isSelect = TRUE;
+                    AllTheControlParaGet((DEVICE_AREA_E - 1),tempIndex)->isSelect = TRUE;					
 				}
 				
 					
@@ -115,6 +115,10 @@ void Page16E1E2ControlRefresh(void)
     u8 i;
     for(i = 0; i < SING_LINK_DEVICE_TOTAL_NUMBER; i++)
     {
+		if(AllTheControlParaGet((DEVICE_AREA_E - 1),i)->cDevice.place.type == DEVICE_NAME_TOWERS_OUT)
+		{
+			AllTheControlParaGet((DEVICE_AREA_E - 1),i)->rotationDirection = TOWERSOUT_CONTROL_FOREWARD;   //¿ØÖÆ½ÊÁúÕý×ª
+		}			
 		if(AllTheControlParaGet((DEVICE_AREA_E - 1),i)->cDevice.place.type != 0)
 		{
 			ControlPareState(DEVICE_AREA_E ,i);

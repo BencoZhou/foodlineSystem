@@ -465,12 +465,15 @@ ParaRefresh *ParaRefreshGet(void)
 
 void ParaAnswer(u32 id)
 {
+	WirlessPara gWirlessParaAnswer;
     u8 index = 0;
-    WirlessParaGet()->buffer[index++] = 3;
+    gWirlessParaAnswer.buffer[index++] = 3;
     
-    WirlessParaGet()->cmd = 0x31;
-    WirlessParaGet()->len = index;
-    
-    ParaSettingSendData(LocalDeviceIdGet(), id);
+    gWirlessParaAnswer.cmd = 0x31;
+    gWirlessParaAnswer.len = index;
+    gWirlessParaAnswer.buffer[5] |= 0x80;
+    WirelessApp_SendData(gWirlessParaAnswer.cmd, FRAME_NEED_NO_ACK, gWirlessParaAnswer.buffer, gWirlessParaAnswer.len, LocalDeviceIdGet(), id,id, 0);
+	
+//    ParaSettingSendData(LocalDeviceIdGet(), id);
 }
 

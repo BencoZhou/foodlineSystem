@@ -10,6 +10,7 @@
 #include "FoodlineControl.h"
 #include "StateMachine.h"
 
+extern OS_MsgBoxHandle gControlStartRe_Queue;
 extern AllTheControlPara gAllTheControlPara[AREA_DEVICE_TOTAL_NUMBER][SING_LINK_DEVICE_TOTAL_NUMBER];
 void Page12S1S2ControlInit(void)
 {
@@ -23,6 +24,7 @@ void Page12S1S2ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
     u32 data;
 //    u16 tempSelect, tempState, tempButton, tempAlarm;
     u16 tempEffect, tempIndex,areaIndex;   //areaIndex  需要得到代表区域的地址
+	INPUT_EVENT evt;
 
 	if(len == 4)
 		data = pbuf[0] << 24 | pbuf[1] << 16 | pbuf[2] << 8 | pbuf[3];
@@ -46,17 +48,13 @@ void Page12S1S2ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
                 break;
             case PAGE12_BUTTON:
                 if(AllTheControlParaGet((DEVICE_AREA_S - 1),tempIndex)->isSelect == TRUE)
-				{
-					if(AllTheControlParaGet((DEVICE_AREA_S - 1),tempIndex)->cDevice.place.type == DEVICE_NAME_TOWERS_OUT)
-					{
-						AllTheControlParaGet((DEVICE_AREA_S - 1),tempIndex)->rotationDirection = TOWERSOUT_CONTROL_FOREWARD;   //控制绞龙正转
-					}
-					
+				{					
 					AllTheControlParaGet((DEVICE_AREA_S - 1),tempIndex)->isSelect = FALSE;					
 				}
                 else
 				{
                     AllTheControlParaGet((DEVICE_AREA_S - 1),tempIndex)->isSelect = TRUE;
+			
 				}
 				
 					
@@ -88,6 +86,7 @@ void Page12S1S2ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
         DeviceControlParaGet()->isClickShutdown = FALSE;
 		DeviceControlParaGet()->controlStopArea[(DEVICE_AREA_S - 1)] = TRUE;
 		DeviceControlParaGet()->controlArea[(DEVICE_AREA_S - 1)] = FALSE;
+		OS_MsgBoxSend(gControlStartRe_Queue, &evt, OS_NO_DELAY, FALSE);
     }
     if(addr == PAGE12_EMERGENCY_STOP_BUTTON)
     {
@@ -128,6 +127,10 @@ void Page12S1S2ControlRefresh(void)
 	RTC_TIME overTimer;
     for(i = 1; i < SING_LINK_DEVICE_TOTAL_NUMBER; i++)
     {
+		if(AllTheControlParaGet((DEVICE_AREA_S - 1),i)->cDevice.place.type == DEVICE_NAME_TOWERS_OUT)
+		{
+			AllTheControlParaGet((DEVICE_AREA_S - 1),i)->rotationDirection = TOWERSOUT_CONTROL_FOREWARD;   //控制绞龙正转
+		}		
 		if(AllTheControlParaGet((DEVICE_AREA_S - 1),i)->cDevice.place.type != 0)
 		{
 			ControlPareState(DEVICE_AREA_S,i);

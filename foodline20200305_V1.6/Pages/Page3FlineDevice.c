@@ -17,56 +17,66 @@ static u8 gPage3Seq; // ÐòºÅ£¬ÀÛ¼Ó
 
 void Page3FoodlineDeviceInquiry(void)
 {
+	WirlessPara gWirlessParaP3;
     u8 index = 0;
 	u8 path;
 	path = PathTrav(gPage3DevicePara.id);
 	if(path == PATH_NUMBERS)
 		return;
-    WirlessParaGet()->buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
-    WirlessParaGet()->buffer[index++] = LocalDeviceIdGet()&0xFF;
-    WirlessParaGet()->buffer[index++] = (gPage3DevicePara.id>>8)&0xFF;
-    WirlessParaGet()->buffer[index++] = gPage3DevicePara.id&0xFF;
-    WirlessParaGet()->buffer[index++] = gPage3Seq++;
-    WirlessParaGet()->buffer[index++] = path;
-    WirlessParaGet()->buffer[index++] = 0x39;
-    WirlessParaGet()->cmd = 0x30;
-    WirlessParaGet()->len = index;
+    gWirlessParaP3.buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
+    gWirlessParaP3.buffer[index++] = LocalDeviceIdGet()&0xFF;
+    gWirlessParaP3.buffer[index++] = (gPage3DevicePara.id>>8)&0xFF;
+    gWirlessParaP3.buffer[index++] = gPage3DevicePara.id&0xFF;
+    gWirlessParaP3.buffer[index++] = gPage3Seq++;
+    gWirlessParaP3.buffer[index++] = path;
+    gWirlessParaP3.buffer[index++] = 0x39;
+    gWirlessParaP3.cmd = 0x30;
+    gWirlessParaP3.len = index;
     
-    ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
+//    ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
+	gWirlessParaP3.buffer[5] |= 0x80;
+    WirelessApp_SendData(gWirlessParaP3.cmd, FRAME_NEED_NO_ACK, gWirlessParaP3.buffer, gWirlessParaP3.len, LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id, PathParameterGet()->dPara[path][0].id, 0);
+
+	
 }
 
 void Page3FoodlineDeviceSend(void)
 {
+	WirlessPara gWirlessParaP3;
     u8 index = 0;
 	u8 path;
 	path = PathTrav(gPage3DevicePara.id);
 	if(path == PATH_NUMBERS)
 		return;
-    WirlessParaGet()->buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
-    WirlessParaGet()->buffer[index++] = LocalDeviceIdGet()&0xFF;
-    WirlessParaGet()->buffer[index++] = (gPage3DevicePara.id>>8)&0xFF;
-    WirlessParaGet()->buffer[index++] = gPage3DevicePara.id&0xFF;
-    WirlessParaGet()->buffer[index++] = gPage3Seq++;
-    WirlessParaGet()->buffer[index++] = path;
-    WirlessParaGet()->buffer[index++] = 0x39;
-    WirlessParaGet()->buffer[index++] = pFoodlineDevicePara->shield.buf;
-    WirlessParaGet()->buffer[index++] = pFoodlineDevicePara->stateTime;
-    WirlessParaGet()->buffer[index++] = pFoodlineDevicePara->motorMintime;
-    WirlessParaGet()->buffer[index++] = (pFoodlineDevicePara->overCurMax>>8);
-    WirlessParaGet()->buffer[index++] = pFoodlineDevicePara->overCurMax;
-    WirlessParaGet()->buffer[index++] = (pFoodlineDevicePara->missPhaseMin>>8);
-    WirlessParaGet()->buffer[index++] = pFoodlineDevicePara->missPhaseMin;
-    WirlessParaGet()->buffer[index++] = pFoodlineDevicePara->curAlarmFilTime;
-    WirlessParaGet()->buffer[index++] = (pFoodlineDevicePara->curCalib>>8);
-    WirlessParaGet()->buffer[index++] = pFoodlineDevicePara->curCalib;
-    WirlessParaGet()->buffer[index++] = pFoodlineDevicePara->motorOnFilTime;
-    WirlessParaGet()->buffer[index++] = pFoodlineDevicePara->maleDevice.buf;
-    WirlessParaGet()->buffer[index++] = pFoodlineDevicePara->commSum;
+    gWirlessParaP3.buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
+    gWirlessParaP3.buffer[index++] = LocalDeviceIdGet()&0xFF;
+    gWirlessParaP3.buffer[index++] = (gPage3DevicePara.id>>8)&0xFF;
+    gWirlessParaP3.buffer[index++] = gPage3DevicePara.id&0xFF;
+    gWirlessParaP3.buffer[index++] = gPage3Seq++;
+    gWirlessParaP3.buffer[index++] = path;
+    gWirlessParaP3.buffer[index++] = 0x39;
+    gWirlessParaP3.buffer[index++] = pFoodlineDevicePara->shield.buf;
+    gWirlessParaP3.buffer[index++] = pFoodlineDevicePara->stateTime;
+    gWirlessParaP3.buffer[index++] = pFoodlineDevicePara->motorMintime;
+    gWirlessParaP3.buffer[index++] = (pFoodlineDevicePara->overCurMax>>8);
+    gWirlessParaP3.buffer[index++] = pFoodlineDevicePara->overCurMax;
+    gWirlessParaP3.buffer[index++] = (pFoodlineDevicePara->missPhaseMin>>8);
+    gWirlessParaP3.buffer[index++] = pFoodlineDevicePara->missPhaseMin;
+    gWirlessParaP3.buffer[index++] = pFoodlineDevicePara->curAlarmFilTime;
+    gWirlessParaP3.buffer[index++] = (pFoodlineDevicePara->curCalib>>8);
+    gWirlessParaP3.buffer[index++] = pFoodlineDevicePara->curCalib;
+    gWirlessParaP3.buffer[index++] = pFoodlineDevicePara->motorOnFilTime;
+    gWirlessParaP3.buffer[index++] = pFoodlineDevicePara->maleDevice.buf;
+    gWirlessParaP3.buffer[index++] = pFoodlineDevicePara->commSum;
     
-    WirlessParaGet()->cmd = 0x30;
-    WirlessParaGet()->len = index;
+    gWirlessParaP3.cmd = 0x30;
+    gWirlessParaP3.len = index;
     
-    ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
+//    ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
+	gWirlessParaP3.buffer[5] |= 0x80;
+    WirelessApp_SendData(gWirlessParaP3.cmd, FRAME_NEED_NO_ACK, gWirlessParaP3.buffer, gWirlessParaP3.len, LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id, PathParameterGet()->dPara[path][0].id, 0);
+
+
 }
 
 

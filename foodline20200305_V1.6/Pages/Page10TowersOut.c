@@ -26,45 +26,53 @@ void Page10TowersOutInit(void)
 
 void Page10ControlSend(void)
 {
+	WirlessPara gWirlessParaP10;
     u8 index = 0;
     u8 path;
     path = PathTrav(gPage10DevicePara.id);
     if(path == PATH_NUMBERS)
         return;
-    WirlessParaGet()->buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
-    WirlessParaGet()->buffer[index++] = LocalDeviceIdGet()&0xFF;
-    WirlessParaGet()->buffer[index++] = (gPage10DevicePara.id>>8)&0xFF; 
-    WirlessParaGet()->buffer[index++] = gPage10DevicePara.id&0xFF;
-    WirlessParaGet()->buffer[index++] = gPage10Seq++;
-    WirlessParaGet()->buffer[index++] = path;
-    WirlessParaGet()->buffer[index++] = 0x36;
-    WirlessParaGet()->buffer[index++] = TowersOutControlGet()->control;
-    WirlessParaGet()->buffer[index++] = (TowersOutControlGet()->overtime>>8)&0xFF; 
-    WirlessParaGet()->buffer[index++] = TowersOutControlGet()->overtime&0xFF;
+    gWirlessParaP10.buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
+    gWirlessParaP10.buffer[index++] = LocalDeviceIdGet()&0xFF;
+    gWirlessParaP10.buffer[index++] = (gPage10DevicePara.id>>8)&0xFF; 
+    gWirlessParaP10.buffer[index++] = gPage10DevicePara.id&0xFF;
+    gWirlessParaP10.buffer[index++] = gPage10Seq++;
+    gWirlessParaP10.buffer[index++] = path;
+    gWirlessParaP10.buffer[index++] = 0x36;
+    gWirlessParaP10.buffer[index++] = TowersOutControlGet()->control;
+    gWirlessParaP10.buffer[index++] = (TowersOutControlGet()->overtime>>8)&0xFF; 
+    gWirlessParaP10.buffer[index++] = TowersOutControlGet()->overtime&0xFF;
     
-    WirlessParaGet()->cmd = 0x30;
-    WirlessParaGet()->len = index;
-    ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
+    gWirlessParaP10.cmd = 0x30;
+    gWirlessParaP10.len = index;
+//    ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
+	gWirlessParaP10.buffer[5] |= 0x80;
+    WirelessApp_SendData(gWirlessParaP10.cmd, FRAME_NEED_NO_ACK, gWirlessParaP10.buffer, gWirlessParaP10.len, LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id, PathParameterGet()->dPara[path][0].id, 0);
+		
 }
 
 void Page10ControlAsk(void)
 {
+	WirlessPara gWirlessParaP10;
     u8 index = 0;
     u8 path;
     path = PathTrav(gPage10DevicePara.id);
     if(path == PATH_NUMBERS)
         return;
-    WirlessParaGet()->buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
-    WirlessParaGet()->buffer[index++] = LocalDeviceIdGet()&0xFF;
-    WirlessParaGet()->buffer[index++] = (gPage10DevicePara.id>>8)&0xFF; 
-    WirlessParaGet()->buffer[index++] = gPage10DevicePara.id&0xFF;
-    WirlessParaGet()->buffer[index++] = gPage10Seq++;
-    WirlessParaGet()->buffer[index++] = path;
-    WirlessParaGet()->buffer[index++] = 0x38;
+    gWirlessParaP10.buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
+    gWirlessParaP10.buffer[index++] = LocalDeviceIdGet()&0xFF;
+    gWirlessParaP10.buffer[index++] = (gPage10DevicePara.id>>8)&0xFF; 
+    gWirlessParaP10.buffer[index++] = gPage10DevicePara.id&0xFF;
+    gWirlessParaP10.buffer[index++] = gPage10Seq++;
+    gWirlessParaP10.buffer[index++] = path;
+    gWirlessParaP10.buffer[index++] = 0x38;
     
-    WirlessParaGet()->cmd = 0x30;
-    WirlessParaGet()->len = index;
-    ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
+    gWirlessParaP10.cmd = 0x30;
+    gWirlessParaP10.len = index;
+//    ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
+	gWirlessParaP10.buffer[5] |= 0x80;
+    WirelessApp_SendData(gWirlessParaP10.cmd, FRAME_NEED_NO_ACK, gWirlessParaP10.buffer, gWirlessParaP10.len, LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id, PathParameterGet()->dPara[path][0].id, 0);
+			
 
 //    TowersOutControlGet()->currentA++;
 }

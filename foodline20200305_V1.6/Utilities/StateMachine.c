@@ -48,7 +48,17 @@ static void StateChange(State *state)
 
 static void IdleStateEntry(void)
 {
+	u8 i;
     DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S - 1] = STATE_CHANGE_IDLE;
+	for(i = 0; i < AREA_DEVICE_TOTAL_NUMBER; i++)
+	{
+		if( DeviceControlParaGet()->controlShutdownArea[i] == FALSE
+			&& DeviceControlParaGet()->controlArea[i] == FALSE
+			&& DeviceControlParaGet()->controlStopArea[i] == FALSE)
+		{
+			DeviceControlParaGet()->stateMachineState[i] = STATE_CHANGE_IDLE;
+		}
+	}
 }
 
 static void IdleStateExit(void)
@@ -85,7 +95,8 @@ static void DeviceExistCal(void)
 	{		
 		if(AllTheControlParaGet(areaIndex,equipIndex)->cDevice.placeNew.useID != 0 )  //选出不为空的数据 
 		{
-			if(AllTheControlParaGet(areaIndex,equipIndex)->cDevice.place.type != DEVICE_NAME_CONTROL)
+			if(AllTheControlParaGet(areaIndex,equipIndex)->cDevice.place.type != DEVICE_NAME_CONTROL
+				&& AllTheControlParaGet(areaIndex,equipIndex)->cDevice.place.type != 0)  //类型不是主机也不为空的才查询
 			SendTypeInquire(areaIndex,equipIndex); 
 			equipIndex = (++equipIndex >= SING_LINK_DEVICE_TOTAL_NUMBER)?0:equipIndex;			
 		}
@@ -153,6 +164,7 @@ static void DeviceAlarmCal(void)
 					if(AllTheControlParaGet(j,i)->alarmByte > 0)
 					{
 						DeviceControlParaGet()->isHaveAlarm = TRUE;
+						DeviceControlParaGet()->controlShutdownArea[j] = TRUE;
 						break;
 					}
 					if(AllTheControlParaGet(j,i)->isSelect == TRUE)
@@ -161,6 +173,7 @@ static void DeviceAlarmCal(void)
 							AllTheControlParaGet(j,i)->stateByte == SWITCH_VALVE_PARA_CLOSEALARM )
 						{
 							DeviceControlParaGet()->isHaveAlarm = TRUE;  
+							DeviceControlParaGet()->controlShutdownArea[j] = TRUE;
 							break;
 						}     
 					} 
@@ -196,7 +209,8 @@ static void DevicEemergencyStopCal(void)
 						DeviceControlParaGet()->isEemergencyStop = TRUE;
 					}
 				}
-				else if(AllTheControlParaGet(areaIndex,index)->cDevice.place.type == DEVICE_NAME_FLINE)
+				else if(AllTheControlParaGet(areaIndex,index)->cDevice.place.type == DEVICE_NAME_FLINE
+					|| AllTheControlParaGet(areaIndex,index)->cDevice.place.type == DEVICE_NAME_VICE_FLINE)
 				{
 					if(AllTheControlParaGet(areaIndex,index)->stateByte == FOODLINE_PARA_CLOSE)
 					{                    
@@ -211,21 +225,18 @@ static void DevicEemergencyStopCal(void)
 					}
 				}
 			}
-
 		}
 	}
 }
 
 static void DeviceNormalStopCondition(void)
 {
-   
     if(NormalStopFlag == TRUE)   //缺料满料引起的正常关闭标志位
     {
         DeviceControlParaGet()->isClickStop = TRUE;
         DeviceControlParaGet()->isClickStart = FALSE;
         NormalStopFlag = FALSE;
     }
-    
 }
 static void DeviceTriggerStartCondition(void)
 {
@@ -293,7 +304,10 @@ static void IdleStateProcess(void)
 		StateChange(&gStateRunning);
 	}
     else if(DeviceControlParaGet()->isHaveAlarm == TRUE)
+	{
  		StateChange(&gStateSuspend);
+	}
+	
 }
 
 static void IdleStateInit(void)
@@ -347,8 +361,12 @@ static void ReadyStateProcess(void)
 			{
 				if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID != 0 )
 				{
-					if(AllTheControlParaGet(j,i)->cState == DEVICE_STATE_CLOSE)
-						deviceCloseNum++;
+					if(AllTheControlParaGet(j,i)->isSelect == FALSE
+						&& AllTheControlParaGet(j,i)->cDevice.place.type != 0)
+					{
+						if(AllTheControlParaGet(j,i)->cState == DEVICE_STATE_CLOSE)
+							deviceCloseNum++;
+					}
 				}
 				else 
 				{
@@ -368,7 +386,9 @@ static void ReadyStateProcess(void)
     else if(DeviceControlParaGet()->isHaveAlarm == TRUE)
  		StateChange(&gStateSuspend);
     else if(DeviceControlParaGet()->isClickStart == TRUE)
- 		StateChange(&gStateRunning);	
+ 		StateChange(&gStateRunning);
+//	else if(DeviceControlParaGet()->isClickStop == TRUE)
+// 		StateChange(&gStateReady);
 
 }
 
@@ -393,7 +413,7 @@ static void RunningStateEntry(void)
     {
         AllTheControlParaGet(DEVICE_AREA_S-1,0x05)->time = *FoodLineTimeGet(S2_FOOD_LINE_TIME);
     }          
-    DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S-1] = STATE_CHANGE_RUNNING;
+//    DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S-1] = STATE_CHANGE_RUNNING;
 }
 
 static void RunningStateExit(void)
@@ -403,7 +423,36 @@ static void RunningStateExit(void)
 
 static void RunningStateProcess(void)
 {
-    DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S-1] = STATE_CHANGE_RUNNING;
+	u8 i,j,deviceStartNum = 0;
+//    DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S-1] = STATE_CHANGE_RUNNING;
+	for(j = 0; j < AREA_DEVICE_TOTAL_NUMBER; j++)    //  判断状态是否需要显示为准备提示
+	{
+		if(AllTheControlParaGet(j,0)->cDevice.placeNew.useID != 0 )
+		{
+			for(i = 0 ;i <SING_LINK_DEVICE_TOTAL_NUMBER; i++)
+			{
+				if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID != 0 )
+				{
+					if(AllTheControlParaGet(j,i)->isSelect == TRUE
+						&& AllTheControlParaGet(j,i)->cDevice.place.type != 0)
+					{
+						if(AllTheControlParaGet(j,i)->cState == DEVICE_STATE_OPEN)
+							deviceStartNum++;
+					}
+				}
+				else 
+				{
+					i = (i > 0)?(i-1):0;
+					if(deviceStartNum == i)
+					{
+						DeviceControlParaGet()->stateMachineState[j] = STATE_CHANGE_RUNNING;
+					}					
+					break;
+				}
+			}
+
+		}
+	}	
     DeviceControlAndInquire();
     DeviceAlarmCal();
     DeviceNormalStopCondition();
@@ -414,8 +463,8 @@ static void RunningStateProcess(void)
  		StateChange(&gStateReady);
     else if(DeviceControlParaGet()->isClickShutdown == TRUE)
  		StateChange(&gStateSuspend);
-    else if(DeviceControlParaGet()->isEemergencyStop == TRUE)
- 		StateChange(&gStateSuspend);
+//    else if(DeviceControlParaGet()->isEemergencyStop == TRUE)
+// 		StateChange(&gStateReady);
 }
 
 static void RunningStateInit(void)
@@ -437,7 +486,7 @@ static void SuspendStateEntry(void)
     DeviceControlParaGet()->isClickStart = FALSE;
     DeviceControlParaGet()->isClickStop = TRUE;
     DeviceControlParaGet()->isEemergencyStop = FALSE;
-    DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S-1] = STATE_CHANGE_SUSPEND;
+//    DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S-1] = STATE_CHANGE_SUSPEND;
 
 }
 
@@ -448,6 +497,7 @@ static void SuspendStateExit(void)
 
 static void SuspendStateProcess(void)
 {
+		u8 i,j,deviceSuspendNum = 0;
     //DeviceStopAndInquire();
     DeviceShutdown();
     DeviceAlarmCal();
@@ -458,7 +508,19 @@ static void SuspendStateProcess(void)
     if(DeviceControlParaGet()->isClickShutdown == FALSE)
  		StateChange(&gStateReady);    
 	
-    DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S-1] = STATE_CHANGE_SUSPEND;
+	for(j = 0; j < AREA_DEVICE_TOTAL_NUMBER; j++)    //  判断状态是否需要显示为准备提示
+	{
+		if(AllTheControlParaGet(j,0)->cDevice.placeNew.useID != 0 )
+		{
+			
+			if(DeviceControlParaGet()->controlShutdownArea[j] == TRUE)
+			{
+				DeviceControlParaGet()->stateMachineState[j] = STATE_CHANGE_SUSPEND;
+			}
+
+		}
+	}	
+	
 }
 
 static void SuspendStateInit(void)

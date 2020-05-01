@@ -17,49 +17,55 @@ static u8 gPage9Seq; // 序号，累加
 
 void Page9SwitchValveConfigInquiry(void)
 {
+	WirlessPara gWirlessParaP9;
     u8 index = 0;
 	u8 path;
 	path = PathTrav(gPage9DevicePara.id);
 	if(path == PATH_NUMBERS)
 		return;
-    WirlessParaGet()->buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
-    WirlessParaGet()->buffer[index++] = LocalDeviceIdGet()&0xFF;
-    WirlessParaGet()->buffer[index++] = (gPage9DevicePara.id>>8)&0xFF;
-    WirlessParaGet()->buffer[index++] = gPage9DevicePara.id&0xFF;
-    WirlessParaGet()->buffer[index++] = gPage9Seq++;
-    WirlessParaGet()->buffer[index++] = path;
-    WirlessParaGet()->buffer[index++] = 0x39;
-    WirlessParaGet()->cmd = 0x30;
-    WirlessParaGet()->len = index;
-    
-    ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
+    gWirlessParaP9.buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
+    gWirlessParaP9.buffer[index++] = LocalDeviceIdGet()&0xFF;
+    gWirlessParaP9.buffer[index++] = (gPage9DevicePara.id>>8)&0xFF;
+    gWirlessParaP9.buffer[index++] = gPage9DevicePara.id&0xFF;
+    gWirlessParaP9.buffer[index++] = gPage9Seq++;
+    gWirlessParaP9.buffer[index++] = path;
+    gWirlessParaP9.buffer[index++] = 0x39;
+    gWirlessParaP9.cmd = 0x30;
+    gWirlessParaP9.len = index;
+	gWirlessParaP9.buffer[5] |= 0x80;
+    WirelessApp_SendData(gWirlessParaP9.cmd, FRAME_NEED_NO_ACK, gWirlessParaP9.buffer, gWirlessParaP9.len, LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id, PathParameterGet()->dPara[path][0].id, 0);
+	    
+//    ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
 }
 
 void Page9SwitchValveConfigSend(void)
 {
+	WirlessPara gWirlessParaP9;
     u8 index = 0;
 	u8 path;
 	path = PathTrav(gPage9DevicePara.id);
 	if(path == PATH_NUMBERS)
 		return;
-    WirlessParaGet()->buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
-    WirlessParaGet()->buffer[index++] = LocalDeviceIdGet()&0xFF;
-    WirlessParaGet()->buffer[index++] = (gPage9DevicePara.id>>8)&0xFF;
-    WirlessParaGet()->buffer[index++] = gPage9DevicePara.id&0xFF;
-    WirlessParaGet()->buffer[index++] = gPage9Seq++;
-    WirlessParaGet()->buffer[index++] = path;
-    WirlessParaGet()->buffer[index++] = 0x39;
-    WirlessParaGet()->buffer[index++] = SwitchValveParaGet()->alarm.buf;
-    WirlessParaGet()->buffer[index++] = SwitchValveParaGet()->stateTime;
-    WirlessParaGet()->buffer[index++] = (SwitchValveParaGet()->openOvertime>>8)&0xFF;
-    WirlessParaGet()->buffer[index++] = SwitchValveParaGet()->openOvertime&0xFF;
-    WirlessParaGet()->cmd = 0x30;
-    WirlessParaGet()->len = index;
+    gWirlessParaP9.buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
+    gWirlessParaP9.buffer[index++] = LocalDeviceIdGet()&0xFF;
+    gWirlessParaP9.buffer[index++] = (gPage9DevicePara.id>>8)&0xFF;
+    gWirlessParaP9.buffer[index++] = gPage9DevicePara.id&0xFF;
+    gWirlessParaP9.buffer[index++] = gPage9Seq++;
+    gWirlessParaP9.buffer[index++] = path;
+    gWirlessParaP9.buffer[index++] = 0x39;
+    gWirlessParaP9.buffer[index++] = SwitchValveParaGet()->alarm.buf;
+    gWirlessParaP9.buffer[index++] = SwitchValveParaGet()->stateTime;
+    gWirlessParaP9.buffer[index++] = (SwitchValveParaGet()->openOvertime>>8)&0xFF;
+    gWirlessParaP9.buffer[index++] = SwitchValveParaGet()->openOvertime&0xFF;
+    gWirlessParaP9.cmd = 0x30;
+    gWirlessParaP9.len = index;
     
+	gWirlessParaP9.buffer[5] |= 0x80;
+    WirelessApp_SendData(gWirlessParaP9.cmd, FRAME_NEED_NO_ACK, gWirlessParaP9.buffer, gWirlessParaP9.len, LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id, PathParameterGet()->dPara[path][0].id, 0);
 	
 	// 用局部变量  直接用WirelessApp_SendData(gWirlessPara.cmd, FRAME_NEED_NO_ACK, gWirlessPara.buffer, gWirlessPara.len, srcaddr, dstaddr, dstaddr, 0);
 	//发送
-    ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
+//    ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
 }
 
 

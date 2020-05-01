@@ -25,43 +25,51 @@ void Page8SwitchValveInit(void)
 
 void Page8ControlSend(void)
 {
+	WirlessPara gWirlessParaP8;
 	u8 index = 0;
 	u8 path;
 	path = PathTrav(gPage8DevicePara.id);
 	if(path == PATH_NUMBERS)
 		return;
-	WirlessParaGet()->buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
-	WirlessParaGet()->buffer[index++] = LocalDeviceIdGet()&0xFF;
-	WirlessParaGet()->buffer[index++] = (gPage8DevicePara.id>>8)&0xFF; 
-	WirlessParaGet()->buffer[index++] = gPage8DevicePara.id&0xFF;
-	WirlessParaGet()->buffer[index++] = gPage8Seq++;
-	WirlessParaGet()->buffer[index++] = path;
-	WirlessParaGet()->buffer[index++] = 0x36;
-	WirlessParaGet()->buffer[index++] = SwitchValveControlGet()->control;
+	gWirlessParaP8.buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
+	gWirlessParaP8.buffer[index++] = LocalDeviceIdGet()&0xFF;
+	gWirlessParaP8.buffer[index++] = (gPage8DevicePara.id>>8)&0xFF; 
+	gWirlessParaP8.buffer[index++] = gPage8DevicePara.id&0xFF;
+	gWirlessParaP8.buffer[index++] = gPage8Seq++;
+	gWirlessParaP8.buffer[index++] = path;
+	gWirlessParaP8.buffer[index++] = 0x36;
+	gWirlessParaP8.buffer[index++] = SwitchValveControlGet()->control;
 
-	WirlessParaGet()->cmd = 0x30;
-	WirlessParaGet()->len = index;
-	ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
+	gWirlessParaP8.cmd = 0x30;
+	gWirlessParaP8.len = index;
+//	ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
+	gWirlessParaP8.buffer[5] |= 0x80;
+    WirelessApp_SendData(gWirlessParaP8.cmd, FRAME_NEED_NO_ACK, gWirlessParaP8.buffer, gWirlessParaP8.len, LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id, PathParameterGet()->dPara[path][0].id, 0);
+			
 }
 
 void Page8ControlAsk(void)
 {
+	WirlessPara gWirlessParaP8;
 	u8 index = 0;
 	u8 path;
 	path = PathTrav(gPage8DevicePara.id);
 	if(path == PATH_NUMBERS)
 		return;
-	WirlessParaGet()->buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
-	WirlessParaGet()->buffer[index++] = LocalDeviceIdGet()&0xFF;
-	WirlessParaGet()->buffer[index++] = (gPage8DevicePara.id>>8)&0xFF; 
-	WirlessParaGet()->buffer[index++] = gPage8DevicePara.id&0xFF;
-	WirlessParaGet()->buffer[index++] = gPage8Seq++;
-	WirlessParaGet()->buffer[index++] = path;
-	WirlessParaGet()->buffer[index++] = 0x38;
+	gWirlessParaP8.buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
+	gWirlessParaP8.buffer[index++] = LocalDeviceIdGet()&0xFF;
+	gWirlessParaP8.buffer[index++] = (gPage8DevicePara.id>>8)&0xFF; 
+	gWirlessParaP8.buffer[index++] = gPage8DevicePara.id&0xFF;
+	gWirlessParaP8.buffer[index++] = gPage8Seq++;
+	gWirlessParaP8.buffer[index++] = path;
+	gWirlessParaP8.buffer[index++] = 0x38;
 
-	WirlessParaGet()->cmd = 0x30;
-	WirlessParaGet()->len = index;
+	gWirlessParaP8.cmd = 0x30;
+	gWirlessParaP8.len = index;
 	ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
+	gWirlessParaP8.buffer[5] |= 0x80;
+    WirelessApp_SendData(gWirlessParaP8.cmd, FRAME_NEED_NO_ACK, gWirlessParaP8.buffer, gWirlessParaP8.len, LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id, PathParameterGet()->dPara[path][0].id, 0);
+			
 }
 
 void Page8SwitchValveProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)

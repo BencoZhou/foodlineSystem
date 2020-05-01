@@ -14,15 +14,19 @@ static DevicePara *pPage5OldDevicePara;
 
 void Page5ReviseSend(void)
 {
+	WirlessPara gWirlessParaP5;
     u8 index = 0;
-    WirlessParaGet()->cmd = 0xF6;
-    WirlessParaGet()->buffer[index++] = gPage5NewDevicePara.id>>24;
-    WirlessParaGet()->buffer[index++] = gPage5NewDevicePara.id>>16;
-    WirlessParaGet()->buffer[index++] = gPage5NewDevicePara.id>>8;
-    WirlessParaGet()->buffer[index++] = gPage5NewDevicePara.id&0xFF;
-    WirlessParaGet()->len = index;
+    gWirlessParaP5.cmd = 0xF6;
+    gWirlessParaP5.buffer[index++] = gPage5NewDevicePara.id>>24;
+    gWirlessParaP5.buffer[index++] = gPage5NewDevicePara.id>>16;
+    gWirlessParaP5.buffer[index++] = gPage5NewDevicePara.id>>8;
+    gWirlessParaP5.buffer[index++] = gPage5NewDevicePara.id&0xFF;
+    gWirlessParaP5.len = index;
     
-    ParaSettingSendData(gPage5LocalDevicePara.id, pPage5OldDevicePara->id);
+//    ParaSettingSendData(gPage5LocalDevicePara.id, pPage5OldDevicePara->id);
+	gWirlessParaP5.buffer[5] |= 0x80;
+    WirelessApp_SendData(gWirlessParaP5.cmd, FRAME_NEED_NO_ACK, gWirlessParaP5.buffer, gWirlessParaP5.len, gPage5LocalDevicePara.id, pPage5OldDevicePara->id, pPage5OldDevicePara->id, 0);
+	
 }
 
 

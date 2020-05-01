@@ -15,57 +15,63 @@ static u8 gPage11Seq; // ÐòºÅ£¬ÀÛ¼Ó
 
 void Page11TowersOutConfigInquiry(void)
 {
+	WirlessPara gWirlessParaP11;
     u8 index = 0;
 	u8 path;
 	path = PathTrav(gPage11DevicePara.id);
 	if(path == PATH_NUMBERS)
 		return;
-    WirlessParaGet()->buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
-    WirlessParaGet()->buffer[index++] = LocalDeviceIdGet()&0xFF;
-    WirlessParaGet()->buffer[index++] = (gPage11DevicePara.id>>8)&0xFF;
-    WirlessParaGet()->buffer[index++] = gPage11DevicePara.id&0xFF;
-    WirlessParaGet()->buffer[index++] = gPage11Seq++;
-    WirlessParaGet()->buffer[index++] = path;
-    WirlessParaGet()->buffer[index++] = 0x39;
+    gWirlessParaP11.buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
+    gWirlessParaP11.buffer[index++] = LocalDeviceIdGet()&0xFF;
+    gWirlessParaP11.buffer[index++] = (gPage11DevicePara.id>>8)&0xFF;
+    gWirlessParaP11.buffer[index++] = gPage11DevicePara.id&0xFF;
+    gWirlessParaP11.buffer[index++] = gPage11Seq++;
+    gWirlessParaP11.buffer[index++] = path;
+    gWirlessParaP11.buffer[index++] = 0x39;
     
-    WirlessParaGet()->cmd = 0x30;
-    WirlessParaGet()->len = index;
-    
-    ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
+    gWirlessParaP11.cmd = 0x30;
+    gWirlessParaP11.len = index;
+	gWirlessParaP11.buffer[5] |= 0x80;
+    WirelessApp_SendData(gWirlessParaP11.cmd, FRAME_NEED_NO_ACK, gWirlessParaP11.buffer, gWirlessParaP11.len, LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id, PathParameterGet()->dPara[path][0].id, 0);
+		    
+//    ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
 }
 
 void Page11TowersOutConfigSend(void)
 {
+	WirlessPara gWirlessParaP11;
     u8 index = 0;
 	u8 path;
 	path = PathTrav(gPage11DevicePara.id);
 	if(path == PATH_NUMBERS)
 		return;
-    WirlessParaGet()->buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
-    WirlessParaGet()->buffer[index++] = LocalDeviceIdGet()&0xFF;
-    WirlessParaGet()->buffer[index++] = (gPage11DevicePara.id>>8)&0xFF;
-    WirlessParaGet()->buffer[index++] = gPage11DevicePara.id&0xFF;
-    WirlessParaGet()->buffer[index++] = gPage11Seq++;
-    WirlessParaGet()->buffer[index++] = path;
-    WirlessParaGet()->buffer[index++] = 0x39;
-    WirlessParaGet()->buffer[index++] = pTowersOutDevicePara->shield.buf;
-    WirlessParaGet()->buffer[index++] = pTowersOutDevicePara->stateTime;
-    WirlessParaGet()->buffer[index++] = pTowersOutDevicePara->motorMintime;
-    WirlessParaGet()->buffer[index++] = (pTowersOutDevicePara->overCurMax>>8);
-    WirlessParaGet()->buffer[index++] = pTowersOutDevicePara->overCurMax;
-    WirlessParaGet()->buffer[index++] = (pTowersOutDevicePara->missPhaseMin>>8);
-    WirlessParaGet()->buffer[index++] = pTowersOutDevicePara->missPhaseMin;
-    WirlessParaGet()->buffer[index++] = pTowersOutDevicePara->curAlarmFilTime;
-    WirlessParaGet()->buffer[index++] = (pTowersOutDevicePara->curCalib>>8);
-    WirlessParaGet()->buffer[index++] = pTowersOutDevicePara->curCalib;
-    WirlessParaGet()->buffer[index++] = pTowersOutDevicePara->motorOnFilTime;
-    WirlessParaGet()->buffer[index++] = pTowersOutDevicePara->feedFilTime;
-    WirlessParaGet()->buffer[index++] = pTowersOutDevicePara->motorState;
+    gWirlessParaP11.buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
+    gWirlessParaP11.buffer[index++] = LocalDeviceIdGet()&0xFF;
+    gWirlessParaP11.buffer[index++] = (gPage11DevicePara.id>>8)&0xFF;
+    gWirlessParaP11.buffer[index++] = gPage11DevicePara.id&0xFF;
+    gWirlessParaP11.buffer[index++] = gPage11Seq++;
+    gWirlessParaP11.buffer[index++] = path;
+    gWirlessParaP11.buffer[index++] = 0x39;
+    gWirlessParaP11.buffer[index++] = pTowersOutDevicePara->shield.buf;
+    gWirlessParaP11.buffer[index++] = pTowersOutDevicePara->stateTime;
+    gWirlessParaP11.buffer[index++] = pTowersOutDevicePara->motorMintime;
+    gWirlessParaP11.buffer[index++] = (pTowersOutDevicePara->overCurMax>>8);
+    gWirlessParaP11.buffer[index++] = pTowersOutDevicePara->overCurMax;
+    gWirlessParaP11.buffer[index++] = (pTowersOutDevicePara->missPhaseMin>>8);
+    gWirlessParaP11.buffer[index++] = pTowersOutDevicePara->missPhaseMin;
+    gWirlessParaP11.buffer[index++] = pTowersOutDevicePara->curAlarmFilTime;
+    gWirlessParaP11.buffer[index++] = (pTowersOutDevicePara->curCalib>>8);
+    gWirlessParaP11.buffer[index++] = pTowersOutDevicePara->curCalib;
+    gWirlessParaP11.buffer[index++] = pTowersOutDevicePara->motorOnFilTime;
+    gWirlessParaP11.buffer[index++] = pTowersOutDevicePara->feedFilTime;
+    gWirlessParaP11.buffer[index++] = pTowersOutDevicePara->motorState;
     
-    WirlessParaGet()->cmd = 0x30;
-    WirlessParaGet()->len = index;
-    
-    ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
+    gWirlessParaP11.cmd = 0x30;
+    gWirlessParaP11.len = index;
+	gWirlessParaP11.buffer[5] |= 0x80;
+    WirelessApp_SendData(gWirlessParaP11.cmd, FRAME_NEED_NO_ACK, gWirlessParaP11.buffer, gWirlessParaP11.len, LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id, PathParameterGet()->dPara[path][0].id, 0);
+		        
+//    ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
 }
 
 

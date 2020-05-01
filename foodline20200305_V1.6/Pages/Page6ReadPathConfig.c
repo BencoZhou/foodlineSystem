@@ -26,22 +26,26 @@ void Page6PathConfigInit(void)
 
 void Page6PathSendPath(void)
 {
+	WirlessPara gWirlessParaP6;
     u8 index = 0;
     u8 path;
     path = PathTrav(ReadPathGet()->readDevice.id);
     if(path == PATH_NUMBERS)
         return;
-    WirlessParaGet()->buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
-    WirlessParaGet()->buffer[index++] = LocalDeviceIdGet()&0xFF;
-    WirlessParaGet()->buffer[index++] = (ReadPathGet()->readDevice.id>>8)&0xFF; 
-    WirlessParaGet()->buffer[index++] = ReadPathGet()->readDevice.id&0xFF;
-    WirlessParaGet()->buffer[index++] = gPage6Seq++;
-    WirlessParaGet()->buffer[index++] = ReadPathGet()->path;
-    WirlessParaGet()->buffer[index++] = 0x33;
+    gWirlessParaP6.buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
+    gWirlessParaP6.buffer[index++] = LocalDeviceIdGet()&0xFF;
+    gWirlessParaP6.buffer[index++] = (ReadPathGet()->readDevice.id>>8)&0xFF; 
+    gWirlessParaP6.buffer[index++] = ReadPathGet()->readDevice.id&0xFF;
+    gWirlessParaP6.buffer[index++] = gPage6Seq++;
+    gWirlessParaP6.buffer[index++] = ReadPathGet()->path;
+    gWirlessParaP6.buffer[index++] = 0x33;
     
-    WirlessParaGet()->cmd = 0x30;
-    WirlessParaGet()->len = index;
-    ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
+    gWirlessParaP6.cmd = 0x30;
+    gWirlessParaP6.len = index;
+//    ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
+	gWirlessParaP6.buffer[5] |= 0x80;
+    WirelessApp_SendData(gWirlessParaP6.cmd, FRAME_NEED_NO_ACK, gWirlessParaP6.buffer, gWirlessParaP6.len, LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id, PathParameterGet()->dPara[path][0].id, 0);
+	
 }
 
 void Page6PathConfigTurn(u8 table)

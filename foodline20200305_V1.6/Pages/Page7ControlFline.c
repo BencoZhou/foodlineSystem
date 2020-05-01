@@ -23,46 +23,54 @@ void Page7ControlFlineInit(void)
 
 void Page7ControlSend(void)
 {
+	WirlessPara gWirlessParaP7;
     u8 index = 0;
     u8 path;
     path = PathTrav(gPage7DevicePara.id);
     if(path == PATH_NUMBERS)
         return;
-    WirlessParaGet()->buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
-    WirlessParaGet()->buffer[index++] = LocalDeviceIdGet()&0xFF;
-    WirlessParaGet()->buffer[index++] = (gPage7DevicePara.id>>8)&0xFF; 
-    WirlessParaGet()->buffer[index++] = gPage7DevicePara.id&0xFF;
-    WirlessParaGet()->buffer[index++] = gPage7Seq++;
-    WirlessParaGet()->buffer[index++] = path;
-    WirlessParaGet()->buffer[index++] = 0x36;
-    WirlessParaGet()->buffer[index++] = FoodlineControlGet()->control;
-    WirlessParaGet()->buffer[index++] = FoodlineControlGet()->sensorSelect;
-    WirlessParaGet()->buffer[index++] = (FoodlineControlGet()->overtime>>8)&0xFF; 
-    WirlessParaGet()->buffer[index++] = FoodlineControlGet()->overtime&0xFF;
+    gWirlessParaP7.buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
+    gWirlessParaP7.buffer[index++] = LocalDeviceIdGet()&0xFF;
+    gWirlessParaP7.buffer[index++] = (gPage7DevicePara.id>>8)&0xFF; 
+    gWirlessParaP7.buffer[index++] = gPage7DevicePara.id&0xFF;
+    gWirlessParaP7.buffer[index++] = gPage7Seq++;
+    gWirlessParaP7.buffer[index++] = path;
+    gWirlessParaP7.buffer[index++] = 0x36;
+    gWirlessParaP7.buffer[index++] = FoodlineControlGet()->control;
+    gWirlessParaP7.buffer[index++] = FoodlineControlGet()->sensorSelect;
+    gWirlessParaP7.buffer[index++] = (FoodlineControlGet()->overtime>>8)&0xFF; 
+    gWirlessParaP7.buffer[index++] = FoodlineControlGet()->overtime&0xFF;
     
-    WirlessParaGet()->cmd = 0x30;
-    WirlessParaGet()->len = index;
-    ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
+    gWirlessParaP7.cmd = 0x30;
+    gWirlessParaP7.len = index;
+//    ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
+	
+	gWirlessParaP7.buffer[5] |= 0x80;
+    WirelessApp_SendData(gWirlessParaP7.cmd, FRAME_NEED_NO_ACK, gWirlessParaP7.buffer, gWirlessParaP7.len, LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id, PathParameterGet()->dPara[path][0].id, 0);
+		
 }
 
 void Page7ControlAsk(void)
 {
     u8 index = 0;
     u8 path;
+	WirlessPara gWirlessParaP7;
     path = PathTrav(gPage7DevicePara.id);
     if(path == PATH_NUMBERS)
         return;
-    WirlessParaGet()->buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
-    WirlessParaGet()->buffer[index++] = LocalDeviceIdGet()&0xFF;
-    WirlessParaGet()->buffer[index++] = (gPage7DevicePara.id>>8)&0xFF; 
-    WirlessParaGet()->buffer[index++] = gPage7DevicePara.id&0xFF;
-    WirlessParaGet()->buffer[index++] = gPage7Seq++;
-    WirlessParaGet()->buffer[index++] = path;
-    WirlessParaGet()->buffer[index++] = 0x38;
+    gWirlessParaP7.buffer[index++] = (LocalDeviceIdGet()>>8)&0xFF;
+    gWirlessParaP7.buffer[index++] = LocalDeviceIdGet()&0xFF;
+    gWirlessParaP7.buffer[index++] = (gPage7DevicePara.id>>8)&0xFF; 
+    gWirlessParaP7.buffer[index++] = gPage7DevicePara.id&0xFF;
+    gWirlessParaP7.buffer[index++] = gPage7Seq++;
+    gWirlessParaP7.buffer[index++] = path;
+    gWirlessParaP7.buffer[index++] = 0x38;
     
-    WirlessParaGet()->cmd = 0x30;
-    WirlessParaGet()->len = index;
-    ParaSettingSendData(LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id);
+    gWirlessParaP7.cmd = 0x30;
+    gWirlessParaP7.len = index;
+	gWirlessParaP7.buffer[5] |= 0x80;
+    WirelessApp_SendData(gWirlessParaP7.cmd, FRAME_NEED_NO_ACK, gWirlessParaP7.buffer, gWirlessParaP7.len, LocalDeviceIdGet(), PathParameterGet()->dPara[path][0].id, PathParameterGet()->dPara[path][0].id, 0);
+
 }
 
 void Page7ControlFlineProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)

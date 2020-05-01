@@ -48,9 +48,9 @@ void Page19N1ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
                 if(AllTheControlParaGet((DEVICE_AREA_N - 1),tempIndex)->isSelect == TRUE)
                     AllTheControlParaGet((DEVICE_AREA_N - 1),tempIndex)->isSelect = FALSE;
                 else
+				{
                     AllTheControlParaGet((DEVICE_AREA_N - 1),tempIndex)->isSelect = TRUE;
-
-
+				}
                 break;
             case PAGE19_ALARM:
                 break;
@@ -108,6 +108,10 @@ void Page19N1ControlRefresh(void)
     u8 i, N1Num = 0;
     for(i = 1; i < SING_LINK_DEVICE_TOTAL_NUMBER; i++)
     {
+		if(AllTheControlParaGet((DEVICE_AREA_N - 1),i)->cDevice.place.type == DEVICE_NAME_TOWERS_OUT)
+		{
+			AllTheControlParaGet((DEVICE_AREA_N - 1),i)->rotationDirection = TOWERSOUT_CONTROL_FOREWARD;   //¿ØÖÆ½ÊÁúÕý×ª
+		}			
 		if(AllTheControlParaGet((DEVICE_AREA_N - 1),i)->cDevice.place.mainLine == 1&&
 			AllTheControlParaGet((DEVICE_AREA_N - 1),i)->cDevice.place.mainLine != 0)
 		{
