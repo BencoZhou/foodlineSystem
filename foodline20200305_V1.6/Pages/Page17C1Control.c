@@ -11,6 +11,7 @@
 #include "StateMachine.h"
 
 u8 AreaC1Num ;
+extern OS_MsgBoxHandle gControlStopRe_Queue;
 
 void Page17C1ControlInit(void)
 {
@@ -22,6 +23,7 @@ void Page17C1ControlInit(void)
 void Page17C1ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
 {
     u32 data;
+	INPUT_EVENT evt;
 //    u16 tempSelect, tempState, tempButton, tempAlarm;
     u16 tempEffect, tempIndex,areaIndex;   //areaIndex  需要得到代表区域的地址
 
@@ -64,19 +66,27 @@ void Page17C1ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
         {
             DeviceControlParaGet()->stateMachineState[DEVICE_AREA_C-1] = STATE_CHANGE_SUSPENDING;   
         }
-        else
+       // else
         {
             DeviceControlParaGet()->isClickStart = TRUE;
-            DeviceControlParaGet()->isClickStop = FALSE;
+//            DeviceControlParaGet()->isClickStop = FALSE;
 			DeviceControlParaGet()->controlArea[(DEVICE_AREA_C - 1)] = TRUE;
+			DeviceControlParaGet()->controlStopArea[(DEVICE_AREA_C - 1)] = FALSE;
+			DeviceControlParaGet()->controlShutdownArea[(DEVICE_AREA_C - 1)] = FALSE;
+			DeviceControlParaGet()->controlIndexMemory[(DEVICE_AREA_C - 1)] = 0;
         }
     }
     if(addr == PAGE17_STOP_BUTTON)
     {
-        DeviceControlParaGet()->isClickStart = FALSE;
+//        DeviceControlParaGet()->isClickStart = FALSE;
         DeviceControlParaGet()->isClickStop = TRUE;
         DeviceControlParaGet()->isClickShutdown = FALSE;
 		DeviceControlParaGet()->controlStopArea[(DEVICE_AREA_C - 1)] = TRUE;
+		DeviceControlParaGet()->controlArea[(DEVICE_AREA_C - 1)] = FALSE;
+		DeviceControlParaGet()->controlShutdownArea[(DEVICE_AREA_C - 1)] = FALSE;	
+//		OS_MsgBoxSend(gControlStopRe_Queue, &evt, OS_NO_DELAY, FALSE);	
+		DeviceControlParaGet()->controlIndexMemory[(DEVICE_AREA_C - 1)]	= SING_LINK_DEVICE_TOTAL_NUMBER - 1;
+
     }
     if(addr == PAGE17_EMERGENCY_STOP_BUTTON)
     {
@@ -84,12 +94,16 @@ void Page17C1ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
         DeviceControlParaGet()->isClickStop = FALSE;
         DeviceControlParaGet()->isClickShutdown = TRUE;
 		DeviceControlParaGet()->controlShutdownArea[(DEVICE_AREA_C - 1)] = TRUE;
+		DeviceControlParaGet()->controlArea[(DEVICE_AREA_C - 1)] = FALSE;
+		DeviceControlParaGet()->controlStopArea[(DEVICE_AREA_C - 1)] = FALSE;		
     }     
     if(addr == PAGE17_STOP_RENEW_BUTTON)
     {
 
         DeviceControlParaGet()->isClickShutdown = FALSE;
 		DeviceControlParaGet()->controlShutdownArea[(DEVICE_AREA_C - 1)] = FALSE;
+		DeviceControlParaGet()->controlArea[(DEVICE_AREA_C - 1)] = FALSE;
+		DeviceControlParaGet()->controlStopArea[(DEVICE_AREA_C - 1)] = FALSE;			
     }       
     if(addr == PAGE17_C1_DELAYTIME)
     {

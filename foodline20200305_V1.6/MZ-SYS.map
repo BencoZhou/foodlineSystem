@@ -255,7 +255,7 @@ Section Cross References
     statemachine.o(.text) refers to statemachine.o(.data) for gState
     statemachine.o(.text) refers to os_wrap.o(.text) for OS_MsgBoxSend
     statemachine.o(.text) refers to statemachine.o(.bss) for gStateReady
-    statemachine.o(.text) refers to foodlinecontrol.o(.data) for gControlStartRe_Queue
+    statemachine.o(.text) refers to foodlinecontrol.o(.data) for gControlStopRe_Queue
     page2pathconfig.o(.text) refers to _printf_pad.o(.text) for _printf_pre_padding
     page2pathconfig.o(.text) refers to _printf_percent.o(.ARM.Collect$$_printf_percent$$00000000) for _printf_percent
     page2pathconfig.o(.text) refers to _printf_x.o(.ARM.Collect$$_printf_percent$$0000000C) for _printf_x
@@ -367,11 +367,9 @@ Section Cross References
     page11towersoutconfig.o(.text) refers to page11towersoutconfig.o(.data) for gPage11DevicePara
     page11towersoutconfig.o(.text) refers to noretval__2sprintf.o(.text) for __2sprintf
     page12s1s2control.o(.text) refers to parasettinglib.o(.text) for AllTheControlParaGet
-    page12s1s2control.o(.text) refers to foodlinecontrol.o(.text) for DeviceControlParaGet
     page12s1s2control.o(.text) refers to displayprotocol.o(.text) for DisplayCommIconSend
+    page12s1s2control.o(.text) refers to foodlinecontrol.o(.text) for DeviceControlParaGet
     page12s1s2control.o(.text) refers to os_time.o(.text) for OSTimeDly
-    page12s1s2control.o(.text) refers to os_wrap.o(.text) for OS_MsgBoxSend
-    page12s1s2control.o(.text) refers to foodlinecontrol.o(.data) for gControlStartRe_Queue
     page13linkconfig .o(.text) refers to displayprotocol.o(.text) for DisplayCommIconSend
     page13linkconfig .o(.text) refers to parasettinglib.o(.text) for ScrInfGet
     page13linkconfig .o(.text) refers to os_time.o(.text) for OSTimeDly
@@ -644,27 +642,27 @@ Image Symbol Table
 
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit3.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit1.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
     ../clib/angel/dczerorl2.s                0x00000000   Number         0  __dczerorl2.o ABSOLUTE
     ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_zi.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry4.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry2.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry4.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry2.o ABSOLUTE
     ../clib/angel/rt.s                       0x00000000   Number         0  rt_raise.o ABSOLUTE
     ../clib/angel/scatter.s                  0x00000000   Number         0  __scatter.o ABSOLUTE
     ../clib/angel/startup.s                  0x00000000   Number         0  __main.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  use_no_semi.o ABSOLUTE
-    ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  sys_stackheap_outer.o ABSOLUTE
-    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
-    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  _get_argv_nomalloc.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
@@ -672,53 +670,53 @@ Image Symbol Table
     ../clib/heapalloc.c                      0x00000000   Number         0  hrguard.o ABSOLUTE
     ../clib/heapaux.c                        0x00000000   Number         0  heapauxi.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libinit.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libshutdown.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
     ../clib/memcpset.s                       0x00000000   Number         0  rt_memcpy_w.o ABSOLUTE
     ../clib/memcpset.s                       0x00000000   Number         0  rt_memclr.o ABSOLUTE
     ../clib/memcpset.s                       0x00000000   Number         0  rt_memclr_w.o ABSOLUTE
     ../clib/misc.s                           0x00000000   Number         0  printf_stubs.o ABSOLUTE
     ../clib/printf.c                         0x00000000   Number         0  _printf_hex_int_ll_ptr.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __printf_flags_ss_wp.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __printf_flags.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __printf_flags_ss.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __printf_wp.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __printf_flags_wp.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __printf_ss_wp.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  _printf_hex_int_ptr.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  _printf_hex_ptr.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  _printf_hex_int_ll.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  _printf_hex_int.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  _printf_hex_ll.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  _printf_dec.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __printf.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __printf_nopercent.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  noretval__2sprintf.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __2sprintf.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  _printf_pad.o ABSOLUTE
     ../clib/printf.c                         0x00000000   Number         0  _sputc.o ABSOLUTE
     ../clib/printf.c                         0x00000000   Number         0  _printf_char_common.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __printf_flags_ss_wp.o ABSOLUTE
     ../clib/printf.c                         0x00000000   Number         0  _printf_intcommon.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __2sprintf.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __printf_ss.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  noretval__2sprintf.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __printf.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  _printf_hex_ptr.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  _printf_pad.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __printf_nopercent.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  _printf_dec.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  _printf_hex_int_ptr.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  _printf_hex_ll.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __printf_ss_wp.o ABSOLUTE
     ../clib/printf.c                         0x00000000   Number         0  _printf_hex_ll_ptr.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  _printf_hex_int.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  _printf_hex_int_ll.o ABSOLUTE
-    ../clib/printf_percent.s                 0x00000000   Number         0  _printf_percent_end.o ABSOLUTE
-    ../clib/printf_percent.s                 0x00000000   Number         0  _printf_percent.o ABSOLUTE
-    ../clib/printf_percent.s                 0x00000000   Number         0  _printf_d.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __printf_flags_wp.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __printf_wp.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __printf_flags_ss.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __printf_ss.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __printf_flags.o ABSOLUTE
     ../clib/printf_percent.s                 0x00000000   Number         0  _printf_x.o ABSOLUTE
+    ../clib/printf_percent.s                 0x00000000   Number         0  _printf_d.o ABSOLUTE
+    ../clib/printf_percent.s                 0x00000000   Number         0  _printf_percent.o ABSOLUTE
+    ../clib/printf_percent.s                 0x00000000   Number         0  _printf_percent_end.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
     ../clib/signal.s                         0x00000000   Number         0  defsig.o ABSOLUTE
     ../clib/stdlib.c                         0x00000000   Number         0  exit.o ABSOLUTE
@@ -921,106 +919,108 @@ Image Symbol Table
     ParaMassStorageReadHead                  0x0800a7d7   Thumb Code    14  parasettinglib.o(.text)
     .text                                    0x0800b038   Section        0  foodlinecontrol.o(.text)
     DeviceSendCmd                            0x0800b0f7   Thumb Code  1026  foodlinecontrol.o(.text)
-    continueControlJudge                     0x0800b929   Thumb Code   764  foodlinecontrol.o(.text)
-    AreaIndexAdministration                  0x0800bd99   Thumb Code   166  foodlinecontrol.o(.text)
-    FirstIndexConfirm                        0x0800be3f   Thumb Code   150  foodlinecontrol.o(.text)
-    indexAdministration                      0x0800bed5   Thumb Code   298  foodlinecontrol.o(.text)
-    NextEnabled                              0x0800bfff   Thumb Code   102  foodlinecontrol.o(.text)
-    .text                                    0x0800c7e8   Section        0  statemachine.o(.text)
-    StateChange                              0x0800c7e9   Thumb Code    46  statemachine.o(.text)
-    IdleStateEntry                           0x0800c817   Thumb Code    66  statemachine.o(.text)
-    IdleStateExit                            0x0800c859   Thumb Code     2  statemachine.o(.text)
-    DeviceExistCal                           0x0800c85b   Thumb Code   288  statemachine.o(.text)
-    DeviceExistCalReady                      0x0800c97b   Thumb Code    76  statemachine.o(.text)
-    DeviceAlarmCal                           0x0800c9c7   Thumb Code   204  statemachine.o(.text)
-    DevicEemergencyStopCal                   0x0800ca93   Thumb Code   208  statemachine.o(.text)
-    DeviceNormalStopCondition                0x0800cb63   Thumb Code    34  statemachine.o(.text)
-    DeviceTriggerStartCondition              0x0800cb85   Thumb Code   104  statemachine.o(.text)
-    IdleStateProcess                         0x0800cbed   Thumb Code   156  statemachine.o(.text)
-    IdleStateInit                            0x0800cc89   Thumb Code    92  statemachine.o(.text)
-    ReadyStateEntry                          0x0800cce5   Thumb Code    36  statemachine.o(.text)
-    ReadyStateExit                           0x0800cd09   Thumb Code     2  statemachine.o(.text)
-    ReadyStateProcess                        0x0800cd0b   Thumb Code   204  statemachine.o(.text)
-    ReadyStateInit                           0x0800cdd7   Thumb Code    20  statemachine.o(.text)
-    RunningStateEntry                        0x0800cdeb   Thumb Code    96  statemachine.o(.text)
-    RunningStateExit                         0x0800ce4b   Thumb Code     2  statemachine.o(.text)
-    RunningStateProcess                      0x0800ce4d   Thumb Code   204  statemachine.o(.text)
-    RunningStateInit                         0x0800cf19   Thumb Code    20  statemachine.o(.text)
-    SuspendStateEntry                        0x0800cf2d   Thumb Code    60  statemachine.o(.text)
-    SuspendStateExit                         0x0800cf69   Thumb Code    12  statemachine.o(.text)
-    SuspendStateProcess                      0x0800cf75   Thumb Code   104  statemachine.o(.text)
-    SuspendStateInit                         0x0800cfdd   Thumb Code    92  statemachine.o(.text)
-    .text                                    0x0800d074   Section        0  page2pathconfig.o(.text)
-    .text                                    0x0800d8a8   Section        0  page1flinepathconfig.o(.text)
-    .text                                    0x0800dac4   Section        0  page3flinedevice.o(.text)
-    .text                                    0x0800e21c   Section        0  page5revise.o(.text)
-    .text                                    0x0800e584   Section        0  page6readpathconfig.o(.text)
-    .text                                    0x0800e9e0   Section        0  page7controlfline.o(.text)
-    .text                                    0x0800eec8   Section        0  page8switchvalve.o(.text)
-    .text                                    0x0800f2f8   Section        0  page9switchvalveconfig.o(.text)
-    .text                                    0x0800f748   Section        0  page10towersout.o(.text)
-    .text                                    0x0800fbc0   Section        0  page11towersoutconfig.o(.text)
-    .text                                    0x080102ac   Section        0  page12s1s2control.o(.text)
-    .text                                    0x08010598   Section        0  page13linkconfig .o(.text)
-    .text                                    0x08010e50   Section        0  page14w1control.o(.text)
-    .text                                    0x0801110c   Section        0  page15w2control.o(.text)
-    .text                                    0x08011828   Section        0  page16e1e2control.o(.text)
-    .text                                    0x08011a90   Section        0  page17c1control.o(.text)
-    .text                                    0x08012374   Section        0  page18c2control.o(.text)
-    .text                                    0x08012ac4   Section        0  page19n1control.o(.text)
-    .text                                    0x08012d30   Section        0  page20n2control.o(.text)
-    .text                                    0x08012f94   Section        0  wirelesscomm.o(.text)
-    .text                                    0x08013fa8   Section        0  wlan4gcomm.o(.text)
-    .text                                    0x080153cc   Section        0  airiap.o(.text)
-    .text                                    0x080164a8   Section        0  noretval__2sprintf.o(.text)
-    .text                                    0x080164d0   Section        0  _printf_pad.o(.text)
-    .text                                    0x08016520   Section        0  _printf_dec.o(.text)
-    .text                                    0x08016598   Section        0  _printf_hex_int.o(.text)
-    .text                                    0x080165f0   Section        0  __printf_flags_wp.o(.text)
-    .text                                    0x08016728   Section      100  rt_memcpy_w.o(.text)
-    .text                                    0x0801678c   Section       68  rt_memclr.o(.text)
-    .text                                    0x080167d0   Section       78  rt_memclr_w.o(.text)
-    .text                                    0x0801681e   Section        0  heapauxi.o(.text)
-    .text                                    0x08016824   Section        0  _printf_intcommon.o(.text)
-    .text                                    0x080168d8   Section        0  _printf_char_common.o(.text)
-    _printf_input_char                       0x080168d9   Thumb Code    10  _printf_char_common.o(.text)
-    .text                                    0x08016908   Section        0  _sputc.o(.text)
-    .text                                    0x08016912   Section       74  sys_stackheap_outer.o(.text)
-    .text                                    0x0801695c   Section        0  exit.o(.text)
-    .text                                    0x08016968   Section        8  libspace.o(.text)
-    .text                                    0x08016970   Section        0  sys_exit.o(.text)
-    .text                                    0x0801697c   Section        2  use_no_semi.o(.text)
-    .text                                    0x0801697e   Section        0  indicate_semi.o(.text)
-    i._is_digit                              0x0801697e   Section        0  __printf_wp.o(i._is_digit)
-    x$fpl$dcmpinf                            0x0801698c   Section       24  dcmpi.o(x$fpl$dcmpinf)
-    x$fpl$dleqf                              0x080169a4   Section      120  dleqf.o(x$fpl$dleqf)
-    x$fpl$dnaninf                            0x08016a1c   Section      156  dnaninf.o(x$fpl$dnaninf)
-    x$fpl$dretinf                            0x08016ab8   Section       12  dretinf.o(x$fpl$dretinf)
-    x$fpl$drleqf                             0x08016ac4   Section      108  drleqf.o(x$fpl$drleqf)
-    x$fpl$f2d                                0x08016b30   Section       86  f2d.o(x$fpl$f2d)
-    x$fpl$fadd                               0x08016b88   Section      196  faddsub_clz.o(x$fpl$fadd)
-    _fadd1                                   0x08016b97   Thumb Code     0  faddsub_clz.o(x$fpl$fadd)
-    x$fpl$ffix                               0x08016c4c   Section       54  ffix.o(x$fpl$ffix)
-    x$fpl$fflt                               0x08016c84   Section       48  fflt_clz.o(x$fpl$fflt)
-    x$fpl$fmul                               0x08016cb4   Section      258  fmul.o(x$fpl$fmul)
-    x$fpl$fnaninf                            0x08016db6   Section      140  fnaninf.o(x$fpl$fnaninf)
-    x$fpl$fretinf                            0x08016e42   Section       10  fretinf.o(x$fpl$fretinf)
-    x$fpl$frsb                               0x08016e4c   Section       20  faddsub_clz.o(x$fpl$frsb)
-    x$fpl$fsub                               0x08016e60   Section      234  faddsub_clz.o(x$fpl$fsub)
-    _fsub1                                   0x08016e6f   Thumb Code     0  faddsub_clz.o(x$fpl$fsub)
-    x$fpl$usenofp                            0x08016f4a   Section        0  usenofp.o(x$fpl$usenofp)
-    .constdata                               0x08016f4c   Section      104  rtc.o(.constdata)
-    .constdata                               0x08016fb4   Section      256  os_core.o(.constdata)
-    .constdata                               0x080170b4   Section      256  os_wrap.o(.constdata)
-    .constdata                               0x080171b4   Section       68  wlan4gcomm.o(.constdata)
-    .constdata                               0x080171f8   Section       40  _printf_hex_int.o(.constdata)
-    uc_hextab                                0x080171f8   Data          20  _printf_hex_int.o(.constdata)
-    lc_hextab                                0x0801720c   Data          20  _printf_hex_int.o(.constdata)
-    .constdata                               0x08017220   Section       17  __printf_flags_wp.o(.constdata)
-    maptable                                 0x08017220   Data          17  __printf_flags_wp.o(.constdata)
-    STKV                                     0x08017254   Section       23  stm32f10x.o(STKV)
-    FAULT_MSG                                0x08017254   Data           7  stm32f10x.o(STKV)
-    STK_OV_MSG                               0x0801725b   Data          16  stm32f10x.o(STKV)
+    continueControlJudge                     0x0800b933   Thumb Code   766  foodlinecontrol.o(.text)
+    AreaIndexAdministration                  0x0800bda5   Thumb Code   194  foodlinecontrol.o(.text)
+    FirstIndexConfirm                        0x0800be67   Thumb Code   256  foodlinecontrol.o(.text)
+    indexAdministration                      0x0800bf67   Thumb Code   322  foodlinecontrol.o(.text)
+    NextEnabled                              0x0800c0a9   Thumb Code   102  foodlinecontrol.o(.text)
+    FirstStopControlIndexConfirm             0x0800c361   Thumb Code   312  foodlinecontrol.o(.text)
+    .text                                    0x0800ca60   Section        0  statemachine.o(.text)
+    StateChange                              0x0800ca61   Thumb Code    46  statemachine.o(.text)
+    IdleStateEntry                           0x0800ca8f   Thumb Code    66  statemachine.o(.text)
+    IdleStateExit                            0x0800cad1   Thumb Code     2  statemachine.o(.text)
+    DeviceExistCal                           0x0800cad3   Thumb Code   288  statemachine.o(.text)
+    DeviceExistCalReady                      0x0800cbf3   Thumb Code    92  statemachine.o(.text)
+    DeviceAlarmCal                           0x0800cc4f   Thumb Code   204  statemachine.o(.text)
+    DevicEemergencyStopCal                   0x0800cd1b   Thumb Code   208  statemachine.o(.text)
+    DeviceNormalStopCondition                0x0800cdeb   Thumb Code    34  statemachine.o(.text)
+    DeviceTriggerStartCondition              0x0800ce0d   Thumb Code   104  statemachine.o(.text)
+    StateShow                                0x0800ce75   Thumb Code   250  statemachine.o(.text)
+    IdleStateProcess                         0x0800cf6f   Thumb Code   152  statemachine.o(.text)
+    IdleStateInit                            0x0800d007   Thumb Code    92  statemachine.o(.text)
+    ReadyStateEntry                          0x0800d063   Thumb Code    20  statemachine.o(.text)
+    ReadyStateExit                           0x0800d077   Thumb Code     2  statemachine.o(.text)
+    ReadyStateProcess                        0x0800d079   Thumb Code    74  statemachine.o(.text)
+    ReadyStateInit                           0x0800d0c3   Thumb Code    20  statemachine.o(.text)
+    RunningStateEntry                        0x0800d0d7   Thumb Code    80  statemachine.o(.text)
+    RunningStateExit                         0x0800d127   Thumb Code     2  statemachine.o(.text)
+    RunningStateProcess                      0x0800d129   Thumb Code    72  statemachine.o(.text)
+    RunningStateInit                         0x0800d171   Thumb Code    20  statemachine.o(.text)
+    SuspendStateEntry                        0x0800d185   Thumb Code    28  statemachine.o(.text)
+    SuspendStateExit                         0x0800d1a1   Thumb Code    12  statemachine.o(.text)
+    SuspendStateProcess                      0x0800d1ad   Thumb Code   104  statemachine.o(.text)
+    SuspendStateInit                         0x0800d215   Thumb Code    20  statemachine.o(.text)
+    .text                                    0x0800d2a8   Section        0  page2pathconfig.o(.text)
+    .text                                    0x0800dadc   Section        0  page1flinepathconfig.o(.text)
+    .text                                    0x0800dcf8   Section        0  page3flinedevice.o(.text)
+    .text                                    0x0800e450   Section        0  page5revise.o(.text)
+    .text                                    0x0800e7b8   Section        0  page6readpathconfig.o(.text)
+    .text                                    0x0800ec14   Section        0  page7controlfline.o(.text)
+    .text                                    0x0800f0fc   Section        0  page8switchvalve.o(.text)
+    .text                                    0x0800f52c   Section        0  page9switchvalveconfig.o(.text)
+    .text                                    0x0800f97c   Section        0  page10towersout.o(.text)
+    .text                                    0x0800fdf4   Section        0  page11towersoutconfig.o(.text)
+    .text                                    0x080104e0   Section        0  page12s1s2control.o(.text)
+    .text                                    0x080107b4   Section        0  page13linkconfig .o(.text)
+    .text                                    0x0801106c   Section        0  page14w1control.o(.text)
+    .text                                    0x08011328   Section        0  page15w2control.o(.text)
+    .text                                    0x08011a44   Section        0  page16e1e2control.o(.text)
+    .text                                    0x08011cac   Section        0  page17c1control.o(.text)
+    .text                                    0x080125e0   Section        0  page18c2control.o(.text)
+    .text                                    0x08012d30   Section        0  page19n1control.o(.text)
+    .text                                    0x08012f9c   Section        0  page20n2control.o(.text)
+    .text                                    0x08013200   Section        0  wirelesscomm.o(.text)
+    .text                                    0x08014214   Section        0  wlan4gcomm.o(.text)
+    .text                                    0x08015638   Section        0  airiap.o(.text)
+    .text                                    0x08016714   Section        0  noretval__2sprintf.o(.text)
+    .text                                    0x0801673c   Section        0  _printf_pad.o(.text)
+    .text                                    0x0801678c   Section        0  _printf_dec.o(.text)
+    .text                                    0x08016804   Section        0  _printf_hex_int.o(.text)
+    .text                                    0x0801685c   Section        0  __printf_flags_wp.o(.text)
+    .text                                    0x08016994   Section      100  rt_memcpy_w.o(.text)
+    .text                                    0x080169f8   Section       68  rt_memclr.o(.text)
+    .text                                    0x08016a3c   Section       78  rt_memclr_w.o(.text)
+    .text                                    0x08016a8a   Section        0  heapauxi.o(.text)
+    .text                                    0x08016a90   Section        0  _printf_intcommon.o(.text)
+    .text                                    0x08016b44   Section        0  _printf_char_common.o(.text)
+    _printf_input_char                       0x08016b45   Thumb Code    10  _printf_char_common.o(.text)
+    .text                                    0x08016b74   Section        0  _sputc.o(.text)
+    .text                                    0x08016b7e   Section       74  sys_stackheap_outer.o(.text)
+    .text                                    0x08016bc8   Section        0  exit.o(.text)
+    .text                                    0x08016bd4   Section        8  libspace.o(.text)
+    .text                                    0x08016bdc   Section        0  sys_exit.o(.text)
+    .text                                    0x08016be8   Section        2  use_no_semi.o(.text)
+    .text                                    0x08016bea   Section        0  indicate_semi.o(.text)
+    i._is_digit                              0x08016bea   Section        0  __printf_wp.o(i._is_digit)
+    x$fpl$dcmpinf                            0x08016bf8   Section       24  dcmpi.o(x$fpl$dcmpinf)
+    x$fpl$dleqf                              0x08016c10   Section      120  dleqf.o(x$fpl$dleqf)
+    x$fpl$dnaninf                            0x08016c88   Section      156  dnaninf.o(x$fpl$dnaninf)
+    x$fpl$dretinf                            0x08016d24   Section       12  dretinf.o(x$fpl$dretinf)
+    x$fpl$drleqf                             0x08016d30   Section      108  drleqf.o(x$fpl$drleqf)
+    x$fpl$f2d                                0x08016d9c   Section       86  f2d.o(x$fpl$f2d)
+    x$fpl$fadd                               0x08016df4   Section      196  faddsub_clz.o(x$fpl$fadd)
+    _fadd1                                   0x08016e03   Thumb Code     0  faddsub_clz.o(x$fpl$fadd)
+    x$fpl$ffix                               0x08016eb8   Section       54  ffix.o(x$fpl$ffix)
+    x$fpl$fflt                               0x08016ef0   Section       48  fflt_clz.o(x$fpl$fflt)
+    x$fpl$fmul                               0x08016f20   Section      258  fmul.o(x$fpl$fmul)
+    x$fpl$fnaninf                            0x08017022   Section      140  fnaninf.o(x$fpl$fnaninf)
+    x$fpl$fretinf                            0x080170ae   Section       10  fretinf.o(x$fpl$fretinf)
+    x$fpl$frsb                               0x080170b8   Section       20  faddsub_clz.o(x$fpl$frsb)
+    x$fpl$fsub                               0x080170cc   Section      234  faddsub_clz.o(x$fpl$fsub)
+    _fsub1                                   0x080170db   Thumb Code     0  faddsub_clz.o(x$fpl$fsub)
+    x$fpl$usenofp                            0x080171b6   Section        0  usenofp.o(x$fpl$usenofp)
+    .constdata                               0x080171b8   Section      104  rtc.o(.constdata)
+    .constdata                               0x08017220   Section      256  os_core.o(.constdata)
+    .constdata                               0x08017320   Section      256  os_wrap.o(.constdata)
+    .constdata                               0x08017420   Section       68  wlan4gcomm.o(.constdata)
+    .constdata                               0x08017464   Section       40  _printf_hex_int.o(.constdata)
+    uc_hextab                                0x08017464   Data          20  _printf_hex_int.o(.constdata)
+    lc_hextab                                0x08017478   Data          20  _printf_hex_int.o(.constdata)
+    .constdata                               0x0801748c   Section       17  __printf_flags_wp.o(.constdata)
+    maptable                                 0x0801748c   Data          17  __printf_flags_wp.o(.constdata)
+    STKV                                     0x080174c0   Section       23  stm32f10x.o(STKV)
+    FAULT_MSG                                0x080174c0   Data           7  stm32f10x.o(STKV)
+    STK_OV_MSG                               0x080174c7   Data          16  stm32f10x.o(STKV)
     .ARM.__AT_0x20000000                     0x20000000   Section     4096  stm32f10x.o(.ARM.__AT_0x20000000)
     Stack_Mem                                0x20000000   Data        4096  stm32f10x.o(.ARM.__AT_0x20000000)
     .data                                    0x20001000   Section       20  rtc.o(.data)
@@ -1064,163 +1064,165 @@ Image Symbol Table
     PageXId                                  0x200010dc   Data           4  parasettinglib.o(.data)
     gHead                                    0x200010e0   Data           4  parasettinglib.o(.data)
     gParaRefresh                             0x200010e4   Data           1  parasettinglib.o(.data)
-    .data                                    0x200010e8   Section       50  foodlinecontrol.o(.data)
+    .data                                    0x200010e8   Section       59  foodlinecontrol.o(.data)
     gFlineCtrlSeq                            0x200010fc   Data           1  foodlinecontrol.o(.data)
     startNum                                 0x200010fd   Data           5  foodlinecontrol.o(.data)
     stopNum                                  0x20001102   Data           5  foodlinecontrol.o(.data)
     selectNum                                0x20001107   Data           5  foodlinecontrol.o(.data)
-    SeqMap                                   0x20001110   Data           6  foodlinecontrol.o(.data)
-    index                                    0x20001116   Data           1  foodlinecontrol.o(.data)
-    areaIndex                                0x20001117   Data           1  foodlinecontrol.o(.data)
-    index                                    0x20001118   Data           1  foodlinecontrol.o(.data)
-    areaIndex                                0x20001119   Data           1  foodlinecontrol.o(.data)
-    .data                                    0x2000111c   Section       12  statemachine.o(.data)
-    gState                                   0x20001120   Data           4  statemachine.o(.data)
-    equipIndex                               0x20001124   Data           1  statemachine.o(.data)
-    areaIndex                                0x20001125   Data           1  statemachine.o(.data)
-    equipIndex                               0x20001126   Data           1  statemachine.o(.data)
-    areaIndex                                0x20001127   Data           1  statemachine.o(.data)
-    .data                                    0x20001128   Section        3  page2pathconfig.o(.data)
-    gP2Table                                 0x20001128   Data           1  page2pathconfig.o(.data)
-    gIndex                                   0x20001129   Data           1  page2pathconfig.o(.data)
-    gPage2Seq                                0x2000112a   Data           1  page2pathconfig.o(.data)
-    .data                                    0x2000112b   Section        2  page1flinepathconfig.o(.data)
-    gPath                                    0x2000112b   Data           1  page1flinepathconfig.o(.data)
-    gSeq                                     0x2000112c   Data           1  page1flinepathconfig.o(.data)
-    .data                                    0x20001130   Section        9  page3flinedevice.o(.data)
-    gPage3DevicePara                         0x20001130   Data           4  page3flinedevice.o(.data)
-    pFoodlineDevicePara                      0x20001134   Data           4  page3flinedevice.o(.data)
-    gPage3Seq                                0x20001138   Data           1  page3flinedevice.o(.data)
-    .data                                    0x2000113c   Section       12  page5revise.o(.data)
-    gPage5NewDevicePara                      0x2000113c   Data           4  page5revise.o(.data)
-    gPage5LocalDevicePara                    0x20001140   Data           4  page5revise.o(.data)
-    pPage5OldDevicePara                      0x20001144   Data           4  page5revise.o(.data)
-    .data                                    0x20001148   Section        2  page6readpathconfig.o(.data)
-    gP6Table                                 0x20001148   Data           1  page6readpathconfig.o(.data)
-    gPage6Seq                                0x20001149   Data           1  page6readpathconfig.o(.data)
-    .data                                    0x2000114c   Section        6  page7controlfline.o(.data)
-    gPage7DevicePara                         0x2000114c   Data           4  page7controlfline.o(.data)
-    gPage7Seq                                0x20001150   Data           1  page7controlfline.o(.data)
-    gPage7Action                             0x20001151   Data           1  page7controlfline.o(.data)
-    .data                                    0x20001154   Section        6  page8switchvalve.o(.data)
-    gPage8DevicePara                         0x20001154   Data           4  page8switchvalve.o(.data)
-    gPage8Seq                                0x20001158   Data           1  page8switchvalve.o(.data)
-    gP8Action                                0x20001159   Data           1  page8switchvalve.o(.data)
-    .data                                    0x2000115c   Section        9  page9switchvalveconfig.o(.data)
-    gPage9DevicePara                         0x2000115c   Data           4  page9switchvalveconfig.o(.data)
-    pSwitchValvePara                         0x20001160   Data           4  page9switchvalveconfig.o(.data)
-    gPage9Seq                                0x20001164   Data           1  page9switchvalveconfig.o(.data)
-    .data                                    0x20001168   Section        6  page10towersout.o(.data)
-    gPage10DevicePara                        0x20001168   Data           4  page10towersout.o(.data)
-    gPage10Seq                               0x2000116c   Data           1  page10towersout.o(.data)
-    gPage10Action                            0x2000116d   Data           1  page10towersout.o(.data)
-    .data                                    0x20001170   Section        9  page11towersoutconfig.o(.data)
-    gPage11DevicePara                        0x20001170   Data           4  page11towersoutconfig.o(.data)
-    pTowersOutDevicePara                     0x20001174   Data           4  page11towersoutconfig.o(.data)
-    gPage11Seq                               0x20001178   Data           1  page11towersoutconfig.o(.data)
-    .data                                    0x20001179   Section        3  page13linkconfig .o(.data)
-    gP13Table                                0x20001179   Data           1  page13linkconfig .o(.data)
-    areaIndex                                0x2000117a   Data           1  page13linkconfig .o(.data)
-    gPage13Seq                               0x2000117b   Data           1  page13linkconfig .o(.data)
-    .data                                    0x2000117c   Section        1  page14w1control.o(.data)
-    .data                                    0x2000117d   Section        1  page17c1control.o(.data)
-    .data                                    0x2000117e   Section        1  page19n1control.o(.data)
-    .data                                    0x20001180   Section       52  wirelesscomm.o(.data)
-    wireless_uart                            0x20001184   Data           4  wirelesscomm.o(.data)
-    WirelessCommRecv_Task_Handle             0x20001198   Data           4  wirelesscomm.o(.data)
-    WirelessCommSend_Task_Handle             0x2000119c   Data           4  wirelesscomm.o(.data)
-    WirelessCommRetrans_Task_Handle          0x200011a0   Data           4  wirelesscomm.o(.data)
-    forward_mode                             0x200011a4   Data           1  wirelesscomm.o(.data)
-    retrans_count                            0x200011a5   Data           1  wirelesscomm.o(.data)
-    send_2_uart                              0x200011a6   Data           2  wirelesscomm.o(.data)
-    WirelessSeq                              0x200011a8   Data           2  wirelesscomm.o(.data)
-    LatestSeq                                0x200011aa   Data           1  wirelesscomm.o(.data)
-    LatestAck                                0x200011ab   Data           1  wirelesscomm.o(.data)
-    UartSt                                   0x200011ac   Data           1  wirelesscomm.o(.data)
-    UartLen                                  0x200011ad   Data           1  wirelesscomm.o(.data)
-    UartAux                                  0x200011ae   Data           1  wirelesscomm.o(.data)
-    UartIdx                                  0x200011af   Data           1  wirelesscomm.o(.data)
-    Retrans                                  0x200011b0   Data           4  wirelesscomm.o(.data)
-    .data                                    0x200011b4   Section       56  wlan4gcomm.o(.data)
-    gWlan4GRcv_Queue                         0x200011b4   Data           4  wlan4gcomm.o(.data)
-    gWlan4GSnd_Queue                         0x200011b8   Data           4  wlan4gcomm.o(.data)
-    gWlan4GRcvSt_Queue                       0x200011bc   Data           4  wlan4gcomm.o(.data)
-    gWlan4GSndSt_Queue                       0x200011c0   Data           4  wlan4gcomm.o(.data)
-    gWlan4GSndDrv_Queue                      0x200011c4   Data           4  wlan4gcomm.o(.data)
-    wlan4g_uart                              0x200011cc   Data           4  wlan4gcomm.o(.data)
-    Wlan4GLink_Task_Handle                   0x200011d0   Data           4  wlan4gcomm.o(.data)
-    Wlan4GPkt_Task_Handle                    0x200011d4   Data           4  wlan4gcomm.o(.data)
-    Wlan4GSend_Task_Handle                   0x200011d8   Data           4  wlan4gcomm.o(.data)
-    packet_msglen                            0x200011dc   Data           2  wlan4gcomm.o(.data)
-    wlan4g_link_stat                         0x200011de   Data           1  wlan4gcomm.o(.data)
-    Uart4GStat                               0x200011df   Data           1  wlan4gcomm.o(.data)
-    Uart4GLen                                0x200011e0   Data           2  wlan4gcomm.o(.data)
-    wlan4g_idle_tick                         0x200011e4   Data           4  wlan4gcomm.o(.data)
-    Wlan4G_SndId                             0x200011e8   Data           1  wlan4gcomm.o(.data)
-    Wlan4G_Svr_Ports                         0x200011ea   Data           2  wlan4gcomm.o(.data)
-    .data                                    0x200011ec   Section       52  airiap.o(.data)
-    mac_address                              0x200011ec   Data           4  airiap.o(.data)
-    paras_address                            0x200011f0   Data           4  airiap.o(.data)
-    iapinfo_address                          0x200011f4   Data           4  airiap.o(.data)
-    gIapMsg_Queue                            0x200011f8   Data           4  airiap.o(.data)
-    IapReq_Task_Handle                       0x200011fc   Data           4  airiap.o(.data)
-    IapDat_Task_Handle                       0x20001200   Data           4  airiap.o(.data)
-    last_rcvtick                             0x20001204   Data           4  airiap.o(.data)
-    call_time                                0x20001208   Data           4  airiap.o(.data)
-    IapAskaddr                               0x2000120c   Data           4  airiap.o(.data)
-    IapAsklen                                0x20001210   Data           1  airiap.o(.data)
-    last_optimes                             0x20001211   Data           1  airiap.o(.data)
-    iap_en_rtc                               0x20001212   Data           1  airiap.o(.data)
-    iap_loopasktime                          0x20001214   Data           2  airiap.o(.data)
-    iap_reqdattime                           0x20001216   Data           2  airiap.o(.data)
-    funcwlan4g                               0x20001218   Data           4  airiap.o(.data)
-    funcwireless                             0x2000121c   Data           4  airiap.o(.data)
-    .bss                                     0x20001220   Section       18  spi.o(.bss)
-    .bss                                     0x20001234   Section     3832  os_core.o(.bss)
-    .bss                                     0x2000212c   Section    24930  systeminit.o(.bss)
-    gLocalConfigPara                         0x2000827c   Data          18  systeminit.o(.bss)
-    .bss                                     0x20008290   Section       36  wirelessapp.o(.bss)
-    s_SeqHistory                             0x20008290   Data          36  wirelessapp.o(.bss)
-    .bss                                     0x200082b4   Section     4128  displayprotocol.o(.bss)
-    .bss                                     0x200092d4   Section      128  stm32f10x_it.o(.bss)
-    DisplayUartRxBuf                         0x200092d4   Data         128  stm32f10x_it.o(.bss)
-    .bss                                     0x20009354   Section     1024  os_wrap.o(.bss)
-    HeapRecord                               0x20009354   Data        1024  os_wrap.o(.bss)
-    .bss                                     0x20009754   Section    14014  parasettinglib.o(.bss)
-    FoodLineTime                             0x20009754   Data          20  parasettinglib.o(.bss)
-    gScrInf                                  0x20009768   Data          10  parasettinglib.o(.bss)
-    gWirlessPara                             0x20009772   Data          89  parasettinglib.o(.bss)
-    gPathParameter                           0x200097cc   Data        8060  parasettinglib.o(.bss)
-    gReadPath                                0x2000b748   Data         168  parasettinglib.o(.bss)
-    gFoodlineDevicePara                      0x2000cdd0   Data          16  parasettinglib.o(.bss)
-    gFoodlineControl                         0x2000cde0   Data          18  parasettinglib.o(.bss)
-    gTowersOutControl                        0x2000cdf2   Data          16  parasettinglib.o(.bss)
-    gTowersOutPara                           0x2000ce02   Data          16  parasettinglib.o(.bss)
-    .bss                                     0x2000ce14   Section       80  foodlinecontrol.o(.bss)
-    gDeviceControlPara                       0x2000ce14   Data          80  foodlinecontrol.o(.bss)
-    .bss                                     0x2000ce64   Section       64  statemachine.o(.bss)
-    gStateIdle                               0x2000ce64   Data          16  statemachine.o(.bss)
-    gStateReady                              0x2000ce74   Data          16  statemachine.o(.bss)
-    gStateRunning                            0x2000ce84   Data          16  statemachine.o(.bss)
-    gStateSuspend                            0x2000ce94   Data          16  statemachine.o(.bss)
-    .bss                                     0x2000cea4   Section       80  page1flinepathconfig.o(.bss)
-    gflinePara                               0x2000cea4   Data          80  page1flinepathconfig.o(.bss)
-    .bss                                     0x2000cef4   Section      264  wirelesscomm.o(.bss)
-    UartRxBuf                                0x2000cef4   Data         128  wirelesscomm.o(.bss)
-    wlanintevt                               0x2000cf74   Data         136  wirelesscomm.o(.bss)
-    .bss                                     0x2000cffc   Section      564  wlan4gcomm.o(.bss)
-    packet_msg                               0x2000d014   Data         256  wlan4gcomm.o(.bss)
-    Uart4GBuf                                0x2000d114   Data         128  wlan4gcomm.o(.bss)
-    w4gintevt                                0x2000d194   Data         136  wlan4gcomm.o(.bss)
-    Wlan4G_Svr_Ip                            0x2000d21c   Data          20  wlan4gcomm.o(.bss)
-    .bss                                     0x2000d230   Section      148  airiap.o(.bss)
-    chip_guid                                0x2000d230   Data          12  airiap.o(.bss)
-    DefInfo                                  0x2000d23c   Data          32  airiap.o(.bss)
-    IapInfo                                  0x2000d25c   Data          32  airiap.o(.bss)
-    RcvIapDt                                 0x2000d27c   Data          72  airiap.o(.bss)
-    .bss                                     0x2000d2c4   Section       96  libspace.o(.bss)
-    HEAP                                     0x2000d328   Section        0  stm32f10x.o(HEAP)
-    Heap_Mem                                 0x2000d328   Data           0  stm32f10x.o(HEAP)
+    deciceNum                                0x2000110c   Data           5  foodlinecontrol.o(.data)
+    SeqMap                                   0x20001118   Data           6  foodlinecontrol.o(.data)
+    prevAreaIndex                            0x2000111e   Data           1  foodlinecontrol.o(.data)
+    index                                    0x2000111f   Data           1  foodlinecontrol.o(.data)
+    areaIndex                                0x20001120   Data           1  foodlinecontrol.o(.data)
+    index                                    0x20001121   Data           1  foodlinecontrol.o(.data)
+    areaIndex                                0x20001122   Data           1  foodlinecontrol.o(.data)
+    .data                                    0x20001124   Section       12  statemachine.o(.data)
+    gState                                   0x20001128   Data           4  statemachine.o(.data)
+    equipIndex                               0x2000112c   Data           1  statemachine.o(.data)
+    areaIndex                                0x2000112d   Data           1  statemachine.o(.data)
+    equipIndex                               0x2000112e   Data           1  statemachine.o(.data)
+    areaIndex                                0x2000112f   Data           1  statemachine.o(.data)
+    .data                                    0x20001130   Section        3  page2pathconfig.o(.data)
+    gP2Table                                 0x20001130   Data           1  page2pathconfig.o(.data)
+    gIndex                                   0x20001131   Data           1  page2pathconfig.o(.data)
+    gPage2Seq                                0x20001132   Data           1  page2pathconfig.o(.data)
+    .data                                    0x20001133   Section        2  page1flinepathconfig.o(.data)
+    gPath                                    0x20001133   Data           1  page1flinepathconfig.o(.data)
+    gSeq                                     0x20001134   Data           1  page1flinepathconfig.o(.data)
+    .data                                    0x20001138   Section        9  page3flinedevice.o(.data)
+    gPage3DevicePara                         0x20001138   Data           4  page3flinedevice.o(.data)
+    pFoodlineDevicePara                      0x2000113c   Data           4  page3flinedevice.o(.data)
+    gPage3Seq                                0x20001140   Data           1  page3flinedevice.o(.data)
+    .data                                    0x20001144   Section       12  page5revise.o(.data)
+    gPage5NewDevicePara                      0x20001144   Data           4  page5revise.o(.data)
+    gPage5LocalDevicePara                    0x20001148   Data           4  page5revise.o(.data)
+    pPage5OldDevicePara                      0x2000114c   Data           4  page5revise.o(.data)
+    .data                                    0x20001150   Section        2  page6readpathconfig.o(.data)
+    gP6Table                                 0x20001150   Data           1  page6readpathconfig.o(.data)
+    gPage6Seq                                0x20001151   Data           1  page6readpathconfig.o(.data)
+    .data                                    0x20001154   Section        6  page7controlfline.o(.data)
+    gPage7DevicePara                         0x20001154   Data           4  page7controlfline.o(.data)
+    gPage7Seq                                0x20001158   Data           1  page7controlfline.o(.data)
+    gPage7Action                             0x20001159   Data           1  page7controlfline.o(.data)
+    .data                                    0x2000115c   Section        6  page8switchvalve.o(.data)
+    gPage8DevicePara                         0x2000115c   Data           4  page8switchvalve.o(.data)
+    gPage8Seq                                0x20001160   Data           1  page8switchvalve.o(.data)
+    gP8Action                                0x20001161   Data           1  page8switchvalve.o(.data)
+    .data                                    0x20001164   Section        9  page9switchvalveconfig.o(.data)
+    gPage9DevicePara                         0x20001164   Data           4  page9switchvalveconfig.o(.data)
+    pSwitchValvePara                         0x20001168   Data           4  page9switchvalveconfig.o(.data)
+    gPage9Seq                                0x2000116c   Data           1  page9switchvalveconfig.o(.data)
+    .data                                    0x20001170   Section        6  page10towersout.o(.data)
+    gPage10DevicePara                        0x20001170   Data           4  page10towersout.o(.data)
+    gPage10Seq                               0x20001174   Data           1  page10towersout.o(.data)
+    gPage10Action                            0x20001175   Data           1  page10towersout.o(.data)
+    .data                                    0x20001178   Section        9  page11towersoutconfig.o(.data)
+    gPage11DevicePara                        0x20001178   Data           4  page11towersoutconfig.o(.data)
+    pTowersOutDevicePara                     0x2000117c   Data           4  page11towersoutconfig.o(.data)
+    gPage11Seq                               0x20001180   Data           1  page11towersoutconfig.o(.data)
+    .data                                    0x20001181   Section        3  page13linkconfig .o(.data)
+    gP13Table                                0x20001181   Data           1  page13linkconfig .o(.data)
+    areaIndex                                0x20001182   Data           1  page13linkconfig .o(.data)
+    gPage13Seq                               0x20001183   Data           1  page13linkconfig .o(.data)
+    .data                                    0x20001184   Section        1  page14w1control.o(.data)
+    .data                                    0x20001185   Section        1  page17c1control.o(.data)
+    .data                                    0x20001186   Section        1  page19n1control.o(.data)
+    .data                                    0x20001188   Section       52  wirelesscomm.o(.data)
+    wireless_uart                            0x2000118c   Data           4  wirelesscomm.o(.data)
+    WirelessCommRecv_Task_Handle             0x200011a0   Data           4  wirelesscomm.o(.data)
+    WirelessCommSend_Task_Handle             0x200011a4   Data           4  wirelesscomm.o(.data)
+    WirelessCommRetrans_Task_Handle          0x200011a8   Data           4  wirelesscomm.o(.data)
+    forward_mode                             0x200011ac   Data           1  wirelesscomm.o(.data)
+    retrans_count                            0x200011ad   Data           1  wirelesscomm.o(.data)
+    send_2_uart                              0x200011ae   Data           2  wirelesscomm.o(.data)
+    WirelessSeq                              0x200011b0   Data           2  wirelesscomm.o(.data)
+    LatestSeq                                0x200011b2   Data           1  wirelesscomm.o(.data)
+    LatestAck                                0x200011b3   Data           1  wirelesscomm.o(.data)
+    UartSt                                   0x200011b4   Data           1  wirelesscomm.o(.data)
+    UartLen                                  0x200011b5   Data           1  wirelesscomm.o(.data)
+    UartAux                                  0x200011b6   Data           1  wirelesscomm.o(.data)
+    UartIdx                                  0x200011b7   Data           1  wirelesscomm.o(.data)
+    Retrans                                  0x200011b8   Data           4  wirelesscomm.o(.data)
+    .data                                    0x200011bc   Section       56  wlan4gcomm.o(.data)
+    gWlan4GRcv_Queue                         0x200011bc   Data           4  wlan4gcomm.o(.data)
+    gWlan4GSnd_Queue                         0x200011c0   Data           4  wlan4gcomm.o(.data)
+    gWlan4GRcvSt_Queue                       0x200011c4   Data           4  wlan4gcomm.o(.data)
+    gWlan4GSndSt_Queue                       0x200011c8   Data           4  wlan4gcomm.o(.data)
+    gWlan4GSndDrv_Queue                      0x200011cc   Data           4  wlan4gcomm.o(.data)
+    wlan4g_uart                              0x200011d4   Data           4  wlan4gcomm.o(.data)
+    Wlan4GLink_Task_Handle                   0x200011d8   Data           4  wlan4gcomm.o(.data)
+    Wlan4GPkt_Task_Handle                    0x200011dc   Data           4  wlan4gcomm.o(.data)
+    Wlan4GSend_Task_Handle                   0x200011e0   Data           4  wlan4gcomm.o(.data)
+    packet_msglen                            0x200011e4   Data           2  wlan4gcomm.o(.data)
+    wlan4g_link_stat                         0x200011e6   Data           1  wlan4gcomm.o(.data)
+    Uart4GStat                               0x200011e7   Data           1  wlan4gcomm.o(.data)
+    Uart4GLen                                0x200011e8   Data           2  wlan4gcomm.o(.data)
+    wlan4g_idle_tick                         0x200011ec   Data           4  wlan4gcomm.o(.data)
+    Wlan4G_SndId                             0x200011f0   Data           1  wlan4gcomm.o(.data)
+    Wlan4G_Svr_Ports                         0x200011f2   Data           2  wlan4gcomm.o(.data)
+    .data                                    0x200011f4   Section       52  airiap.o(.data)
+    mac_address                              0x200011f4   Data           4  airiap.o(.data)
+    paras_address                            0x200011f8   Data           4  airiap.o(.data)
+    iapinfo_address                          0x200011fc   Data           4  airiap.o(.data)
+    gIapMsg_Queue                            0x20001200   Data           4  airiap.o(.data)
+    IapReq_Task_Handle                       0x20001204   Data           4  airiap.o(.data)
+    IapDat_Task_Handle                       0x20001208   Data           4  airiap.o(.data)
+    last_rcvtick                             0x2000120c   Data           4  airiap.o(.data)
+    call_time                                0x20001210   Data           4  airiap.o(.data)
+    IapAskaddr                               0x20001214   Data           4  airiap.o(.data)
+    IapAsklen                                0x20001218   Data           1  airiap.o(.data)
+    last_optimes                             0x20001219   Data           1  airiap.o(.data)
+    iap_en_rtc                               0x2000121a   Data           1  airiap.o(.data)
+    iap_loopasktime                          0x2000121c   Data           2  airiap.o(.data)
+    iap_reqdattime                           0x2000121e   Data           2  airiap.o(.data)
+    funcwlan4g                               0x20001220   Data           4  airiap.o(.data)
+    funcwireless                             0x20001224   Data           4  airiap.o(.data)
+    .bss                                     0x20001228   Section       18  spi.o(.bss)
+    .bss                                     0x2000123c   Section     3832  os_core.o(.bss)
+    .bss                                     0x20002134   Section    24930  systeminit.o(.bss)
+    gLocalConfigPara                         0x20008284   Data          18  systeminit.o(.bss)
+    .bss                                     0x20008298   Section       36  wirelessapp.o(.bss)
+    s_SeqHistory                             0x20008298   Data          36  wirelessapp.o(.bss)
+    .bss                                     0x200082bc   Section     4128  displayprotocol.o(.bss)
+    .bss                                     0x200092dc   Section      128  stm32f10x_it.o(.bss)
+    DisplayUartRxBuf                         0x200092dc   Data         128  stm32f10x_it.o(.bss)
+    .bss                                     0x2000935c   Section     1024  os_wrap.o(.bss)
+    HeapRecord                               0x2000935c   Data        1024  os_wrap.o(.bss)
+    .bss                                     0x2000975c   Section    14014  parasettinglib.o(.bss)
+    FoodLineTime                             0x2000975c   Data          20  parasettinglib.o(.bss)
+    gScrInf                                  0x20009770   Data          10  parasettinglib.o(.bss)
+    gWirlessPara                             0x2000977a   Data          89  parasettinglib.o(.bss)
+    gPathParameter                           0x200097d4   Data        8060  parasettinglib.o(.bss)
+    gReadPath                                0x2000b750   Data         168  parasettinglib.o(.bss)
+    gFoodlineDevicePara                      0x2000cdd8   Data          16  parasettinglib.o(.bss)
+    gFoodlineControl                         0x2000cde8   Data          18  parasettinglib.o(.bss)
+    gTowersOutControl                        0x2000cdfa   Data          16  parasettinglib.o(.bss)
+    gTowersOutPara                           0x2000ce0a   Data          16  parasettinglib.o(.bss)
+    .bss                                     0x2000ce1c   Section       92  foodlinecontrol.o(.bss)
+    gDeviceControlPara                       0x2000ce1c   Data          92  foodlinecontrol.o(.bss)
+    .bss                                     0x2000ce78   Section       64  statemachine.o(.bss)
+    gStateIdle                               0x2000ce78   Data          16  statemachine.o(.bss)
+    gStateReady                              0x2000ce88   Data          16  statemachine.o(.bss)
+    gStateRunning                            0x2000ce98   Data          16  statemachine.o(.bss)
+    gStateSuspend                            0x2000cea8   Data          16  statemachine.o(.bss)
+    .bss                                     0x2000ceb8   Section       80  page1flinepathconfig.o(.bss)
+    gflinePara                               0x2000ceb8   Data          80  page1flinepathconfig.o(.bss)
+    .bss                                     0x2000cf08   Section      264  wirelesscomm.o(.bss)
+    UartRxBuf                                0x2000cf08   Data         128  wirelesscomm.o(.bss)
+    wlanintevt                               0x2000cf88   Data         136  wirelesscomm.o(.bss)
+    .bss                                     0x2000d010   Section      564  wlan4gcomm.o(.bss)
+    packet_msg                               0x2000d028   Data         256  wlan4gcomm.o(.bss)
+    Uart4GBuf                                0x2000d128   Data         128  wlan4gcomm.o(.bss)
+    w4gintevt                                0x2000d1a8   Data         136  wlan4gcomm.o(.bss)
+    Wlan4G_Svr_Ip                            0x2000d230   Data          20  wlan4gcomm.o(.bss)
+    .bss                                     0x2000d244   Section      148  airiap.o(.bss)
+    chip_guid                                0x2000d244   Data          12  airiap.o(.bss)
+    DefInfo                                  0x2000d250   Data          32  airiap.o(.bss)
+    IapInfo                                  0x2000d270   Data          32  airiap.o(.bss)
+    RcvIapDt                                 0x2000d290   Data          72  airiap.o(.bss)
+    .bss                                     0x2000d2d8   Section       96  libspace.o(.bss)
+    HEAP                                     0x2000d338   Section        0  stm32f10x.o(HEAP)
+    Heap_Mem                                 0x2000d338   Data           0  stm32f10x.o(HEAP)
 
     Global Symbols
 
@@ -1844,218 +1846,218 @@ Image Symbol Table
     SingleDeviceStop                         0x0800b50b   Thumb Code    26  foodlinecontrol.o(.text)
     DeviceStopStateInquire                   0x0800b525   Thumb Code   262  foodlinecontrol.o(.text)
     SingleDeviceControl                      0x0800b62b   Thumb Code    40  foodlinecontrol.o(.text)
-    DeviceControlStateInquire                0x0800b653   Thumb Code   726  foodlinecontrol.o(.text)
-    judgeControlArea                         0x0800bc25   Thumb Code   372  foodlinecontrol.o(.text)
-    DeviceControlAndInquire                  0x0800c065   Thumb Code   222  foodlinecontrol.o(.text)
-    judgeControlStopArea                     0x0800c143   Thumb Code   338  foodlinecontrol.o(.text)
-    DeviceStopAndInquire                     0x0800c295   Thumb Code   728  foodlinecontrol.o(.text)
-    DelayShutDown                            0x0800c56d   Thumb Code   262  foodlinecontrol.o(.text)
-    DeviceShutdown                           0x0800c673   Thumb Code   364  foodlinecontrol.o(.text)
-    StateMachineInit                         0x0800d039   Thumb Code    26  statemachine.o(.text)
-    StateMachineProcess                      0x0800d053   Thumb Code    26  statemachine.o(.text)
-    Page2PathConfigTurn                      0x0800d075   Thumb Code    96  page2pathconfig.o(.text)
-    Page2PathConfigInit                      0x0800d0d5   Thumb Code    54  page2pathconfig.o(.text)
-    Page2PathSendPath                        0x0800d10b   Thumb Code   444  page2pathconfig.o(.text)
-    Page2PathSavePath                        0x0800d2c7   Thumb Code   338  page2pathconfig.o(.text)
-    Page2PathConfigInsert                    0x0800d419   Thumb Code   104  page2pathconfig.o(.text)
-    Page2PathConfigDelete                    0x0800d481   Thumb Code   120  page2pathconfig.o(.text)
-    Page2PathConfigRefresh                   0x0800d4f9   Thumb Code   378  page2pathconfig.o(.text)
-    Page2PathConfigProcess                   0x0800d673   Thumb Code   548  page2pathconfig.o(.text)
-    Page1Convert                             0x0800d8a9   Thumb Code    38  page1flinepathconfig.o(.text)
-    Page1FlinePathConfigInit                 0x0800d8cf   Thumb Code     2  page1flinepathconfig.o(.text)
-    Page1FlineSendPath                       0x0800d8d1   Thumb Code   162  page1flinepathconfig.o(.text)
-    Page1FlinePathConfigProcess              0x0800d973   Thumb Code   166  page1flinepathconfig.o(.text)
-    Page1FlinePathConfigRefresh              0x0800da19   Thumb Code   150  page1flinepathconfig.o(.text)
-    Page3FoodlineDeviceInquiry               0x0800dac5   Thumb Code   242  page3flinedevice.o(.text)
-    Page3FoodlineDeviceSend                  0x0800dbb7   Thumb Code   482  page3flinedevice.o(.text)
-    Page3FlineDeviceRefresh                  0x0800dd99   Thumb Code   388  page3flinedevice.o(.text)
-    Page3FlineDeviceInit                     0x0800df1d   Thumb Code    44  page3flinedevice.o(.text)
-    Page3FlineDeviceProcess                  0x0800df49   Thumb Code   708  page3flinedevice.o(.text)
-    Page5ReviseSend                          0x0800e21d   Thumb Code   142  page5revise.o(.text)
-    Page5ReviseInit                          0x0800e2ab   Thumb Code    50  page5revise.o(.text)
-    Page5ReviseProcess                       0x0800e2dd   Thumb Code   328  page5revise.o(.text)
-    Page5ReviseRefresh                       0x0800e425   Thumb Code   330  page5revise.o(.text)
-    Page6PathConfigTurn                      0x0800e585   Thumb Code    96  page6readpathconfig.o(.text)
-    Page6PathConfigInit                      0x0800e5e5   Thumb Code    72  page6readpathconfig.o(.text)
-    Page6PathSendPath                        0x0800e62d   Thumb Code   264  page6readpathconfig.o(.text)
-    Page6PathConfigProcess                   0x0800e735   Thumb Code   316  page6readpathconfig.o(.text)
-    Page6PathConfigRefresh                   0x0800e871   Thumb Code   368  page6readpathconfig.o(.text)
-    Page7ControlFlineInit                    0x0800e9e1   Thumb Code    46  page7controlfline.o(.text)
-    Page7ControlSend                         0x0800ea0f   Thumb Code   316  page7controlfline.o(.text)
-    Page7ControlAsk                          0x0800eb4b   Thumb Code   242  page7controlfline.o(.text)
-    Page7ControlFlineProcess                 0x0800ec3d   Thumb Code   206  page7controlfline.o(.text)
-    Page7ControlFlineRefresh                 0x0800ed0b   Thumb Code   442  page7controlfline.o(.text)
-    Page8SwitchValveInit                     0x0800eec9   Thumb Code    46  page8switchvalve.o(.text)
-    Page8ControlSend                         0x0800eef7   Thumb Code   260  page8switchvalve.o(.text)
-    Page8ControlAsk                          0x0800effb   Thumb Code   268  page8switchvalve.o(.text)
-    Page8SwitchValveProcess                  0x0800f107   Thumb Code   178  page8switchvalve.o(.text)
-    Page8SwitchValveRefresh                  0x0800f1b9   Thumb Code   314  page8switchvalve.o(.text)
-    Page9SwitchValveConfigInquiry            0x0800f2f9   Thumb Code   242  page9switchvalveconfig.o(.text)
-    Page9SwitchValveConfigSend               0x0800f3eb   Thumb Code   316  page9switchvalveconfig.o(.text)
-    Page9SwitchValveConfigRefresh            0x0800f527   Thumb Code   178  page9switchvalveconfig.o(.text)
-    Page9SwitchValveConfigInit               0x0800f5d9   Thumb Code    44  page9switchvalveconfig.o(.text)
-    Page9SwitchValveConfigProcess            0x0800f605   Thumb Code   320  page9switchvalveconfig.o(.text)
-    Page10TowersOutInit                      0x0800f749   Thumb Code    46  page10towersout.o(.text)
-    Page10ControlSend                        0x0800f777   Thumb Code   298  page10towersout.o(.text)
-    Page10ControlAsk                         0x0800f8a1   Thumb Code   242  page10towersout.o(.text)
-    Page10TowersOutProcess                   0x0800f993   Thumb Code   192  page10towersout.o(.text)
-    Page10TowersOutRefresh                   0x0800fa53   Thumb Code   362  page10towersout.o(.text)
-    Page11TowersOutConfigInquiry             0x0800fbc1   Thumb Code   242  page11towersoutconfig.o(.text)
-    Page11TowersOutConfigSend                0x0800fcb3   Thumb Code   482  page11towersoutconfig.o(.text)
-    Page11TowersOutConfigRefresh             0x0800fe95   Thumb Code   370  page11towersoutconfig.o(.text)
-    Page11TowersOutConfigInit                0x08010007   Thumb Code    44  page11towersoutconfig.o(.text)
-    Page11TowersOutConfigProcess             0x08010033   Thumb Code   618  page11towersoutconfig.o(.text)
-    Page12S1S2ControlRefresh                 0x080102ad   Thumb Code   264  page12s1s2control.o(.text)
-    Page12S1S2ControlInit                    0x080103b5   Thumb Code     8  page12s1s2control.o(.text)
-    Page12S1S2ControlProcess                 0x080103bd   Thumb Code   472  page12s1s2control.o(.text)
-    Page13LinkConfigTurn                     0x08010599   Thumb Code    96  page13linkconfig .o(.text)
-    Page13LinkConfigInit                     0x080105f9   Thumb Code    54  page13linkconfig .o(.text)
-    Page13LinkConfigInsert                   0x0801062f   Thumb Code   224  page13linkconfig .o(.text)
-    Page13LinkConfigDelete                   0x0801070f   Thumb Code   234  page13linkconfig .o(.text)
-    Page13LinkConfigRefresh                  0x080107f9   Thumb Code   654  page13linkconfig .o(.text)
-    Page13LinkConfigProcess                  0x08010a87   Thumb Code   956  page13linkconfig .o(.text)
-    Page14W1ControlRefresh                   0x08010e51   Thumb Code   306  page14w1control.o(.text)
-    Page14W1ControlInit                      0x08010f83   Thumb Code     8  page14w1control.o(.text)
-    Page14W1ControlProcess                   0x08010f8b   Thumb Code   380  page14w1control.o(.text)
-    Page15W2ControlRefresh                   0x0801110d   Thumb Code  1428  page15w2control.o(.text)
-    Page15W2ControlInit                      0x080116a1   Thumb Code     8  page15w2control.o(.text)
-    Page15W2ControlProcess                   0x080116a9   Thumb Code   378  page15w2control.o(.text)
-    Page16E1E2ControlRefresh                 0x08011829   Thumb Code   214  page16e1e2control.o(.text)
-    Page16E1E2ControlInit                    0x080118ff   Thumb Code     8  page16e1e2control.o(.text)
-    Page16E1E2ControlProcess                 0x08011907   Thumb Code   394  page16e1e2control.o(.text)
-    Page17C1ControlRefresh                   0x08011a91   Thumb Code  1864  page17c1control.o(.text)
-    Page17C1ControlInit                      0x080121d9   Thumb Code     8  page17c1control.o(.text)
-    Page17C1ControlProcess                   0x080121e1   Thumb Code   398  page17c1control.o(.text)
-    Page18C2ControlRefresh                   0x08012375   Thumb Code  1504  page18c2control.o(.text)
-    Page18C2ControlInit                      0x08012955   Thumb Code     8  page18c2control.o(.text)
-    Page18C2ControlProcess                   0x0801295d   Thumb Code   354  page18c2control.o(.text)
-    Page19N1ControlRefresh                   0x08012ac5   Thumb Code   238  page19n1control.o(.text)
-    Page19N1ControlInit                      0x08012bb3   Thumb Code     8  page19n1control.o(.text)
-    Page19N1ControlProcess                   0x08012bbb   Thumb Code   368  page19n1control.o(.text)
-    Page20N2ControlRefresh                   0x08012d31   Thumb Code   220  page20n2control.o(.text)
-    Page20N2ControlInit                      0x08012e0d   Thumb Code     8  page20n2control.o(.text)
-    Page20N2ControlProcess                   0x08012e15   Thumb Code   378  page20n2control.o(.text)
-    WirelessComm_Init                        0x08012f95   Thumb Code   148  wirelesscomm.o(.text)
-    SendConfigPara                           0x08013029   Thumb Code   228  wirelesscomm.o(.text)
-    ReceiveWirelessMsg                       0x0801310d   Thumb Code   424  wirelesscomm.o(.text)
-    SendCommPacket                           0x080132b5   Thumb Code   280  wirelesscomm.o(.text)
-    SendCommAck                              0x080133cd   Thumb Code    58  wirelesscomm.o(.text)
-    AnalyseCommPacket                        0x08013407   Thumb Code   338  wirelesscomm.o(.text)
-    WirelessCommRecv_Task                    0x08013559   Thumb Code   226  wirelesscomm.o(.text)
-    WirelessCommSend_Task                    0x0801363b   Thumb Code   154  wirelesscomm.o(.text)
-    WirelessComm_SendData                    0x080136d5   Thumb Code   228  wirelesscomm.o(.text)
-    WirelessCommRetrans_Task                 0x080137b9   Thumb Code   936  wirelesscomm.o(.text)
-    WirelessApp_SendData                     0x08013b61   Thumb Code   640  wirelesscomm.o(.text)
-    WirelessIntService                       0x08013de1   Thumb Code   292  wirelesscomm.o(.text)
-    CreateWrelessTask                        0x08013f05   Thumb Code    82  wirelesscomm.o(.text)
-    Wlan4GComm_Init                          0x08013fa9   Thumb Code    94  wlan4gcomm.o(.text)
-    Wlan4G_SetServer                         0x08014007   Thumb Code    42  wlan4gcomm.o(.text)
-    Wlan4G_Send                              0x08014031   Thumb Code    64  wlan4gcomm.o(.text)
-    ConnectServer                            0x08014071   Thumb Code   174  wlan4gcomm.o(.text)
-    Wlan4GLink_Task                          0x0801411f   Thumb Code  1296  wlan4gcomm.o(.text)
-    CheckPktType                             0x0801462f   Thumb Code   340  wlan4gcomm.o(.text)
-    Wlan4G_Transfer                          0x08014783   Thumb Code    84  wlan4gcomm.o(.text)
-    Wlan4G_RevTransfer                       0x080147d7   Thumb Code   306  wlan4gcomm.o(.text)
-    Wlan4G_AnalyseData                       0x08014909   Thumb Code   150  wlan4gcomm.o(.text)
-    Wlan4G_AnalyseFrame                      0x0801499f   Thumb Code   124  wlan4gcomm.o(.text)
-    Wlan4G_AnalysePkt                        0x08014a1b   Thumb Code   148  wlan4gcomm.o(.text)
-    Wlan4GPkt_Task                           0x08014aaf   Thumb Code  1052  wlan4gcomm.o(.text)
-    Wlan4G_SendData                          0x08014ecb   Thumb Code   350  wlan4gcomm.o(.text)
-    Wlan4GSend_Task                          0x08015029   Thumb Code   452  wlan4gcomm.o(.text)
-    Send4GMessage                            0x080151ed   Thumb Code   112  wlan4gcomm.o(.text)
-    Wlan4GIntService                         0x0801525d   Thumb Code   228  wlan4gcomm.o(.text)
-    CreateW4GTask                            0x08015341   Thumb Code    80  wlan4gcomm.o(.text)
-    EraseIapInfodata                         0x080153cd   Thumb Code    16  airiap.o(.text)
-    WriteIapInfo                             0x080153dd   Thumb Code   108  airiap.o(.text)
-    ReadIapInfo                              0x08015449   Thumb Code    82  airiap.o(.text)
-    WriteIapdata                             0x0801549b   Thumb Code    52  airiap.o(.text)
-    ReadIapdata                              0x080154cf   Thumb Code    22  airiap.o(.text)
-    WriteLocalConfig                         0x080154e5   Thumb Code   100  airiap.o(.text)
-    ReadLocalConfig                          0x08015549   Thumb Code    82  airiap.o(.text)
-    AskVersion                               0x0801559b   Thumb Code   200  airiap.o(.text)
-    RcvVersion                               0x08015663   Thumb Code   146  airiap.o(.text)
-    AskVerData                               0x080156f5   Thumb Code   266  airiap.o(.text)
-    RcvVerData                               0x080157ff   Thumb Code   104  airiap.o(.text)
-    RcvAskIapInfo                            0x08015867   Thumb Code   212  airiap.o(.text)
-    RcvAskGuid                               0x0801593b   Thumb Code   300  airiap.o(.text)
-    RespondConfigPara                        0x08015a67   Thumb Code   216  airiap.o(.text)
-    Sys_Soft_Reset                           0x08015b3f   Thumb Code     8  airiap.o(.text)
-    RcvConfigPara                            0x08015b47   Thumb Code    96  airiap.o(.text)
-    RespConfigPara                           0x08015ba7   Thumb Code   298  airiap.o(.text)
-    RcvConfigID                              0x08015cd1   Thumb Code    78  airiap.o(.text)
-    ResetDevice                              0x08015d1f   Thumb Code    32  airiap.o(.text)
-    RcvAdjustTime                            0x08015d3f   Thumb Code   386  airiap.o(.text)
-    RcvIapData                               0x08015ec1   Thumb Code   210  airiap.o(.text)
-    AirIapReq_Task                           0x08015f93   Thumb Code   148  airiap.o(.text)
-    AirIapDat_Task                           0x08016027   Thumb Code   760  airiap.o(.text)
-    CreateIapTask                            0x0801631f   Thumb Code    56  airiap.o(.text)
-    ParaFlash_Init                           0x08016357   Thumb Code    38  airiap.o(.text)
-    AirIap_Init                              0x0801637d   Thumb Code   300  airiap.o(.text)
-    __2sprintf                               0x080164a9   Thumb Code    34  noretval__2sprintf.o(.text)
-    _printf_pre_padding                      0x080164d1   Thumb Code    44  _printf_pad.o(.text)
-    _printf_post_padding                     0x080164fd   Thumb Code    34  _printf_pad.o(.text)
-    _printf_int_dec                          0x08016521   Thumb Code   104  _printf_dec.o(.text)
-    _printf_int_hex                          0x08016599   Thumb Code    84  _printf_hex_int.o(.text)
-    _printf_longlong_hex                     0x08016599   Thumb Code     0  _printf_hex_int.o(.text)
-    __printf                                 0x080165f1   Thumb Code   308  __printf_flags_wp.o(.text)
-    __aeabi_memcpy4                          0x08016729   Thumb Code     0  rt_memcpy_w.o(.text)
-    __aeabi_memcpy8                          0x08016729   Thumb Code     0  rt_memcpy_w.o(.text)
-    __rt_memcpy_w                            0x08016729   Thumb Code   100  rt_memcpy_w.o(.text)
-    _memcpy_lastbytes_aligned                0x08016771   Thumb Code     0  rt_memcpy_w.o(.text)
-    __aeabi_memclr                           0x0801678d   Thumb Code     0  rt_memclr.o(.text)
-    __rt_memclr                              0x0801678d   Thumb Code    68  rt_memclr.o(.text)
-    _memset                                  0x08016791   Thumb Code     0  rt_memclr.o(.text)
-    __aeabi_memclr4                          0x080167d1   Thumb Code     0  rt_memclr_w.o(.text)
-    __aeabi_memclr8                          0x080167d1   Thumb Code     0  rt_memclr_w.o(.text)
-    __rt_memclr_w                            0x080167d1   Thumb Code    78  rt_memclr_w.o(.text)
-    _memset_w                                0x080167d5   Thumb Code     0  rt_memclr_w.o(.text)
-    __use_two_region_memory                  0x0801681f   Thumb Code     2  heapauxi.o(.text)
-    __rt_heap_escrow$2region                 0x08016821   Thumb Code     2  heapauxi.o(.text)
-    __rt_heap_expand$2region                 0x08016823   Thumb Code     2  heapauxi.o(.text)
-    _printf_int_common                       0x08016825   Thumb Code   178  _printf_intcommon.o(.text)
-    _printf_char_common                      0x080168e3   Thumb Code    32  _printf_char_common.o(.text)
-    _sputc                                   0x08016909   Thumb Code    10  _sputc.o(.text)
-    __user_setup_stackheap                   0x08016913   Thumb Code    74  sys_stackheap_outer.o(.text)
-    exit                                     0x0801695d   Thumb Code    12  exit.o(.text)
-    __user_libspace                          0x08016969   Thumb Code     8  libspace.o(.text)
-    __user_perproc_libspace                  0x08016969   Thumb Code     0  libspace.o(.text)
-    __user_perthread_libspace                0x08016969   Thumb Code     0  libspace.o(.text)
-    _sys_exit                                0x08016971   Thumb Code     8  sys_exit.o(.text)
-    __I$use$semihosting                      0x0801697d   Thumb Code     0  use_no_semi.o(.text)
-    __use_no_semihosting_swi                 0x0801697d   Thumb Code     2  use_no_semi.o(.text)
-    __semihosting_library_function           0x0801697f   Thumb Code     0  indicate_semi.o(.text)
-    _is_digit                                0x0801697f   Thumb Code    14  __printf_wp.o(i._is_digit)
-    __fpl_dcmp_Inf                           0x0801698d   Thumb Code    24  dcmpi.o(x$fpl$dcmpinf)
-    __aeabi_cdcmple                          0x080169a5   Thumb Code     0  dleqf.o(x$fpl$dleqf)
-    _dcmple                                  0x080169a5   Thumb Code   120  dleqf.o(x$fpl$dleqf)
-    __fpl_dcmple_InfNaN                      0x08016a07   Thumb Code     0  dleqf.o(x$fpl$dleqf)
-    __fpl_dnaninf                            0x08016a1d   Thumb Code   156  dnaninf.o(x$fpl$dnaninf)
-    __fpl_dretinf                            0x08016ab9   Thumb Code    12  dretinf.o(x$fpl$dretinf)
-    __aeabi_cdrcmple                         0x08016ac5   Thumb Code     0  drleqf.o(x$fpl$drleqf)
-    _drcmple                                 0x08016ac5   Thumb Code   108  drleqf.o(x$fpl$drleqf)
-    __aeabi_f2d                              0x08016b31   Thumb Code     0  f2d.o(x$fpl$f2d)
-    _f2d                                     0x08016b31   Thumb Code    86  f2d.o(x$fpl$f2d)
-    __aeabi_fadd                             0x08016b89   Thumb Code     0  faddsub_clz.o(x$fpl$fadd)
-    _fadd                                    0x08016b89   Thumb Code   196  faddsub_clz.o(x$fpl$fadd)
-    __aeabi_f2iz                             0x08016c4d   Thumb Code     0  ffix.o(x$fpl$ffix)
-    _ffix                                    0x08016c4d   Thumb Code    54  ffix.o(x$fpl$ffix)
-    __aeabi_i2f                              0x08016c85   Thumb Code     0  fflt_clz.o(x$fpl$fflt)
-    _fflt                                    0x08016c85   Thumb Code    48  fflt_clz.o(x$fpl$fflt)
-    __aeabi_fmul                             0x08016cb5   Thumb Code     0  fmul.o(x$fpl$fmul)
-    _fmul                                    0x08016cb5   Thumb Code   258  fmul.o(x$fpl$fmul)
-    __fpl_fnaninf                            0x08016db7   Thumb Code   140  fnaninf.o(x$fpl$fnaninf)
-    __fpl_fretinf                            0x08016e43   Thumb Code    10  fretinf.o(x$fpl$fretinf)
-    __aeabi_frsub                            0x08016e4d   Thumb Code     0  faddsub_clz.o(x$fpl$frsb)
-    _frsb                                    0x08016e4d   Thumb Code    20  faddsub_clz.o(x$fpl$frsb)
-    __aeabi_fsub                             0x08016e61   Thumb Code     0  faddsub_clz.o(x$fpl$fsub)
-    _fsub                                    0x08016e61   Thumb Code   234  faddsub_clz.o(x$fpl$fsub)
-    __I$use$fp                               0x08016f4a   Number         0  usenofp.o(x$fpl$usenofp)
-    Leap_Month_Seconds                       0x08016f4c   Data          52  rtc.o(.constdata)
-    Month_Seconds                            0x08016f80   Data          52  rtc.o(.constdata)
-    OSUnMapTbl                               0x08016fb4   Data         256  os_core.o(.constdata)
-    crc8table                                0x080170b4   Data         256  os_wrap.o(.constdata)
-    Region$$Table$$Base                      0x08017234   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08017254   Number         0  anon$$obj.o(Region$$Table)
+    DeviceControlStateInquire                0x0800b653   Thumb Code   736  foodlinecontrol.o(.text)
+    judgeControlArea                         0x0800bc31   Thumb Code   372  foodlinecontrol.o(.text)
+    DeviceControlAndInquire                  0x0800c10f   Thumb Code   242  foodlinecontrol.o(.text)
+    judgeControlStopArea                     0x0800c201   Thumb Code   352  foodlinecontrol.o(.text)
+    DelayShutDown                            0x0800c499   Thumb Code   348  foodlinecontrol.o(.text)
+    DeviceStopAndInquire                     0x0800c5f5   Thumb Code   754  foodlinecontrol.o(.text)
+    DeviceShutdown                           0x0800c8e7   Thumb Code   378  foodlinecontrol.o(.text)
+    StateMachineInit                         0x0800d229   Thumb Code    26  statemachine.o(.text)
+    StateMachineProcess                      0x0800d243   Thumb Code    26  statemachine.o(.text)
+    Page2PathConfigTurn                      0x0800d2a9   Thumb Code    96  page2pathconfig.o(.text)
+    Page2PathConfigInit                      0x0800d309   Thumb Code    54  page2pathconfig.o(.text)
+    Page2PathSendPath                        0x0800d33f   Thumb Code   444  page2pathconfig.o(.text)
+    Page2PathSavePath                        0x0800d4fb   Thumb Code   338  page2pathconfig.o(.text)
+    Page2PathConfigInsert                    0x0800d64d   Thumb Code   104  page2pathconfig.o(.text)
+    Page2PathConfigDelete                    0x0800d6b5   Thumb Code   120  page2pathconfig.o(.text)
+    Page2PathConfigRefresh                   0x0800d72d   Thumb Code   378  page2pathconfig.o(.text)
+    Page2PathConfigProcess                   0x0800d8a7   Thumb Code   548  page2pathconfig.o(.text)
+    Page1Convert                             0x0800dadd   Thumb Code    38  page1flinepathconfig.o(.text)
+    Page1FlinePathConfigInit                 0x0800db03   Thumb Code     2  page1flinepathconfig.o(.text)
+    Page1FlineSendPath                       0x0800db05   Thumb Code   162  page1flinepathconfig.o(.text)
+    Page1FlinePathConfigProcess              0x0800dba7   Thumb Code   166  page1flinepathconfig.o(.text)
+    Page1FlinePathConfigRefresh              0x0800dc4d   Thumb Code   150  page1flinepathconfig.o(.text)
+    Page3FoodlineDeviceInquiry               0x0800dcf9   Thumb Code   242  page3flinedevice.o(.text)
+    Page3FoodlineDeviceSend                  0x0800ddeb   Thumb Code   482  page3flinedevice.o(.text)
+    Page3FlineDeviceRefresh                  0x0800dfcd   Thumb Code   388  page3flinedevice.o(.text)
+    Page3FlineDeviceInit                     0x0800e151   Thumb Code    44  page3flinedevice.o(.text)
+    Page3FlineDeviceProcess                  0x0800e17d   Thumb Code   708  page3flinedevice.o(.text)
+    Page5ReviseSend                          0x0800e451   Thumb Code   142  page5revise.o(.text)
+    Page5ReviseInit                          0x0800e4df   Thumb Code    50  page5revise.o(.text)
+    Page5ReviseProcess                       0x0800e511   Thumb Code   328  page5revise.o(.text)
+    Page5ReviseRefresh                       0x0800e659   Thumb Code   330  page5revise.o(.text)
+    Page6PathConfigTurn                      0x0800e7b9   Thumb Code    96  page6readpathconfig.o(.text)
+    Page6PathConfigInit                      0x0800e819   Thumb Code    72  page6readpathconfig.o(.text)
+    Page6PathSendPath                        0x0800e861   Thumb Code   264  page6readpathconfig.o(.text)
+    Page6PathConfigProcess                   0x0800e969   Thumb Code   316  page6readpathconfig.o(.text)
+    Page6PathConfigRefresh                   0x0800eaa5   Thumb Code   368  page6readpathconfig.o(.text)
+    Page7ControlFlineInit                    0x0800ec15   Thumb Code    46  page7controlfline.o(.text)
+    Page7ControlSend                         0x0800ec43   Thumb Code   316  page7controlfline.o(.text)
+    Page7ControlAsk                          0x0800ed7f   Thumb Code   242  page7controlfline.o(.text)
+    Page7ControlFlineProcess                 0x0800ee71   Thumb Code   206  page7controlfline.o(.text)
+    Page7ControlFlineRefresh                 0x0800ef3f   Thumb Code   442  page7controlfline.o(.text)
+    Page8SwitchValveInit                     0x0800f0fd   Thumb Code    46  page8switchvalve.o(.text)
+    Page8ControlSend                         0x0800f12b   Thumb Code   260  page8switchvalve.o(.text)
+    Page8ControlAsk                          0x0800f22f   Thumb Code   268  page8switchvalve.o(.text)
+    Page8SwitchValveProcess                  0x0800f33b   Thumb Code   178  page8switchvalve.o(.text)
+    Page8SwitchValveRefresh                  0x0800f3ed   Thumb Code   314  page8switchvalve.o(.text)
+    Page9SwitchValveConfigInquiry            0x0800f52d   Thumb Code   242  page9switchvalveconfig.o(.text)
+    Page9SwitchValveConfigSend               0x0800f61f   Thumb Code   316  page9switchvalveconfig.o(.text)
+    Page9SwitchValveConfigRefresh            0x0800f75b   Thumb Code   178  page9switchvalveconfig.o(.text)
+    Page9SwitchValveConfigInit               0x0800f80d   Thumb Code    44  page9switchvalveconfig.o(.text)
+    Page9SwitchValveConfigProcess            0x0800f839   Thumb Code   320  page9switchvalveconfig.o(.text)
+    Page10TowersOutInit                      0x0800f97d   Thumb Code    46  page10towersout.o(.text)
+    Page10ControlSend                        0x0800f9ab   Thumb Code   298  page10towersout.o(.text)
+    Page10ControlAsk                         0x0800fad5   Thumb Code   242  page10towersout.o(.text)
+    Page10TowersOutProcess                   0x0800fbc7   Thumb Code   192  page10towersout.o(.text)
+    Page10TowersOutRefresh                   0x0800fc87   Thumb Code   362  page10towersout.o(.text)
+    Page11TowersOutConfigInquiry             0x0800fdf5   Thumb Code   242  page11towersoutconfig.o(.text)
+    Page11TowersOutConfigSend                0x0800fee7   Thumb Code   482  page11towersoutconfig.o(.text)
+    Page11TowersOutConfigRefresh             0x080100c9   Thumb Code   370  page11towersoutconfig.o(.text)
+    Page11TowersOutConfigInit                0x0801023b   Thumb Code    44  page11towersoutconfig.o(.text)
+    Page11TowersOutConfigProcess             0x08010267   Thumb Code   618  page11towersoutconfig.o(.text)
+    Page12S1S2ControlRefresh                 0x080104e1   Thumb Code   216  page12s1s2control.o(.text)
+    Page12S1S2ControlInit                    0x080105b9   Thumb Code     8  page12s1s2control.o(.text)
+    Page12S1S2ControlProcess                 0x080105c1   Thumb Code   500  page12s1s2control.o(.text)
+    Page13LinkConfigTurn                     0x080107b5   Thumb Code    96  page13linkconfig .o(.text)
+    Page13LinkConfigInit                     0x08010815   Thumb Code    54  page13linkconfig .o(.text)
+    Page13LinkConfigInsert                   0x0801084b   Thumb Code   224  page13linkconfig .o(.text)
+    Page13LinkConfigDelete                   0x0801092b   Thumb Code   234  page13linkconfig .o(.text)
+    Page13LinkConfigRefresh                  0x08010a15   Thumb Code   654  page13linkconfig .o(.text)
+    Page13LinkConfigProcess                  0x08010ca3   Thumb Code   956  page13linkconfig .o(.text)
+    Page14W1ControlRefresh                   0x0801106d   Thumb Code   306  page14w1control.o(.text)
+    Page14W1ControlInit                      0x0801119f   Thumb Code     8  page14w1control.o(.text)
+    Page14W1ControlProcess                   0x080111a7   Thumb Code   380  page14w1control.o(.text)
+    Page15W2ControlRefresh                   0x08011329   Thumb Code  1428  page15w2control.o(.text)
+    Page15W2ControlInit                      0x080118bd   Thumb Code     8  page15w2control.o(.text)
+    Page15W2ControlProcess                   0x080118c5   Thumb Code   378  page15w2control.o(.text)
+    Page16E1E2ControlRefresh                 0x08011a45   Thumb Code   214  page16e1e2control.o(.text)
+    Page16E1E2ControlInit                    0x08011b1b   Thumb Code     8  page16e1e2control.o(.text)
+    Page16E1E2ControlProcess                 0x08011b23   Thumb Code   394  page16e1e2control.o(.text)
+    Page17C1ControlRefresh                   0x08011cad   Thumb Code  1864  page17c1control.o(.text)
+    Page17C1ControlInit                      0x080123f5   Thumb Code     8  page17c1control.o(.text)
+    Page17C1ControlProcess                   0x080123fd   Thumb Code   480  page17c1control.o(.text)
+    Page18C2ControlRefresh                   0x080125e1   Thumb Code  1504  page18c2control.o(.text)
+    Page18C2ControlInit                      0x08012bc1   Thumb Code     8  page18c2control.o(.text)
+    Page18C2ControlProcess                   0x08012bc9   Thumb Code   354  page18c2control.o(.text)
+    Page19N1ControlRefresh                   0x08012d31   Thumb Code   238  page19n1control.o(.text)
+    Page19N1ControlInit                      0x08012e1f   Thumb Code     8  page19n1control.o(.text)
+    Page19N1ControlProcess                   0x08012e27   Thumb Code   368  page19n1control.o(.text)
+    Page20N2ControlRefresh                   0x08012f9d   Thumb Code   220  page20n2control.o(.text)
+    Page20N2ControlInit                      0x08013079   Thumb Code     8  page20n2control.o(.text)
+    Page20N2ControlProcess                   0x08013081   Thumb Code   378  page20n2control.o(.text)
+    WirelessComm_Init                        0x08013201   Thumb Code   148  wirelesscomm.o(.text)
+    SendConfigPara                           0x08013295   Thumb Code   228  wirelesscomm.o(.text)
+    ReceiveWirelessMsg                       0x08013379   Thumb Code   424  wirelesscomm.o(.text)
+    SendCommPacket                           0x08013521   Thumb Code   280  wirelesscomm.o(.text)
+    SendCommAck                              0x08013639   Thumb Code    58  wirelesscomm.o(.text)
+    AnalyseCommPacket                        0x08013673   Thumb Code   338  wirelesscomm.o(.text)
+    WirelessCommRecv_Task                    0x080137c5   Thumb Code   226  wirelesscomm.o(.text)
+    WirelessCommSend_Task                    0x080138a7   Thumb Code   154  wirelesscomm.o(.text)
+    WirelessComm_SendData                    0x08013941   Thumb Code   228  wirelesscomm.o(.text)
+    WirelessCommRetrans_Task                 0x08013a25   Thumb Code   936  wirelesscomm.o(.text)
+    WirelessApp_SendData                     0x08013dcd   Thumb Code   640  wirelesscomm.o(.text)
+    WirelessIntService                       0x0801404d   Thumb Code   292  wirelesscomm.o(.text)
+    CreateWrelessTask                        0x08014171   Thumb Code    82  wirelesscomm.o(.text)
+    Wlan4GComm_Init                          0x08014215   Thumb Code    94  wlan4gcomm.o(.text)
+    Wlan4G_SetServer                         0x08014273   Thumb Code    42  wlan4gcomm.o(.text)
+    Wlan4G_Send                              0x0801429d   Thumb Code    64  wlan4gcomm.o(.text)
+    ConnectServer                            0x080142dd   Thumb Code   174  wlan4gcomm.o(.text)
+    Wlan4GLink_Task                          0x0801438b   Thumb Code  1296  wlan4gcomm.o(.text)
+    CheckPktType                             0x0801489b   Thumb Code   340  wlan4gcomm.o(.text)
+    Wlan4G_Transfer                          0x080149ef   Thumb Code    84  wlan4gcomm.o(.text)
+    Wlan4G_RevTransfer                       0x08014a43   Thumb Code   306  wlan4gcomm.o(.text)
+    Wlan4G_AnalyseData                       0x08014b75   Thumb Code   150  wlan4gcomm.o(.text)
+    Wlan4G_AnalyseFrame                      0x08014c0b   Thumb Code   124  wlan4gcomm.o(.text)
+    Wlan4G_AnalysePkt                        0x08014c87   Thumb Code   148  wlan4gcomm.o(.text)
+    Wlan4GPkt_Task                           0x08014d1b   Thumb Code  1052  wlan4gcomm.o(.text)
+    Wlan4G_SendData                          0x08015137   Thumb Code   350  wlan4gcomm.o(.text)
+    Wlan4GSend_Task                          0x08015295   Thumb Code   452  wlan4gcomm.o(.text)
+    Send4GMessage                            0x08015459   Thumb Code   112  wlan4gcomm.o(.text)
+    Wlan4GIntService                         0x080154c9   Thumb Code   228  wlan4gcomm.o(.text)
+    CreateW4GTask                            0x080155ad   Thumb Code    80  wlan4gcomm.o(.text)
+    EraseIapInfodata                         0x08015639   Thumb Code    16  airiap.o(.text)
+    WriteIapInfo                             0x08015649   Thumb Code   108  airiap.o(.text)
+    ReadIapInfo                              0x080156b5   Thumb Code    82  airiap.o(.text)
+    WriteIapdata                             0x08015707   Thumb Code    52  airiap.o(.text)
+    ReadIapdata                              0x0801573b   Thumb Code    22  airiap.o(.text)
+    WriteLocalConfig                         0x08015751   Thumb Code   100  airiap.o(.text)
+    ReadLocalConfig                          0x080157b5   Thumb Code    82  airiap.o(.text)
+    AskVersion                               0x08015807   Thumb Code   200  airiap.o(.text)
+    RcvVersion                               0x080158cf   Thumb Code   146  airiap.o(.text)
+    AskVerData                               0x08015961   Thumb Code   266  airiap.o(.text)
+    RcvVerData                               0x08015a6b   Thumb Code   104  airiap.o(.text)
+    RcvAskIapInfo                            0x08015ad3   Thumb Code   212  airiap.o(.text)
+    RcvAskGuid                               0x08015ba7   Thumb Code   300  airiap.o(.text)
+    RespondConfigPara                        0x08015cd3   Thumb Code   216  airiap.o(.text)
+    Sys_Soft_Reset                           0x08015dab   Thumb Code     8  airiap.o(.text)
+    RcvConfigPara                            0x08015db3   Thumb Code    96  airiap.o(.text)
+    RespConfigPara                           0x08015e13   Thumb Code   298  airiap.o(.text)
+    RcvConfigID                              0x08015f3d   Thumb Code    78  airiap.o(.text)
+    ResetDevice                              0x08015f8b   Thumb Code    32  airiap.o(.text)
+    RcvAdjustTime                            0x08015fab   Thumb Code   386  airiap.o(.text)
+    RcvIapData                               0x0801612d   Thumb Code   210  airiap.o(.text)
+    AirIapReq_Task                           0x080161ff   Thumb Code   148  airiap.o(.text)
+    AirIapDat_Task                           0x08016293   Thumb Code   760  airiap.o(.text)
+    CreateIapTask                            0x0801658b   Thumb Code    56  airiap.o(.text)
+    ParaFlash_Init                           0x080165c3   Thumb Code    38  airiap.o(.text)
+    AirIap_Init                              0x080165e9   Thumb Code   300  airiap.o(.text)
+    __2sprintf                               0x08016715   Thumb Code    34  noretval__2sprintf.o(.text)
+    _printf_pre_padding                      0x0801673d   Thumb Code    44  _printf_pad.o(.text)
+    _printf_post_padding                     0x08016769   Thumb Code    34  _printf_pad.o(.text)
+    _printf_int_dec                          0x0801678d   Thumb Code   104  _printf_dec.o(.text)
+    _printf_int_hex                          0x08016805   Thumb Code    84  _printf_hex_int.o(.text)
+    _printf_longlong_hex                     0x08016805   Thumb Code     0  _printf_hex_int.o(.text)
+    __printf                                 0x0801685d   Thumb Code   308  __printf_flags_wp.o(.text)
+    __aeabi_memcpy4                          0x08016995   Thumb Code     0  rt_memcpy_w.o(.text)
+    __aeabi_memcpy8                          0x08016995   Thumb Code     0  rt_memcpy_w.o(.text)
+    __rt_memcpy_w                            0x08016995   Thumb Code   100  rt_memcpy_w.o(.text)
+    _memcpy_lastbytes_aligned                0x080169dd   Thumb Code     0  rt_memcpy_w.o(.text)
+    __aeabi_memclr                           0x080169f9   Thumb Code     0  rt_memclr.o(.text)
+    __rt_memclr                              0x080169f9   Thumb Code    68  rt_memclr.o(.text)
+    _memset                                  0x080169fd   Thumb Code     0  rt_memclr.o(.text)
+    __aeabi_memclr4                          0x08016a3d   Thumb Code     0  rt_memclr_w.o(.text)
+    __aeabi_memclr8                          0x08016a3d   Thumb Code     0  rt_memclr_w.o(.text)
+    __rt_memclr_w                            0x08016a3d   Thumb Code    78  rt_memclr_w.o(.text)
+    _memset_w                                0x08016a41   Thumb Code     0  rt_memclr_w.o(.text)
+    __use_two_region_memory                  0x08016a8b   Thumb Code     2  heapauxi.o(.text)
+    __rt_heap_escrow$2region                 0x08016a8d   Thumb Code     2  heapauxi.o(.text)
+    __rt_heap_expand$2region                 0x08016a8f   Thumb Code     2  heapauxi.o(.text)
+    _printf_int_common                       0x08016a91   Thumb Code   178  _printf_intcommon.o(.text)
+    _printf_char_common                      0x08016b4f   Thumb Code    32  _printf_char_common.o(.text)
+    _sputc                                   0x08016b75   Thumb Code    10  _sputc.o(.text)
+    __user_setup_stackheap                   0x08016b7f   Thumb Code    74  sys_stackheap_outer.o(.text)
+    exit                                     0x08016bc9   Thumb Code    12  exit.o(.text)
+    __user_libspace                          0x08016bd5   Thumb Code     8  libspace.o(.text)
+    __user_perproc_libspace                  0x08016bd5   Thumb Code     0  libspace.o(.text)
+    __user_perthread_libspace                0x08016bd5   Thumb Code     0  libspace.o(.text)
+    _sys_exit                                0x08016bdd   Thumb Code     8  sys_exit.o(.text)
+    __I$use$semihosting                      0x08016be9   Thumb Code     0  use_no_semi.o(.text)
+    __use_no_semihosting_swi                 0x08016be9   Thumb Code     2  use_no_semi.o(.text)
+    __semihosting_library_function           0x08016beb   Thumb Code     0  indicate_semi.o(.text)
+    _is_digit                                0x08016beb   Thumb Code    14  __printf_wp.o(i._is_digit)
+    __fpl_dcmp_Inf                           0x08016bf9   Thumb Code    24  dcmpi.o(x$fpl$dcmpinf)
+    __aeabi_cdcmple                          0x08016c11   Thumb Code     0  dleqf.o(x$fpl$dleqf)
+    _dcmple                                  0x08016c11   Thumb Code   120  dleqf.o(x$fpl$dleqf)
+    __fpl_dcmple_InfNaN                      0x08016c73   Thumb Code     0  dleqf.o(x$fpl$dleqf)
+    __fpl_dnaninf                            0x08016c89   Thumb Code   156  dnaninf.o(x$fpl$dnaninf)
+    __fpl_dretinf                            0x08016d25   Thumb Code    12  dretinf.o(x$fpl$dretinf)
+    __aeabi_cdrcmple                         0x08016d31   Thumb Code     0  drleqf.o(x$fpl$drleqf)
+    _drcmple                                 0x08016d31   Thumb Code   108  drleqf.o(x$fpl$drleqf)
+    __aeabi_f2d                              0x08016d9d   Thumb Code     0  f2d.o(x$fpl$f2d)
+    _f2d                                     0x08016d9d   Thumb Code    86  f2d.o(x$fpl$f2d)
+    __aeabi_fadd                             0x08016df5   Thumb Code     0  faddsub_clz.o(x$fpl$fadd)
+    _fadd                                    0x08016df5   Thumb Code   196  faddsub_clz.o(x$fpl$fadd)
+    __aeabi_f2iz                             0x08016eb9   Thumb Code     0  ffix.o(x$fpl$ffix)
+    _ffix                                    0x08016eb9   Thumb Code    54  ffix.o(x$fpl$ffix)
+    __aeabi_i2f                              0x08016ef1   Thumb Code     0  fflt_clz.o(x$fpl$fflt)
+    _fflt                                    0x08016ef1   Thumb Code    48  fflt_clz.o(x$fpl$fflt)
+    __aeabi_fmul                             0x08016f21   Thumb Code     0  fmul.o(x$fpl$fmul)
+    _fmul                                    0x08016f21   Thumb Code   258  fmul.o(x$fpl$fmul)
+    __fpl_fnaninf                            0x08017023   Thumb Code   140  fnaninf.o(x$fpl$fnaninf)
+    __fpl_fretinf                            0x080170af   Thumb Code    10  fretinf.o(x$fpl$fretinf)
+    __aeabi_frsub                            0x080170b9   Thumb Code     0  faddsub_clz.o(x$fpl$frsb)
+    _frsb                                    0x080170b9   Thumb Code    20  faddsub_clz.o(x$fpl$frsb)
+    __aeabi_fsub                             0x080170cd   Thumb Code     0  faddsub_clz.o(x$fpl$fsub)
+    _fsub                                    0x080170cd   Thumb Code   234  faddsub_clz.o(x$fpl$fsub)
+    __I$use$fp                               0x080171b6   Number         0  usenofp.o(x$fpl$usenofp)
+    Leap_Month_Seconds                       0x080171b8   Data          52  rtc.o(.constdata)
+    Month_Seconds                            0x080171ec   Data          52  rtc.o(.constdata)
+    OSUnMapTbl                               0x08017220   Data         256  os_core.o(.constdata)
+    crc8table                                0x08017320   Data         256  os_wrap.o(.constdata)
+    Region$$Table$$Base                      0x080174a0   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x080174c0   Number         0  anon$$obj.o(Region$$Table)
     OSCtxSwCtr                               0x20001014   Data           4  os_core.o(.data)
     OSEventFreeList                          0x20001018   Data           4  os_core.o(.data)
     OSIntNesting                             0x2000101c   Data           1  os_core.o(.data)
@@ -2101,37 +2103,37 @@ Image Symbol Table
     gControlStopRe_Queue                     0x200010f0   Data           4  foodlinecontrol.o(.data)
     gControlSendSeq_Queue                    0x200010f4   Data           4  foodlinecontrol.o(.data)
     gControlSendNotify_Queue                 0x200010f8   Data           4  foodlinecontrol.o(.data)
-    timerCommunication                       0x2000110c   Data           4  foodlinecontrol.o(.data)
-    NormalStopFlag                           0x2000111c   Data           1  statemachine.o(.data)
-    foodDownPlaceArrivalFlag                 0x2000111d   Data           1  statemachine.o(.data)
-    AreaW1Num                                0x2000117c   Data           1  page14w1control.o(.data)
-    AreaC1Num                                0x2000117d   Data           1  page17c1control.o(.data)
-    AreaN1Num                                0x2000117e   Data           1  page19n1control.o(.data)
-    WirelessForceRsts                        0x20001180   Data           1  wirelesscomm.o(.data)
-    WirelessUartRsts                         0x20001181   Data           1  wirelesscomm.o(.data)
-    gWirelessSend_Queue                      0x20001188   Data           4  wirelesscomm.o(.data)
-    gWirelessMsg_Queue                       0x2000118c   Data           4  wirelesscomm.o(.data)
-    gWirelessNotify_Queue                    0x20001190   Data           4  wirelesscomm.o(.data)
-    gWirelessRetrans_Queue                   0x20001194   Data           4  wirelesscomm.o(.data)
-    Wlan4GForceRsts                          0x200011c8   Data           1  wlan4gcomm.o(.data)
-    Wlan4GUartRsts                           0x200011c9   Data           1  wlan4gcomm.o(.data)
-    SPI_InitStructure                        0x20001220   Data          18  spi.o(.bss)
-    OSEventTbl                               0x20001234   Data         800  os_core.o(.bss)
-    OSTaskIdleStk                            0x20001554   Data         512  os_core.o(.bss)
-    OSTCBPrioTbl                             0x20001754   Data         128  os_core.o(.bss)
-    OSTCBTbl                                 0x200017d4   Data        1624  os_core.o(.bss)
-    OSQTbl                                   0x20001e2c   Data         768  os_core.o(.bss)
-    HMem                                     0x2000212c   Data       24580  systeminit.o(.bss)
-    MZQsTaskRecord                           0x20008130   Data         320  systeminit.o(.bss)
-    Stm32DeviceID                            0x20008270   Data          12  systeminit.o(.bss)
-    gDisplayMsgBody                          0x200082b4   Data        2048  displayprotocol.o(.bss)
-    gDisplayMsgSend                          0x20008ab4   Data        2048  displayprotocol.o(.bss)
-    gDisplayMsgBodyLen                       0x200092b4   Data          16  displayprotocol.o(.bss)
-    gDisplayMsgSendLen                       0x200092c4   Data          16  displayprotocol.o(.bss)
-    gAllTheControlPara                       0x2000b7f0   Data        5600  parasettinglib.o(.bss)
-    USimICCID                                0x2000cffc   Data          24  wlan4gcomm.o(.bss)
-    __libspace_start                         0x2000d2c4   Data          96  libspace.o(.bss)
-    __temporary_stack_top$libspace           0x2000d324   Data           0  libspace.o(.bss)
+    timerCommunication                       0x20001114   Data           4  foodlinecontrol.o(.data)
+    NormalStopFlag                           0x20001124   Data           1  statemachine.o(.data)
+    foodDownPlaceArrivalFlag                 0x20001125   Data           1  statemachine.o(.data)
+    AreaW1Num                                0x20001184   Data           1  page14w1control.o(.data)
+    AreaC1Num                                0x20001185   Data           1  page17c1control.o(.data)
+    AreaN1Num                                0x20001186   Data           1  page19n1control.o(.data)
+    WirelessForceRsts                        0x20001188   Data           1  wirelesscomm.o(.data)
+    WirelessUartRsts                         0x20001189   Data           1  wirelesscomm.o(.data)
+    gWirelessSend_Queue                      0x20001190   Data           4  wirelesscomm.o(.data)
+    gWirelessMsg_Queue                       0x20001194   Data           4  wirelesscomm.o(.data)
+    gWirelessNotify_Queue                    0x20001198   Data           4  wirelesscomm.o(.data)
+    gWirelessRetrans_Queue                   0x2000119c   Data           4  wirelesscomm.o(.data)
+    Wlan4GForceRsts                          0x200011d0   Data           1  wlan4gcomm.o(.data)
+    Wlan4GUartRsts                           0x200011d1   Data           1  wlan4gcomm.o(.data)
+    SPI_InitStructure                        0x20001228   Data          18  spi.o(.bss)
+    OSEventTbl                               0x2000123c   Data         800  os_core.o(.bss)
+    OSTaskIdleStk                            0x2000155c   Data         512  os_core.o(.bss)
+    OSTCBPrioTbl                             0x2000175c   Data         128  os_core.o(.bss)
+    OSTCBTbl                                 0x200017dc   Data        1624  os_core.o(.bss)
+    OSQTbl                                   0x20001e34   Data         768  os_core.o(.bss)
+    HMem                                     0x20002134   Data       24580  systeminit.o(.bss)
+    MZQsTaskRecord                           0x20008138   Data         320  systeminit.o(.bss)
+    Stm32DeviceID                            0x20008278   Data          12  systeminit.o(.bss)
+    gDisplayMsgBody                          0x200082bc   Data        2048  displayprotocol.o(.bss)
+    gDisplayMsgSend                          0x20008abc   Data        2048  displayprotocol.o(.bss)
+    gDisplayMsgBodyLen                       0x200092bc   Data          16  displayprotocol.o(.bss)
+    gDisplayMsgSendLen                       0x200092cc   Data          16  displayprotocol.o(.bss)
+    gAllTheControlPara                       0x2000b7f8   Data        5600  parasettinglib.o(.bss)
+    USimICCID                                0x2000d010   Data          24  wlan4gcomm.o(.bss)
+    __libspace_start                         0x2000d2d8   Data          96  libspace.o(.bss)
+    __temporary_stack_top$libspace           0x2000d338   Data           0  libspace.o(.bss)
 
 
 
@@ -2141,62 +2143,62 @@ Memory Map of the image
 
   Image Entry point : 0x08002931
 
-  Load Region LR_IROM1 (Base: 0x08002800, Size: 0x00015c8c, Max: 0x0003c000, ABSOLUTE, COMPRESSED[0x00014ac8])
+  Load Region LR_IROM1 (Base: 0x08002800, Size: 0x00015f00, Max: 0x0003c000, ABSOLUTE, COMPRESSED[0x00014d34])
 
-    Execution Region ER_IROM1 (Base: 0x08002800, Size: 0x00014a6c, Max: 0x0003c000, ABSOLUTE)
+    Execution Region ER_IROM1 (Base: 0x08002800, Size: 0x00014cd8, Max: 0x0003c000, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x08002800   0x00000130   Data   RO            3    RESET               stm32f10x.o
-    0x08002930   0x00000008   Code   RO         1709  * !!!main             c_w.l(__main.o)
-    0x08002938   0x00000034   Code   RO         1911    !!!scatter          c_w.l(__scatter.o)
-    0x0800296c   0x0000005a   Code   RO         1909    !!dczerorl2         c_w.l(__dczerorl2.o)
+    0x08002930   0x00000008   Code   RO         1710  * !!!main             c_w.l(__main.o)
+    0x08002938   0x00000034   Code   RO         1912    !!!scatter          c_w.l(__scatter.o)
+    0x0800296c   0x0000005a   Code   RO         1910    !!dczerorl2         c_w.l(__dczerorl2.o)
     0x080029c6   0x00000002   PAD
-    0x080029c8   0x0000001c   Code   RO         1913    !!handler_zi        c_w.l(__scatter_zi.o)
-    0x080029e4   0x00000000   Code   RO         1700    .ARM.Collect$$_printf_percent$$00000000  c_w.l(_printf_percent.o)
-    0x080029e4   0x00000006   Code   RO         1699    .ARM.Collect$$_printf_percent$$00000009  c_w.l(_printf_d.o)
-    0x080029ea   0x00000006   Code   RO         1698    .ARM.Collect$$_printf_percent$$0000000C  c_w.l(_printf_x.o)
-    0x080029f0   0x00000004   Code   RO         1742    .ARM.Collect$$_printf_percent$$00000017  c_w.l(_printf_percent_end.o)
-    0x080029f4   0x00000002   Code   RO         1780    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
-    0x080029f6   0x00000000   Code   RO         1787    .ARM.Collect$$libinit$$00000002  c_w.l(libinit2.o)
-    0x080029f6   0x00000000   Code   RO         1789    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
-    0x080029f6   0x00000000   Code   RO         1792    .ARM.Collect$$libinit$$0000000A  c_w.l(libinit2.o)
-    0x080029f6   0x00000000   Code   RO         1794    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
-    0x080029f6   0x00000000   Code   RO         1796    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
-    0x080029f6   0x00000000   Code   RO         1799    .ARM.Collect$$libinit$$00000011  c_w.l(libinit2.o)
-    0x080029f6   0x00000000   Code   RO         1801    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
-    0x080029f6   0x00000000   Code   RO         1803    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
-    0x080029f6   0x00000000   Code   RO         1805    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
-    0x080029f6   0x00000000   Code   RO         1807    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
-    0x080029f6   0x00000000   Code   RO         1809    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
-    0x080029f6   0x00000000   Code   RO         1811    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
-    0x080029f6   0x00000000   Code   RO         1813    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
-    0x080029f6   0x00000000   Code   RO         1815    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
-    0x080029f6   0x00000000   Code   RO         1817    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
-    0x080029f6   0x00000000   Code   RO         1819    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
-    0x080029f6   0x00000000   Code   RO         1823    .ARM.Collect$$libinit$$0000002C  c_w.l(libinit2.o)
-    0x080029f6   0x00000000   Code   RO         1825    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
-    0x080029f6   0x00000000   Code   RO         1827    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
-    0x080029f6   0x00000000   Code   RO         1829    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
-    0x080029f6   0x00000002   Code   RO         1830    .ARM.Collect$$libinit$$00000033  c_w.l(libinit2.o)
-    0x080029f8   0x00000002   Code   RO         1850    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
-    0x080029fa   0x00000000   Code   RO         1864    .ARM.Collect$$libshutdown$$00000003  c_w.l(libshutdown2.o)
-    0x080029fa   0x00000000   Code   RO         1867    .ARM.Collect$$libshutdown$$00000006  c_w.l(libshutdown2.o)
-    0x080029fa   0x00000000   Code   RO         1870    .ARM.Collect$$libshutdown$$00000009  c_w.l(libshutdown2.o)
-    0x080029fa   0x00000000   Code   RO         1872    .ARM.Collect$$libshutdown$$0000000B  c_w.l(libshutdown2.o)
-    0x080029fa   0x00000000   Code   RO         1875    .ARM.Collect$$libshutdown$$0000000E  c_w.l(libshutdown2.o)
-    0x080029fa   0x00000002   Code   RO         1876    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
-    0x080029fc   0x00000000   Code   RO         1735    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
-    0x080029fc   0x00000000   Code   RO         1755    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
-    0x080029fc   0x00000006   Code   RO         1767    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
-    0x08002a02   0x00000000   Code   RO         1757    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
-    0x08002a02   0x00000004   Code   RO         1758    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
-    0x08002a06   0x00000000   Code   RO         1760    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
-    0x08002a06   0x00000008   Code   RO         1761    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
-    0x08002a0e   0x00000002   Code   RO         1784    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
-    0x08002a10   0x00000000   Code   RO         1832    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
-    0x08002a10   0x00000004   Code   RO         1833    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
-    0x08002a14   0x00000006   Code   RO         1834    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
+    0x080029c8   0x0000001c   Code   RO         1914    !!handler_zi        c_w.l(__scatter_zi.o)
+    0x080029e4   0x00000000   Code   RO         1701    .ARM.Collect$$_printf_percent$$00000000  c_w.l(_printf_percent.o)
+    0x080029e4   0x00000006   Code   RO         1700    .ARM.Collect$$_printf_percent$$00000009  c_w.l(_printf_d.o)
+    0x080029ea   0x00000006   Code   RO         1699    .ARM.Collect$$_printf_percent$$0000000C  c_w.l(_printf_x.o)
+    0x080029f0   0x00000004   Code   RO         1743    .ARM.Collect$$_printf_percent$$00000017  c_w.l(_printf_percent_end.o)
+    0x080029f4   0x00000002   Code   RO         1781    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
+    0x080029f6   0x00000000   Code   RO         1788    .ARM.Collect$$libinit$$00000002  c_w.l(libinit2.o)
+    0x080029f6   0x00000000   Code   RO         1790    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
+    0x080029f6   0x00000000   Code   RO         1793    .ARM.Collect$$libinit$$0000000A  c_w.l(libinit2.o)
+    0x080029f6   0x00000000   Code   RO         1795    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
+    0x080029f6   0x00000000   Code   RO         1797    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
+    0x080029f6   0x00000000   Code   RO         1800    .ARM.Collect$$libinit$$00000011  c_w.l(libinit2.o)
+    0x080029f6   0x00000000   Code   RO         1802    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
+    0x080029f6   0x00000000   Code   RO         1804    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
+    0x080029f6   0x00000000   Code   RO         1806    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
+    0x080029f6   0x00000000   Code   RO         1808    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
+    0x080029f6   0x00000000   Code   RO         1810    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
+    0x080029f6   0x00000000   Code   RO         1812    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
+    0x080029f6   0x00000000   Code   RO         1814    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
+    0x080029f6   0x00000000   Code   RO         1816    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
+    0x080029f6   0x00000000   Code   RO         1818    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
+    0x080029f6   0x00000000   Code   RO         1820    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
+    0x080029f6   0x00000000   Code   RO         1824    .ARM.Collect$$libinit$$0000002C  c_w.l(libinit2.o)
+    0x080029f6   0x00000000   Code   RO         1826    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
+    0x080029f6   0x00000000   Code   RO         1828    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
+    0x080029f6   0x00000000   Code   RO         1830    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
+    0x080029f6   0x00000002   Code   RO         1831    .ARM.Collect$$libinit$$00000033  c_w.l(libinit2.o)
+    0x080029f8   0x00000002   Code   RO         1851    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
+    0x080029fa   0x00000000   Code   RO         1865    .ARM.Collect$$libshutdown$$00000003  c_w.l(libshutdown2.o)
+    0x080029fa   0x00000000   Code   RO         1868    .ARM.Collect$$libshutdown$$00000006  c_w.l(libshutdown2.o)
+    0x080029fa   0x00000000   Code   RO         1871    .ARM.Collect$$libshutdown$$00000009  c_w.l(libshutdown2.o)
+    0x080029fa   0x00000000   Code   RO         1873    .ARM.Collect$$libshutdown$$0000000B  c_w.l(libshutdown2.o)
+    0x080029fa   0x00000000   Code   RO         1876    .ARM.Collect$$libshutdown$$0000000E  c_w.l(libshutdown2.o)
+    0x080029fa   0x00000002   Code   RO         1877    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
+    0x080029fc   0x00000000   Code   RO         1736    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
+    0x080029fc   0x00000000   Code   RO         1756    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
+    0x080029fc   0x00000006   Code   RO         1768    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
+    0x08002a02   0x00000000   Code   RO         1758    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
+    0x08002a02   0x00000004   Code   RO         1759    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
+    0x08002a06   0x00000000   Code   RO         1761    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
+    0x08002a06   0x00000008   Code   RO         1762    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
+    0x08002a0e   0x00000002   Code   RO         1785    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
+    0x08002a10   0x00000000   Code   RO         1833    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
+    0x08002a10   0x00000004   Code   RO         1834    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
+    0x08002a14   0x00000006   Code   RO         1835    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
     0x08002a1a   0x00000002   PAD
     0x08002a1c   0x00000020   Code   RO          826    .emb_text           core_cm3.o
     0x08002a3c   0x000000a4   Code   RO            5    .text               stm32f10x.o
@@ -2240,81 +2242,81 @@ Memory Map of the image
     0x08009710   0x00000ce4   Code   RO         1066    .text               os_wrap.o
     0x0800a3f4   0x000002f0   Code   RO         1084    .text               displaypara.o
     0x0800a6e4   0x00000954   Code   RO         1103    .text               parasettinglib.o
-    0x0800b038   0x000017b0   Code   RO         1122    .text               foodlinecontrol.o
-    0x0800c7e8   0x0000088c   Code   RO         1145    .text               statemachine.o
-    0x0800d074   0x00000834   Code   RO         1162    .text               page2pathconfig.o
-    0x0800d8a8   0x0000021c   Code   RO         1179    .text               page1flinepathconfig.o
-    0x0800dac4   0x00000758   Code   RO         1197    .text               page3flinedevice.o
-    0x0800e21c   0x00000368   Code   RO         1214    .text               page5revise.o
-    0x0800e584   0x0000045c   Code   RO         1231    .text               page6readpathconfig.o
-    0x0800e9e0   0x000004e8   Code   RO         1248    .text               page7controlfline.o
-    0x0800eec8   0x00000430   Code   RO         1265    .text               page8switchvalve.o
-    0x0800f2f8   0x00000450   Code   RO         1282    .text               page9switchvalveconfig.o
-    0x0800f748   0x00000478   Code   RO         1299    .text               page10towersout.o
-    0x0800fbc0   0x000006ec   Code   RO         1316    .text               page11towersoutconfig.o
-    0x080102ac   0x000002ec   Code   RO         1333    .text               page12s1s2control.o
-    0x08010598   0x000008b8   Code   RO         1349    .text               page13linkconfig .o
-    0x08010e50   0x000002bc   Code   RO         1367    .text               page14w1control.o
-    0x0801110c   0x0000071c   Code   RO         1385    .text               page15w2control.o
-    0x08011828   0x00000268   Code   RO         1401    .text               page16e1e2control.o
-    0x08011a90   0x000008e4   Code   RO         1417    .text               page17c1control.o
-    0x08012374   0x00000750   Code   RO         1435    .text               page18c2control.o
-    0x08012ac4   0x0000026c   Code   RO         1451    .text               page19n1control.o
-    0x08012d30   0x00000264   Code   RO         1469    .text               page20n2control.o
-    0x08012f94   0x00001014   Code   RO         1485    .text               MZWireless_131.lib(wirelesscomm.o)
-    0x08013fa8   0x00001424   Code   RO         1585    .text               MZWlan4G_131.lib(wlan4gcomm.o)
-    0x080153cc   0x000010dc   Code   RO         1611    .text               MZAirIap_132_240K.lib(airiap.o)
-    0x080164a8   0x00000028   Code   RO         1649    .text               c_w.l(noretval__2sprintf.o)
-    0x080164d0   0x0000004e   Code   RO         1653    .text               c_w.l(_printf_pad.o)
-    0x0801651e   0x00000002   PAD
-    0x08016520   0x00000078   Code   RO         1655    .text               c_w.l(_printf_dec.o)
-    0x08016598   0x00000058   Code   RO         1660    .text               c_w.l(_printf_hex_int.o)
-    0x080165f0   0x00000138   Code   RO         1690    .text               c_w.l(__printf_flags_wp.o)
-    0x08016728   0x00000064   Code   RO         1701    .text               c_w.l(rt_memcpy_w.o)
-    0x0801678c   0x00000044   Code   RO         1703    .text               c_w.l(rt_memclr.o)
-    0x080167d0   0x0000004e   Code   RO         1705    .text               c_w.l(rt_memclr_w.o)
-    0x0801681e   0x00000006   Code   RO         1707    .text               c_w.l(heapauxi.o)
-    0x08016824   0x000000b2   Code   RO         1736    .text               c_w.l(_printf_intcommon.o)
-    0x080168d6   0x00000002   PAD
-    0x080168d8   0x00000030   Code   RO         1738    .text               c_w.l(_printf_char_common.o)
-    0x08016908   0x0000000a   Code   RO         1740    .text               c_w.l(_sputc.o)
-    0x08016912   0x0000004a   Code   RO         1771    .text               c_w.l(sys_stackheap_outer.o)
-    0x0801695c   0x0000000c   Code   RO         1773    .text               c_w.l(exit.o)
-    0x08016968   0x00000008   Code   RO         1781    .text               c_w.l(libspace.o)
-    0x08016970   0x0000000c   Code   RO         1842    .text               c_w.l(sys_exit.o)
-    0x0801697c   0x00000002   Code   RO         1853    .text               c_w.l(use_no_semi.o)
-    0x0801697e   0x00000000   Code   RO         1855    .text               c_w.l(indicate_semi.o)
-    0x0801697e   0x0000000e   Code   RO         1688    i._is_digit         c_w.l(__printf_wp.o)
-    0x0801698c   0x00000018   Code   RO         1743    x$fpl$dcmpinf       fz_ws.l(dcmpi.o)
-    0x080169a4   0x00000078   Code   RO         1711    x$fpl$dleqf         fz_ws.l(dleqf.o)
-    0x08016a1c   0x0000009c   Code   RO         1745    x$fpl$dnaninf       fz_ws.l(dnaninf.o)
-    0x08016ab8   0x0000000c   Code   RO         1747    x$fpl$dretinf       fz_ws.l(dretinf.o)
-    0x08016ac4   0x0000006c   Code   RO         1713    x$fpl$drleqf        fz_ws.l(drleqf.o)
-    0x08016b30   0x00000056   Code   RO         1715    x$fpl$f2d           fz_ws.l(f2d.o)
-    0x08016b86   0x00000002   PAD
-    0x08016b88   0x000000c4   Code   RO         1717    x$fpl$fadd          fz_ws.l(faddsub_clz.o)
-    0x08016c4c   0x00000036   Code   RO         1723    x$fpl$ffix          fz_ws.l(ffix.o)
-    0x08016c82   0x00000002   PAD
-    0x08016c84   0x00000030   Code   RO         1728    x$fpl$fflt          fz_ws.l(fflt_clz.o)
-    0x08016cb4   0x00000102   Code   RO         1733    x$fpl$fmul          fz_ws.l(fmul.o)
-    0x08016db6   0x0000008c   Code   RO         1749    x$fpl$fnaninf       fz_ws.l(fnaninf.o)
-    0x08016e42   0x0000000a   Code   RO         1751    x$fpl$fretinf       fz_ws.l(fretinf.o)
-    0x08016e4c   0x00000014   Code   RO         1718    x$fpl$frsb          fz_ws.l(faddsub_clz.o)
-    0x08016e60   0x000000ea   Code   RO         1719    x$fpl$fsub          fz_ws.l(faddsub_clz.o)
-    0x08016f4a   0x00000000   Code   RO         1753    x$fpl$usenofp       fz_ws.l(usenofp.o)
-    0x08016f4a   0x00000002   PAD
-    0x08016f4c   0x00000068   Data   RO           12    .constdata          rtc.o
-    0x08016fb4   0x00000100   Data   RO          417    .constdata          os_core.o
-    0x080170b4   0x00000100   Data   RO         1068    .constdata          os_wrap.o
-    0x080171b4   0x00000044   Data   RO         1587    .constdata          MZWlan4G_131.lib(wlan4gcomm.o)
-    0x080171f8   0x00000028   Data   RO         1661    .constdata          c_w.l(_printf_hex_int.o)
-    0x08017220   0x00000011   Data   RO         1691    .constdata          c_w.l(__printf_flags_wp.o)
-    0x08017231   0x00000003   PAD
-    0x08017234   0x00000020   Data   RO         1907    Region$$Table       anon$$obj.o
-    0x08017254   0x00000017   Data   RO            4    STKV                stm32f10x.o
+    0x0800b038   0x00001a28   Code   RO         1122    .text               foodlinecontrol.o
+    0x0800ca60   0x00000848   Code   RO         1145    .text               statemachine.o
+    0x0800d2a8   0x00000834   Code   RO         1162    .text               page2pathconfig.o
+    0x0800dadc   0x0000021c   Code   RO         1179    .text               page1flinepathconfig.o
+    0x0800dcf8   0x00000758   Code   RO         1197    .text               page3flinedevice.o
+    0x0800e450   0x00000368   Code   RO         1214    .text               page5revise.o
+    0x0800e7b8   0x0000045c   Code   RO         1231    .text               page6readpathconfig.o
+    0x0800ec14   0x000004e8   Code   RO         1248    .text               page7controlfline.o
+    0x0800f0fc   0x00000430   Code   RO         1265    .text               page8switchvalve.o
+    0x0800f52c   0x00000450   Code   RO         1282    .text               page9switchvalveconfig.o
+    0x0800f97c   0x00000478   Code   RO         1299    .text               page10towersout.o
+    0x0800fdf4   0x000006ec   Code   RO         1316    .text               page11towersoutconfig.o
+    0x080104e0   0x000002d4   Code   RO         1333    .text               page12s1s2control.o
+    0x080107b4   0x000008b8   Code   RO         1349    .text               page13linkconfig .o
+    0x0801106c   0x000002bc   Code   RO         1367    .text               page14w1control.o
+    0x08011328   0x0000071c   Code   RO         1385    .text               page15w2control.o
+    0x08011a44   0x00000268   Code   RO         1401    .text               page16e1e2control.o
+    0x08011cac   0x00000934   Code   RO         1417    .text               page17c1control.o
+    0x080125e0   0x00000750   Code   RO         1436    .text               page18c2control.o
+    0x08012d30   0x0000026c   Code   RO         1452    .text               page19n1control.o
+    0x08012f9c   0x00000264   Code   RO         1470    .text               page20n2control.o
+    0x08013200   0x00001014   Code   RO         1486    .text               MZWireless_131.lib(wirelesscomm.o)
+    0x08014214   0x00001424   Code   RO         1586    .text               MZWlan4G_131.lib(wlan4gcomm.o)
+    0x08015638   0x000010dc   Code   RO         1612    .text               MZAirIap_132_240K.lib(airiap.o)
+    0x08016714   0x00000028   Code   RO         1650    .text               c_w.l(noretval__2sprintf.o)
+    0x0801673c   0x0000004e   Code   RO         1654    .text               c_w.l(_printf_pad.o)
+    0x0801678a   0x00000002   PAD
+    0x0801678c   0x00000078   Code   RO         1656    .text               c_w.l(_printf_dec.o)
+    0x08016804   0x00000058   Code   RO         1661    .text               c_w.l(_printf_hex_int.o)
+    0x0801685c   0x00000138   Code   RO         1691    .text               c_w.l(__printf_flags_wp.o)
+    0x08016994   0x00000064   Code   RO         1702    .text               c_w.l(rt_memcpy_w.o)
+    0x080169f8   0x00000044   Code   RO         1704    .text               c_w.l(rt_memclr.o)
+    0x08016a3c   0x0000004e   Code   RO         1706    .text               c_w.l(rt_memclr_w.o)
+    0x08016a8a   0x00000006   Code   RO         1708    .text               c_w.l(heapauxi.o)
+    0x08016a90   0x000000b2   Code   RO         1737    .text               c_w.l(_printf_intcommon.o)
+    0x08016b42   0x00000002   PAD
+    0x08016b44   0x00000030   Code   RO         1739    .text               c_w.l(_printf_char_common.o)
+    0x08016b74   0x0000000a   Code   RO         1741    .text               c_w.l(_sputc.o)
+    0x08016b7e   0x0000004a   Code   RO         1772    .text               c_w.l(sys_stackheap_outer.o)
+    0x08016bc8   0x0000000c   Code   RO         1774    .text               c_w.l(exit.o)
+    0x08016bd4   0x00000008   Code   RO         1782    .text               c_w.l(libspace.o)
+    0x08016bdc   0x0000000c   Code   RO         1843    .text               c_w.l(sys_exit.o)
+    0x08016be8   0x00000002   Code   RO         1854    .text               c_w.l(use_no_semi.o)
+    0x08016bea   0x00000000   Code   RO         1856    .text               c_w.l(indicate_semi.o)
+    0x08016bea   0x0000000e   Code   RO         1689    i._is_digit         c_w.l(__printf_wp.o)
+    0x08016bf8   0x00000018   Code   RO         1744    x$fpl$dcmpinf       fz_ws.l(dcmpi.o)
+    0x08016c10   0x00000078   Code   RO         1712    x$fpl$dleqf         fz_ws.l(dleqf.o)
+    0x08016c88   0x0000009c   Code   RO         1746    x$fpl$dnaninf       fz_ws.l(dnaninf.o)
+    0x08016d24   0x0000000c   Code   RO         1748    x$fpl$dretinf       fz_ws.l(dretinf.o)
+    0x08016d30   0x0000006c   Code   RO         1714    x$fpl$drleqf        fz_ws.l(drleqf.o)
+    0x08016d9c   0x00000056   Code   RO         1716    x$fpl$f2d           fz_ws.l(f2d.o)
+    0x08016df2   0x00000002   PAD
+    0x08016df4   0x000000c4   Code   RO         1718    x$fpl$fadd          fz_ws.l(faddsub_clz.o)
+    0x08016eb8   0x00000036   Code   RO         1724    x$fpl$ffix          fz_ws.l(ffix.o)
+    0x08016eee   0x00000002   PAD
+    0x08016ef0   0x00000030   Code   RO         1729    x$fpl$fflt          fz_ws.l(fflt_clz.o)
+    0x08016f20   0x00000102   Code   RO         1734    x$fpl$fmul          fz_ws.l(fmul.o)
+    0x08017022   0x0000008c   Code   RO         1750    x$fpl$fnaninf       fz_ws.l(fnaninf.o)
+    0x080170ae   0x0000000a   Code   RO         1752    x$fpl$fretinf       fz_ws.l(fretinf.o)
+    0x080170b8   0x00000014   Code   RO         1719    x$fpl$frsb          fz_ws.l(faddsub_clz.o)
+    0x080170cc   0x000000ea   Code   RO         1720    x$fpl$fsub          fz_ws.l(faddsub_clz.o)
+    0x080171b6   0x00000000   Code   RO         1754    x$fpl$usenofp       fz_ws.l(usenofp.o)
+    0x080171b6   0x00000002   PAD
+    0x080171b8   0x00000068   Data   RO           12    .constdata          rtc.o
+    0x08017220   0x00000100   Data   RO          417    .constdata          os_core.o
+    0x08017320   0x00000100   Data   RO         1068    .constdata          os_wrap.o
+    0x08017420   0x00000044   Data   RO         1588    .constdata          MZWlan4G_131.lib(wlan4gcomm.o)
+    0x08017464   0x00000028   Data   RO         1662    .constdata          c_w.l(_printf_hex_int.o)
+    0x0801748c   0x00000011   Data   RO         1692    .constdata          c_w.l(__printf_flags_wp.o)
+    0x0801749d   0x00000003   PAD
+    0x080174a0   0x00000020   Data   RO         1908    Region$$Table       anon$$obj.o
+    0x080174c0   0x00000017   Data   RO            4    STKV                stm32f10x.o
 
 
-    Execution Region RW_IRAM1 (Base: 0x20000000, Size: 0x0000d328, Max: 0x00010000, ABSOLUTE, COMPRESSED[0x0000005c])
+    Execution Region RW_IRAM1 (Base: 0x20000000, Size: 0x0000d338, Max: 0x00010000, ABSOLUTE, COMPRESSED[0x0000005c])
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -2336,54 +2338,53 @@ Memory Map of the image
     0x200010c6   0x00000002   PAD
     0x200010c8   0x0000001d   Data   RW         1105    .data               parasettinglib.o
     0x200010e5   0x00000003   PAD
-    0x200010e8   0x00000032   Data   RW         1124    .data               foodlinecontrol.o
-    0x2000111a   0x00000002   PAD
-    0x2000111c   0x0000000c   Data   RW         1147    .data               statemachine.o
-    0x20001128   0x00000003   Data   RW         1163    .data               page2pathconfig.o
-    0x2000112b   0x00000002   Data   RW         1181    .data               page1flinepathconfig.o
-    0x2000112d   0x00000003   PAD
-    0x20001130   0x00000009   Data   RW         1198    .data               page3flinedevice.o
-    0x20001139   0x00000003   PAD
-    0x2000113c   0x0000000c   Data   RW         1215    .data               page5revise.o
-    0x20001148   0x00000002   Data   RW         1232    .data               page6readpathconfig.o
-    0x2000114a   0x00000002   PAD
-    0x2000114c   0x00000006   Data   RW         1249    .data               page7controlfline.o
+    0x200010e8   0x0000003b   Data   RW         1124    .data               foodlinecontrol.o
+    0x20001123   0x00000001   PAD
+    0x20001124   0x0000000c   Data   RW         1147    .data               statemachine.o
+    0x20001130   0x00000003   Data   RW         1163    .data               page2pathconfig.o
+    0x20001133   0x00000002   Data   RW         1181    .data               page1flinepathconfig.o
+    0x20001135   0x00000003   PAD
+    0x20001138   0x00000009   Data   RW         1198    .data               page3flinedevice.o
+    0x20001141   0x00000003   PAD
+    0x20001144   0x0000000c   Data   RW         1215    .data               page5revise.o
+    0x20001150   0x00000002   Data   RW         1232    .data               page6readpathconfig.o
     0x20001152   0x00000002   PAD
-    0x20001154   0x00000006   Data   RW         1266    .data               page8switchvalve.o
+    0x20001154   0x00000006   Data   RW         1249    .data               page7controlfline.o
     0x2000115a   0x00000002   PAD
-    0x2000115c   0x00000009   Data   RW         1283    .data               page9switchvalveconfig.o
-    0x20001165   0x00000003   PAD
-    0x20001168   0x00000006   Data   RW         1300    .data               page10towersout.o
-    0x2000116e   0x00000002   PAD
-    0x20001170   0x00000009   Data   RW         1317    .data               page11towersoutconfig.o
-    0x20001179   0x00000003   Data   RW         1350    .data               page13linkconfig .o
-    0x2000117c   0x00000001   Data   RW         1368    .data               page14w1control.o
-    0x2000117d   0x00000001   Data   RW         1418    .data               page17c1control.o
-    0x2000117e   0x00000001   Data   RW         1452    .data               page19n1control.o
-    0x2000117f   0x00000001   PAD
-    0x20001180   0x00000034   Data   RW         1487    .data               MZWireless_131.lib(wirelesscomm.o)
-    0x200011b4   0x00000038   Data   RW         1588    .data               MZWlan4G_131.lib(wlan4gcomm.o)
-    0x200011ec   0x00000034   Data   RW         1613    .data               MZAirIap_132_240K.lib(airiap.o)
-    0x20001220   0x00000012   Zero   RW          250    .bss                spi.o
-    0x20001232   0x00000002   PAD
-    0x20001234   0x00000ef8   Zero   RW          416    .bss                os_core.o
-    0x2000212c   0x00006162   Zero   RW          610    .bss                systeminit.o
-    0x2000828e   0x00000002   PAD
-    0x20008290   0x00000024   Zero   RW          688    .bss                wirelessapp.o
-    0x200082b4   0x00001020   Zero   RW          735    .bss                displayprotocol.o
-    0x200092d4   0x00000080   Zero   RW          811    .bss                stm32f10x_it.o
-    0x20009354   0x00000400   Zero   RW         1067    .bss                os_wrap.o
-    0x20009754   0x000036be   Zero   RW         1104    .bss                parasettinglib.o
-    0x2000ce12   0x00000002   PAD
-    0x2000ce14   0x00000050   Zero   RW         1123    .bss                foodlinecontrol.o
-    0x2000ce64   0x00000040   Zero   RW         1146    .bss                statemachine.o
-    0x2000cea4   0x00000050   Zero   RW         1180    .bss                page1flinepathconfig.o
-    0x2000cef4   0x00000108   Zero   RW         1486    .bss                MZWireless_131.lib(wirelesscomm.o)
-    0x2000cffc   0x00000234   Zero   RW         1586    .bss                MZWlan4G_131.lib(wlan4gcomm.o)
-    0x2000d230   0x00000094   Zero   RW         1612    .bss                MZAirIap_132_240K.lib(airiap.o)
-    0x2000d2c4   0x00000060   Zero   RW         1782    .bss                c_w.l(libspace.o)
-    0x2000d324   0x00000004   PAD
-    0x2000d328   0x00000000   Zero   RW            2    HEAP                stm32f10x.o
+    0x2000115c   0x00000006   Data   RW         1266    .data               page8switchvalve.o
+    0x20001162   0x00000002   PAD
+    0x20001164   0x00000009   Data   RW         1283    .data               page9switchvalveconfig.o
+    0x2000116d   0x00000003   PAD
+    0x20001170   0x00000006   Data   RW         1300    .data               page10towersout.o
+    0x20001176   0x00000002   PAD
+    0x20001178   0x00000009   Data   RW         1317    .data               page11towersoutconfig.o
+    0x20001181   0x00000003   Data   RW         1350    .data               page13linkconfig .o
+    0x20001184   0x00000001   Data   RW         1368    .data               page14w1control.o
+    0x20001185   0x00000001   Data   RW         1418    .data               page17c1control.o
+    0x20001186   0x00000001   Data   RW         1453    .data               page19n1control.o
+    0x20001187   0x00000001   PAD
+    0x20001188   0x00000034   Data   RW         1488    .data               MZWireless_131.lib(wirelesscomm.o)
+    0x200011bc   0x00000038   Data   RW         1589    .data               MZWlan4G_131.lib(wlan4gcomm.o)
+    0x200011f4   0x00000034   Data   RW         1614    .data               MZAirIap_132_240K.lib(airiap.o)
+    0x20001228   0x00000012   Zero   RW          250    .bss                spi.o
+    0x2000123a   0x00000002   PAD
+    0x2000123c   0x00000ef8   Zero   RW          416    .bss                os_core.o
+    0x20002134   0x00006162   Zero   RW          610    .bss                systeminit.o
+    0x20008296   0x00000002   PAD
+    0x20008298   0x00000024   Zero   RW          688    .bss                wirelessapp.o
+    0x200082bc   0x00001020   Zero   RW          735    .bss                displayprotocol.o
+    0x200092dc   0x00000080   Zero   RW          811    .bss                stm32f10x_it.o
+    0x2000935c   0x00000400   Zero   RW         1067    .bss                os_wrap.o
+    0x2000975c   0x000036be   Zero   RW         1104    .bss                parasettinglib.o
+    0x2000ce1a   0x00000002   PAD
+    0x2000ce1c   0x0000005c   Zero   RW         1123    .bss                foodlinecontrol.o
+    0x2000ce78   0x00000040   Zero   RW         1146    .bss                statemachine.o
+    0x2000ceb8   0x00000050   Zero   RW         1180    .bss                page1flinepathconfig.o
+    0x2000cf08   0x00000108   Zero   RW         1487    .bss                MZWireless_131.lib(wirelesscomm.o)
+    0x2000d010   0x00000234   Zero   RW         1587    .bss                MZWlan4G_131.lib(wlan4gcomm.o)
+    0x2000d244   0x00000094   Zero   RW         1613    .bss                MZAirIap_132_240K.lib(airiap.o)
+    0x2000d2d8   0x00000060   Zero   RW         1783    .bss                c_w.l(libspace.o)
+    0x2000d338   0x00000000   Zero   RW            2    HEAP                stm32f10x.o
 
 
 ==============================================================================
@@ -2401,7 +2402,7 @@ Image component sizes
        752         54          0          2          0       2866   displaypara.o
       1932         68          0         13       4128      10940   displayprotocol.o
        414          0          0          0          0       5566   flash.o
-      6064        166          0         50         80      12334   foodlinecontrol.o
+      6696        170          0         59         92      13538   foodlinecontrol.o
        192         20          0          4          0        923   main.o
        220         22          0          0          0       3485   misc.o
       1600        120        256         52       3832      14635   os_core.o
@@ -2416,12 +2417,12 @@ Image component sizes
       3300         68        256          8       1024      15719   os_wrap.o
       1144         24          0          6          0       2483   page10towersout.o
       1772         30          0          9          0       2857   page11towersoutconfig.o
-       748          4          0          0          0       1961   page12s1s2control.o
+       724          0          0          0          0       1944   page12s1s2control.o
       2232         28          0          3          0       3091   page13linkconfig .o
        700          6          0          1          0       2000   page14w1control.o
       1820         12          0          0          0       2252   page15w2control.o
        616          0          0          0          0       1815   page16e1e2control.o
-      2276          6          0          1          0       2632   page17c1control.o
+      2356          4          0          1          0       2751   page17c1control.o
       1872         10          0          0          0       2260   page18c2control.o
        620          6          0          1          0       1960   page19n1control.o
        540         22          0          2         80       2823   page1flinepathconfig.o
@@ -2437,7 +2438,7 @@ Image component sizes
       2136         86        104         20          0     239664   rtc.o
        224         12          0          0         18     228733   spi.o
        672         12          0          0          0       3769   spiflash.o
-      2188         96          0         12         64       6174   statemachine.o
+      2120         92          0         12         64       6114   statemachine.o
        164         50        327       4096          0        512   stm32f10x.o
        196          8          0          0          0       3444   stm32f10x_bkp.o
       1468         34          0          0          0      14390   stm32f10x_flash.o
@@ -2457,9 +2458,9 @@ Image component sizes
        672         24          0          0          0       2426   wlan4gapp.o
 
     ----------------------------------------------------------------------
-     66936       2034        976       4480      48340     787124   Object Totals
+     67556       2028        976       4488      48352     788370   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-         4          0          1         29          6          0   (incl. Padding)
+         4          0          1         28          6          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -2519,8 +2520,8 @@ Image component sizes
          0          0          0          0          0          0   usenofp.o
 
     ----------------------------------------------------------------------
-     16548       1102        128        160       1076     260873   Library Totals
-        14          0          3          0          4          0   (incl. Padding)
+     16548       1102        128        160       1072     260873   Library Totals
+        14          0          3          0          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -2533,7 +2534,7 @@ Image component sizes
       1466         32          0          0          0       1108   fz_ws.l
 
     ----------------------------------------------------------------------
-     16548       1102        128        160       1076     260873   Library Totals
+     16548       1102        128        160       1072     260873   Library Totals
 
     ----------------------------------------------------------------------
 
@@ -2542,15 +2543,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     83484       3136       1104       4640      49416    1041285   Grand Totals
-     83484       3136       1104         92      49416    1041285   ELF Image Totals (compressed)
-     83484       3136       1104         92          0          0   ROM Totals
+     84104       3130       1104       4648      49424    1042531   Grand Totals
+     84104       3130       1104         92      49424    1042531   ELF Image Totals (compressed)
+     84104       3130       1104         92          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                84588 (  82.61kB)
-    Total RW  Size (RW Data + ZI Data)             54056 (  52.79kB)
-    Total ROM Size (Code + RO Data + RW Data)      84680 (  82.70kB)
+    Total RO  Size (Code + RO Data)                85208 (  83.21kB)
+    Total RW  Size (RW Data + ZI Data)             54072 (  52.80kB)
+    Total ROM Size (Code + RO Data + RW Data)      85300 (  83.30kB)
 
 ==============================================================================
 

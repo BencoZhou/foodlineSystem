@@ -54,6 +54,9 @@ typedef struct
 	bool   controlStopArea[AREA_DEVICE_TOTAL_NUMBER];	//控制设备停止区域 
 	bool   controlShutdownArea[AREA_DEVICE_TOTAL_NUMBER];	//控制设备停止区域 
 	bool   controlStopDelayFlag[AREA_DEVICE_TOTAL_NUMBER];	//控制设备停止区域 
+	bool   controlRestartStopFlag[AREA_DEVICE_TOTAL_NUMBER];	//重新启动停止标志位 
+	bool   controlRestartFlag[AREA_DEVICE_TOTAL_NUMBER];	//重新启动标志位 
+	u8     controlIndexMemory[AREA_DEVICE_TOTAL_NUMBER];
 }DeviceControlPara;
 
 void ControlMsgBoxInit(void);

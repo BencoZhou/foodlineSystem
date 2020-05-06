@@ -30,6 +30,8 @@ typedef struct
 static State gStateIdle, gStateReady, gStateRunning, gStateSuspend;
 static State *gState = NULL;
 
+static void StateShow(void);
+
 static void StateChange(State *state)
 {
 	if(state == NULL)
@@ -125,12 +127,16 @@ static void DeviceExistCalReady(void)
 		{
 			for(i = 0; i < SING_LINK_DEVICE_TOTAL_NUMBER; i++)
 			{
-			   
-				if(AllTheControlParaGet(j,i)->isSelect == TRUE)
+				if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID != 0)
 				{
-					DeviceControlParaGet()->isHaveDevice = TRUE;
-					break;
+					if(AllTheControlParaGet(j,i)->isSelect == TRUE)
+					{
+						DeviceControlParaGet()->isHaveDevice = TRUE;
+						break;
+					}
 				}
+				else
+					break;
 			}
 		}
 	}
@@ -272,9 +278,11 @@ static void IdleStateProcess(void)
 {
 	u8 stopAreaNum = 0, delayAreaNum = 0, starAreaNum = 0;
 	u8 i;
-	DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S - 1] = STATE_CHANGE_IDLE;
+	StateShow();
     DeviceExistCal();
- 	if(DeviceControlParaGet()->isHaveDevice)
+ 	//if(DeviceControlParaGet()->isHaveDevice)
+		
+	if(DeviceControlParaGet()->isClickStop == TRUE)
  		StateChange(&gStateReady); 
 	for(i = 0; i < AREA_DEVICE_TOTAL_NUMBER; i++)   // 检查个区域的开关延时状态
 	{
@@ -336,7 +344,7 @@ static void IdleStateInit(void)
 static void ReadyStateEntry(void)
 {
     INPUT_EVENT evt;
-    OS_MsgBoxSend(gControlStartRe_Queue, &evt, OS_NO_DELAY, FALSE);
+//    OS_MsgBoxSend(gControlStartRe_Queue, &evt, OS_NO_DELAY, FALSE);
     OS_MsgBoxSend(gControlStopRe_Queue, &evt, OS_NO_DELAY, FALSE);
 }
 
@@ -344,43 +352,68 @@ static void ReadyStateExit(void)
 {
 
 }
-
-static void ReadyStateProcess(void)
+static void StateShow(void)
 {
-    u8 i,j,deviceCloseNum = 0;
-    DeviceStopAndInquire();
-    DeviceExistCalReady();
-    DeviceAlarmCal();
-    DeviceTriggerStartCondition();
-
+	u8 i,j,deviceCloseNum = 0,deviceNum = 0,deviceStartNum = 0,selectNum = 0;
 	for(j = 0; j < AREA_DEVICE_TOTAL_NUMBER; j++)    //  判断状态是否需要显示为准备提示
 	{
 		if(AllTheControlParaGet(j,0)->cDevice.placeNew.useID != 0 )
 		{
+			deviceNum = 0;
+			deviceCloseNum = 0;
+			deviceStartNum = 0;
+			selectNum = 0;
 			for(i = 0 ;i <SING_LINK_DEVICE_TOTAL_NUMBER; i++)
 			{
-				if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID != 0 )
+				if(AllTheControlParaGet(j,i)->cDevice.place.type != DEVICE_NAME_CONTROL)  //非主机设备才进行判断
 				{
-					if(AllTheControlParaGet(j,i)->isSelect == FALSE
+					if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID != 0 
 						&& AllTheControlParaGet(j,i)->cDevice.place.type != 0)
 					{
-						if(AllTheControlParaGet(j,i)->cState == DEVICE_STATE_CLOSE)
+						
+						if(AllTheControlParaGet(j,i)->isSelect == TRUE)					
+							selectNum++;
+						
+						if(AllTheControlParaGet(j,i)->cState == DEVICE_STATE_OPEN)													
+							deviceStartNum++;
+						else if(AllTheControlParaGet(j,i)->cState == DEVICE_STATE_CLOSE)
 							deviceCloseNum++;
+							
+						deviceNum++;
 					}
-				}
-				else 
-				{
-					i = (i > 0)?(i-1):0;
-					if(deviceCloseNum == i)
+					else 
 					{
-						DeviceControlParaGet()->stateMachineState[j] = STATE_CHANGE_READY;
-					}					
-					break;
+						if(selectNum == 0)
+						{
+							DeviceControlParaGet()->stateMachineState[j] = STATE_CHANGE_IDLE;      // 没有选择设备，则为待机状态																							
+						}			
+						else if(selectNum != 0 &&  (deviceCloseNum == deviceNum)) //有选择但都是关闭状态则是准备状态
+						{
+							DeviceControlParaGet()->stateMachineState[j] = STATE_CHANGE_READY;
+						}					
+						else if((selectNum != 0 && deviceStartNum != 0) || (DeviceControlParaGet()->controlArea[i] == TRUE))//有选择但有开启的状态则是运行状态
+						{
+//							if(DeviceControlParaGet()->controlArea[i] == TRUE)
+								DeviceControlParaGet()->stateMachineState[j] = STATE_CHANGE_RUNNING;
+//							else
+//								DeviceControlParaGet()->stateMachineState[j] = STATE_CHANGE_READY;
+						}
+						break;
+					}
 				}
 			}
 
 		}
-	}
+	}	
+}
+static void ReadyStateProcess(void)
+{
+    DeviceStopAndInquire();
+    DeviceExistCalReady();
+    DeviceAlarmCal();
+    DeviceTriggerStartCondition();
+	StateShow();
+	
  	if(DeviceControlParaGet()->isHaveDevice == FALSE)
  		StateChange(&gStateIdle);
     else if(DeviceControlParaGet()->isHaveAlarm == TRUE)
@@ -404,7 +437,7 @@ static void RunningStateEntry(void)
 {
     INPUT_EVENT evt;
     OS_MsgBoxSend(gControlStartRe_Queue, &evt, OS_NO_DELAY, FALSE);
-    OS_MsgBoxSend(gControlStopRe_Queue, &evt, OS_NO_DELAY, FALSE);
+//    OS_MsgBoxSend(gControlStopRe_Queue, &evt, OS_NO_DELAY, FALSE);
     if(AllTheControlParaGet(DEVICE_AREA_S-1,0x03)->time == 0)
     {
         AllTheControlParaGet(DEVICE_AREA_S-1,0x03)->time = *FoodLineTimeGet(S1_FOOD_LINE_TIME);
@@ -423,36 +456,7 @@ static void RunningStateExit(void)
 
 static void RunningStateProcess(void)
 {
-	u8 i,j,deviceStartNum = 0;
-//    DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S-1] = STATE_CHANGE_RUNNING;
-	for(j = 0; j < AREA_DEVICE_TOTAL_NUMBER; j++)    //  判断状态是否需要显示为准备提示
-	{
-		if(AllTheControlParaGet(j,0)->cDevice.placeNew.useID != 0 )
-		{
-			for(i = 0 ;i <SING_LINK_DEVICE_TOTAL_NUMBER; i++)
-			{
-				if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID != 0 )
-				{
-					if(AllTheControlParaGet(j,i)->isSelect == TRUE
-						&& AllTheControlParaGet(j,i)->cDevice.place.type != 0)
-					{
-						if(AllTheControlParaGet(j,i)->cState == DEVICE_STATE_OPEN)
-							deviceStartNum++;
-					}
-				}
-				else 
-				{
-					i = (i > 0)?(i-1):0;
-					if(deviceStartNum == i)
-					{
-						DeviceControlParaGet()->stateMachineState[j] = STATE_CHANGE_RUNNING;
-					}					
-					break;
-				}
-			}
-
-		}
-	}	
+	StateShow();
     DeviceControlAndInquire();
     DeviceAlarmCal();
     DeviceNormalStopCondition();
@@ -480,8 +484,8 @@ static void SuspendStateEntry(void)
 {
     
     INPUT_EVENT evt;
-    OS_MsgBoxSend(gControlStartRe_Queue, &evt, OS_NO_DELAY, FALSE);
-    OS_MsgBoxSend(gControlStopRe_Queue, &evt, OS_NO_DELAY, FALSE);
+//    OS_MsgBoxSend(gControlStartRe_Queue, &evt, OS_NO_DELAY, FALSE);
+//    OS_MsgBoxSend(gControlStopRe_Queue, &evt, OS_NO_DELAY, FALSE);
     
     DeviceControlParaGet()->isClickStart = FALSE;
     DeviceControlParaGet()->isClickStop = TRUE;

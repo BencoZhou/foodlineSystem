@@ -10,7 +10,7 @@
 #include "FoodlineControl.h"
 #include "StateMachine.h"
 
-extern OS_MsgBoxHandle gControlStartRe_Queue;
+extern OS_MsgBoxHandle gControlStopRe_Queue;
 extern AllTheControlPara gAllTheControlPara[AREA_DEVICE_TOTAL_NUMBER][SING_LINK_DEVICE_TOTAL_NUMBER];
 void Page12S1S2ControlInit(void)
 {
@@ -54,6 +54,7 @@ void Page12S1S2ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
                 else
 				{
                     AllTheControlParaGet((DEVICE_AREA_S - 1),tempIndex)->isSelect = TRUE;
+//					DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S-1] = STATE_CHANGE_READY; 
 			
 				}
 				
@@ -74,19 +75,25 @@ void Page12S1S2ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
        // else
         {
             DeviceControlParaGet()->isClickStart = TRUE;
-            DeviceControlParaGet()->isClickStop = FALSE;
+//            DeviceControlParaGet()->isClickStop = FALSE;
 			DeviceControlParaGet()->controlArea[(DEVICE_AREA_S - 1)] = TRUE;
 			DeviceControlParaGet()->controlStopArea[(DEVICE_AREA_S - 1)] = FALSE;
+			DeviceControlParaGet()->controlShutdownArea[(DEVICE_AREA_S - 1)] = FALSE;
+			DeviceControlParaGet()->controlIndexMemory[(DEVICE_AREA_S - 1)] = 0;
+			DeviceControlParaGet()->controlRestartFlag[(DEVICE_AREA_S - 1)] = TRUE;
         }
     }
     if(addr == PAGE12_STOP_BUTTON)
     {
-        DeviceControlParaGet()->isClickStart = FALSE;
+//        DeviceControlParaGet()->isClickStart = FALSE;
         DeviceControlParaGet()->isClickStop = TRUE;
         DeviceControlParaGet()->isClickShutdown = FALSE;
 		DeviceControlParaGet()->controlStopArea[(DEVICE_AREA_S - 1)] = TRUE;
 		DeviceControlParaGet()->controlArea[(DEVICE_AREA_S - 1)] = FALSE;
-		OS_MsgBoxSend(gControlStartRe_Queue, &evt, OS_NO_DELAY, FALSE);
+		DeviceControlParaGet()->controlShutdownArea[(DEVICE_AREA_S - 1)] = FALSE;
+//		OS_MsgBoxSend(gControlStopRe_Queue, &evt, OS_NO_DELAY, FALSE);
+		DeviceControlParaGet()->controlRestartStopFlag[(DEVICE_AREA_S - 1)] = TRUE;
+		DeviceControlParaGet()->controlIndexMemory[(DEVICE_AREA_S - 1)]	= SING_LINK_DEVICE_TOTAL_NUMBER - 1;
     }
     if(addr == PAGE12_EMERGENCY_STOP_BUTTON)
     {
@@ -134,12 +141,12 @@ void Page12S1S2ControlRefresh(void)
 		if(AllTheControlParaGet((DEVICE_AREA_S - 1),i)->cDevice.place.type != 0)
 		{
 			ControlPareState(DEVICE_AREA_S,i);
-			if(DeviceControlParaGet()->controlStopDelayFlag[DEVICE_AREA_S-1] == TRUE)
-			{
-				DelayShutDown((DEVICE_AREA_S-1), 0x03, overTimer);
-				if(AllTheControlParaGet((DEVICE_AREA_S-1),0x03)->time == 0)
-				DelayShutDown((DEVICE_AREA_S-1), 0x05, overTimer);
-			}	
+//			if(DeviceControlParaGet()->controlStopDelayFlag[DEVICE_AREA_S-1] == TRUE)
+//			{
+//				DelayShutDown((DEVICE_AREA_S-1), 0x03, overTimer);
+//				if(AllTheControlParaGet((DEVICE_AREA_S-1),0x03)->time == 0)
+//				DelayShutDown((DEVICE_AREA_S-1), 0x05, overTimer);
+//			}	
 			
 			DisplayCommIconSend((PAGE12_TOWERSOUT_S1_10|PAGE12_SELECT) + (i-1)    , AllTheControlParaGet((DEVICE_AREA_S - 1),i)->isSelect);
 			DisplayCommIconSend((PAGE12_TOWERSOUT_S1_10|PAGE12_STATE) + (i-1)     , AllTheControlParaGet((DEVICE_AREA_S - 1),i)->cState); 
