@@ -26,21 +26,75 @@ Project File Date:  04/08/2020
 
 <h2>Output:</h2>
 Build target 'MZ-SYS'
+compiling SystemInit.c...
+compiling WirelessApp.c...
 compiling FoodlineControl.c...
-Utilities\FoodlineControl.c(641): warning:  #177-D: variable "j" was declared but never referenced
+Utilities\FoodlineControl.c(696): warning:  #177-D: variable "j" was declared but never referenced
         u8 i = 0, j = 0;
-Utilities\FoodlineControl.c(706): warning:  #550-D: variable "prevAreaIndex" was set but never used
+Utilities\FoodlineControl.c(761): warning:  #550-D: variable "prevAreaIndex" was set but never used
         static u8 prevAreaIndex = 0;   //记录上一次所控制的区域
-Utilities\FoodlineControl.c(809): warning:  #177-D: variable "i" was declared but never referenced
+Utilities\FoodlineControl.c(828): warning:  #177-D: variable "i" was declared but never referenced
       u8 i = 0;
-Utilities\FoodlineControl.c(1063): warning:  #177-D: variable "j" was declared but never referenced
+Utilities\FoodlineControl.c(1039): warning:  #177-D: variable "j" was declared but never referenced
         u8 i = 0, j = 0;
 Utilities\FoodlineControl.c: 4 warnings, 0 errors
+compiling StateMachine.c...
+Utilities\StateMachine.c(127): warning:  #177-D: variable "equipIndex" was declared but never referenced
+      static u8 equipIndex = 0,areaIndex = 0 ;
+Utilities\StateMachine.c(127): warning:  #177-D: variable "areaIndex" was declared but never referenced
+      static u8 equipIndex = 0,areaIndex = 0 ;
+Utilities\StateMachine.c(254): warning:  #177-D: variable "j" was declared but never referenced
+        u8 i,j;
+Utilities\StateMachine.c(486): warning:  #177-D: variable "evt" was declared but never referenced
+      INPUT_EVENT evt;
+Utilities\StateMachine.c(504): warning:  #177-D: variable "i" was declared but never referenced
+                u8 i,j,deviceSuspendNum = 0;
+Utilities\StateMachine.c(504): warning:  #177-D: variable "deviceSuspendNum" was declared but never referenced
+                u8 i,j,deviceSuspendNum = 0;
+Utilities\StateMachine.c(205): warning:  #177-D: function "DevicEemergencyStopCal" was declared but never referenced
+  static void DevicEemergencyStopCal(void)
+Utilities\StateMachine.c: 7 warnings, 0 errors
+compiling Page12S1S2Control.c...
+Pages\Page12S1S2Control.c(27): warning:  #177-D: variable "areaIndex" was declared but never referenced
+      u16 tempEffect, tempIndex,areaIndex;   //areaIndex  需要得到代表区域的地址
+Pages\Page12S1S2Control.c(139): warning:  #177-D: variable "overTimer" was declared but never referenced
+        RTC_TIME overTimer;
+Pages\Page12S1S2Control.c: 2 warnings, 0 errors
+compiling Page14W1Control.c...
+Pages\Page14W1Control.c(31): warning:  #177-D: variable "areaIndex" was declared but never referenced
+      u16 tempEffect, tempIndex,areaIndex;   //areaIndex  需要得到代表区域的地址
+Pages\Page14W1Control.c: 1 warning, 0 errors
+compiling Page15W2Control.c...
+Pages\Page15W2Control.c(30): warning:  #177-D: variable "areaIndex" was declared but never referenced
+      u16 tempEffect, tempIndex,areaIndex;   //areaIndex  需要得到代表区域的地址
+Pages\Page15W2Control.c: 1 warning, 0 errors
+compiling Page16E1E2Control.c...
+Pages\Page16E1E2Control.c(29): warning:  #177-D: variable "areaIndex" was declared but never referenced
+      u16 tempEffect, tempIndex,areaIndex;   //areaIndex  需要得到代表区域的地址
+Pages\Page16E1E2Control.c: 1 warning, 0 errors
+compiling Page17C1Control.c...
+Pages\Page17C1Control.c(29): warning:  #177-D: variable "areaIndex" was declared but never referenced
+      u16 tempEffect, tempIndex,areaIndex;   //areaIndex  需要得到代表区域的地址
+Pages\Page17C1Control.c: 1 warning, 0 errors
+compiling Page18C2Control.c...
+Pages\Page18C2Control.c(24): warning:  #550-D: variable "data" was set but never used
+      u32 data;
+Pages\Page18C2Control.c(27): warning:  #177-D: variable "areaIndex" was declared but never referenced
+      u16 tempEffect, tempIndex,areaIndex;   //areaIndex  需要得到代表区域的地址
+Pages\Page18C2Control.c: 2 warnings, 0 errors
+compiling Page19N1Control.c...
+Pages\Page19N1Control.c(27): warning:  #177-D: variable "areaIndex" was declared but never referenced
+      u16 tempEffect, tempIndex,areaIndex;   //areaIndex  需要得到代表区域的地址
+Pages\Page19N1Control.c: 1 warning, 0 errors
+compiling Page20N2Control.c...
+Pages\Page20N2Control.c(27): warning:  #177-D: variable "areaIndex" was declared but never referenced
+      u16 tempEffect, tempIndex,areaIndex;   //areaIndex  需要得到代表区域的地址
+Pages\Page20N2Control.c: 1 warning, 0 errors
 linking...
-Program Size: Code=84104 RO-data=1104 RW-data=4648 ZI-data=49424  
+Program Size: Code=85988 RO-data=1104 RW-data=4648 ZI-data=50224  
 FromELF: creating hex file...
 After Build - User command #1: C:\Keil_v5\ARM\ARMCC\bin\fromelf.exe --bin --output ./Output/MZ-SYS.bin ./Output/MZ-SYS.axf
-".\Output\MZ-SYS.axf" - 0 Error(s), 4 Warning(s).
+".\Output\MZ-SYS.axf" - 0 Error(s), 21 Warning(s).
 
 <h2>Software Packages used:</h2>
 

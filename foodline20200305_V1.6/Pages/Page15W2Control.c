@@ -12,6 +12,9 @@
 
 extern u8 AreaW1Num ;
 
+extern OS_MsgBoxHandle gControlStopRe_Queue;
+extern OS_MsgBoxHandle gControlStartRe_Queue;
+
 void Page15W2ControlInit(void)
 {
     
@@ -22,6 +25,7 @@ void Page15W2ControlInit(void)
 void Page15W2ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
 {
     u32 data;
+	INPUT_EVENT evt;
 //    u16 tempSelect, tempState, tempButton, tempAlarm;
     u16 tempEffect, tempIndex,areaIndex;   //areaIndex  需要得到代表区域的地址
 
@@ -64,19 +68,26 @@ void Page15W2ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
         {
             DeviceControlParaGet()->stateMachineState[DEVICE_AREA_W-1] = STATE_CHANGE_SUSPENDING;   
         }
-        else
+       
         {
+			
             DeviceControlParaGet()->isClickStart = TRUE;
-            DeviceControlParaGet()->isClickStop = FALSE;
 			DeviceControlParaGet()->controlArea[(DEVICE_AREA_W - 1)] = TRUE;
+			DeviceControlParaGet()->controlStopArea[(DEVICE_AREA_W - 1)] = FALSE;
+			DeviceControlParaGet()->controlShutdownArea[(DEVICE_AREA_W - 1)] = FALSE;
+			DeviceControlParaGet()->controlIndexMemory[(DEVICE_AREA_W - 1)] = 0;
+			OS_MsgBoxSend(gControlStartRe_Queue, &evt, OS_NO_DELAY, FALSE);				
         }
     }
     if(addr == PAGE15_STOP_BUTTON)
     {
-        DeviceControlParaGet()->isClickStart = FALSE;
         DeviceControlParaGet()->isClickStop = TRUE;
         DeviceControlParaGet()->isClickShutdown = FALSE;
 		DeviceControlParaGet()->controlStopArea[(DEVICE_AREA_W - 1)] = TRUE;
+		DeviceControlParaGet()->controlArea[(DEVICE_AREA_W - 1)] = FALSE;
+		DeviceControlParaGet()->controlShutdownArea[(DEVICE_AREA_W - 1)] = FALSE;	
+		OS_MsgBoxSend(gControlStopRe_Queue, &evt, OS_NO_DELAY, FALSE);	
+		DeviceControlParaGet()->controlIndexMemory[(DEVICE_AREA_W - 1)]	= SING_LINK_DEVICE_TOTAL_NUMBER - 1;	
     }
     if(addr == PAGE15_EMERGENCY_STOP_BUTTON)
     {
@@ -94,8 +105,9 @@ void Page15W2ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
     if(addr == PAGE15_W2_DELAYTIME)
     {
         AllTheControlParaGet((DEVICE_AREA_W - 1),(AreaW1Num + 0x02))->time = data;
+		AllTheControlParaGet((DEVICE_AREA_W - 1),(AreaW1Num + 0x02))->setStopTime = data;
 		*FoodLineTimeGet(W2_FOOD_LINE_TIME) = data;
-		ParaDelayParaSave();
+		ParaDelayParaSave();				
     }    
    
 

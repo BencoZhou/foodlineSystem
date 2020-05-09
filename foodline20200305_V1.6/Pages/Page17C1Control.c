@@ -12,6 +12,7 @@
 
 u8 AreaC1Num ;
 extern OS_MsgBoxHandle gControlStopRe_Queue;
+extern OS_MsgBoxHandle gControlStartRe_Queue;
 
 void Page17C1ControlInit(void)
 {
@@ -74,6 +75,8 @@ void Page17C1ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
 			DeviceControlParaGet()->controlStopArea[(DEVICE_AREA_C - 1)] = FALSE;
 			DeviceControlParaGet()->controlShutdownArea[(DEVICE_AREA_C - 1)] = FALSE;
 			DeviceControlParaGet()->controlIndexMemory[(DEVICE_AREA_C - 1)] = 0;
+			OS_MsgBoxSend(gControlStartRe_Queue, &evt, OS_NO_DELAY, FALSE);
+		
         }
     }
     if(addr == PAGE17_STOP_BUTTON)
@@ -84,7 +87,7 @@ void Page17C1ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
 		DeviceControlParaGet()->controlStopArea[(DEVICE_AREA_C - 1)] = TRUE;
 		DeviceControlParaGet()->controlArea[(DEVICE_AREA_C - 1)] = FALSE;
 		DeviceControlParaGet()->controlShutdownArea[(DEVICE_AREA_C - 1)] = FALSE;	
-//		OS_MsgBoxSend(gControlStopRe_Queue, &evt, OS_NO_DELAY, FALSE);	
+		OS_MsgBoxSend(gControlStopRe_Queue, &evt, OS_NO_DELAY, FALSE);	
 		DeviceControlParaGet()->controlIndexMemory[(DEVICE_AREA_C - 1)]	= SING_LINK_DEVICE_TOTAL_NUMBER - 1;
 
     }
@@ -107,13 +110,15 @@ void Page17C1ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
     }       
     if(addr == PAGE17_C1_DELAYTIME)
     {
-        AllTheControlParaGet((DEVICE_AREA_C - 1), 0x03)->time = data;
+        AllTheControlParaGet((DEVICE_AREA_C - 1),0x04)->time = data;
+		AllTheControlParaGet((DEVICE_AREA_C - 1),0x04)->setStopTime = data;		
 		*FoodLineTimeGet(C1_FOOD_LINE_TIME) = data;
 		ParaDelayParaSave();
     }    
     if(addr == PAGE17_C2_DELAYTIME)
     {
-        AllTheControlParaGet((DEVICE_AREA_C - 1), 0x0b)->time = data;
+        AllTheControlParaGet((DEVICE_AREA_C - 1),0x0c)->time = data;
+		AllTheControlParaGet((DEVICE_AREA_C - 1),0x0c)->setStopTime = data;			
 		*FoodLineTimeGet(C2_FOOD_LINE_TIME) = data;
 		ParaDelayParaSave();
     }    	
@@ -240,9 +245,11 @@ void Page17C1ControlRefresh(void)
 				
 				C1NuM++;
 			}
-			else if((AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cDevice.place.mainLine == 2) &&
-				(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cDevice.place.type == DEVICE_NAME_FLINE))
+			else if((AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cDevice.place.mainLine == 2)&&
+				(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cDevice.place.viceLine == 0))
 			{
+				if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cDevice.place.type == DEVICE_NAME_FLINE)
+				{
 					if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == FOODLINE_PARA_CLOSE)
 						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_CLOSE;
 					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == FOODLINE_PARA_OPEN)
@@ -266,6 +273,7 @@ void Page17C1ControlRefresh(void)
 						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 6;                 
 					else 
 						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 0;
+				}
 
 					C1NuM++;
 				DisplayCommIconSend((PAGE17_CONTROL_C1|PAGE17_SELECT) + i - 1     , AllTheControlParaGet((DEVICE_AREA_C - 1),i)->isSelect);

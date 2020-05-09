@@ -10,6 +10,9 @@
 #include "FoodlineControl.h"
 #include "StateMachine.h"
 
+extern OS_MsgBoxHandle gControlStopRe_Queue;
+extern OS_MsgBoxHandle gControlStartRe_Queue;		
+
 extern AllTheControlPara gAllTheControlPara[AREA_DEVICE_TOTAL_NUMBER][SING_LINK_DEVICE_TOTAL_NUMBER];
 void Page16E1E2ControlInit(void)
 {
@@ -21,6 +24,7 @@ void Page16E1E2ControlInit(void)
 void Page16E1E2ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
 {
     u32 data;
+	INPUT_EVENT evt;	
 //    u16 tempSelect, tempState, tempButton, tempAlarm;
     u16 tempEffect, tempIndex,areaIndex;   //areaIndex  需要得到代表区域的地址
 
@@ -76,17 +80,22 @@ void Page16E1E2ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
     }
     if(addr == PAGE16_STOP_BUTTON)
     {
-        DeviceControlParaGet()->isClickStart = FALSE;
-        DeviceControlParaGet()->isClickStop = TRUE;
-        DeviceControlParaGet()->isClickShutdown = FALSE;
-		DeviceControlParaGet()->controlStopArea[(DEVICE_AREA_E - 1)] = TRUE;
+		DeviceControlParaGet()->isClickStart = TRUE;
+		DeviceControlParaGet()->controlArea[(DEVICE_AREA_E - 1)] = TRUE;
+		DeviceControlParaGet()->controlStopArea[(DEVICE_AREA_E - 1)] = FALSE;
+		DeviceControlParaGet()->controlShutdownArea[(DEVICE_AREA_E - 1)] = FALSE;
+		DeviceControlParaGet()->controlIndexMemory[(DEVICE_AREA_E - 1)] = 0;
+		OS_MsgBoxSend(gControlStartRe_Queue, &evt, OS_NO_DELAY, FALSE);				
     }
     if(addr == PAGE16_EMERGENCY_STOP_BUTTON)
     {
-        DeviceControlParaGet()->isClickStart = FALSE;
-        DeviceControlParaGet()->isClickStop = FALSE;
-        DeviceControlParaGet()->isClickShutdown = TRUE;
-		DeviceControlParaGet()->controlShutdownArea[(DEVICE_AREA_E - 1)] = TRUE;
+        DeviceControlParaGet()->isClickStop = TRUE;
+        DeviceControlParaGet()->isClickShutdown = FALSE;
+		DeviceControlParaGet()->controlStopArea[(DEVICE_AREA_E - 1)] = TRUE;
+		DeviceControlParaGet()->controlArea[(DEVICE_AREA_E - 1)] = FALSE;
+		DeviceControlParaGet()->controlShutdownArea[(DEVICE_AREA_E - 1)] = FALSE;	
+		OS_MsgBoxSend(gControlStopRe_Queue, &evt, OS_NO_DELAY, FALSE);	
+		DeviceControlParaGet()->controlIndexMemory[(DEVICE_AREA_E - 1)]	= SING_LINK_DEVICE_TOTAL_NUMBER - 1;	
     }     
     if(addr == PAGE16_STOP_RENEW_BUTTON)
     {
@@ -96,15 +105,17 @@ void Page16E1E2ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
     }       
     if(addr == PAGE16_E1_DELAYTIME)
     {
-        AllTheControlParaGet((DEVICE_AREA_E - 1),0x01)->time = data;
+        AllTheControlParaGet((DEVICE_AREA_E - 1),0x02)->time = data;
+		AllTheControlParaGet((DEVICE_AREA_E - 1),0x02)->setStopTime = data;
 		*FoodLineTimeGet(E1_FOOD_LINE_TIME) = data;
-		ParaDelayParaSave();
+		ParaDelayParaSave();			
     }    
     if(addr == PAGE16_E2_DELAYTIME)
     {
-        AllTheControlParaGet((DEVICE_AREA_E - 1),0x03)->time = data; 
+        AllTheControlParaGet((DEVICE_AREA_E - 1),0x04)->time = data;
+		AllTheControlParaGet((DEVICE_AREA_E - 1),0x04)->setStopTime = data;
 		*FoodLineTimeGet(E2_FOOD_LINE_TIME) = data;
-		ParaDelayParaSave();
+		ParaDelayParaSave();			
     }    
 
     Page16E1E2ControlRefresh();

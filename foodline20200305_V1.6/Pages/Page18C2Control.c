@@ -22,6 +22,7 @@ void Page18C2ControlInit(void)
 void Page18C2ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
 {
     u32 data;
+	INPUT_EVENT evt;	
 //    u16 tempSelect, tempState, tempButton, tempAlarm;
     u16 tempEffect, tempIndex,areaIndex;   //areaIndex  需要得到代表区域的地址
 
@@ -70,19 +71,26 @@ void Page18C2ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
         {
             DeviceControlParaGet()->stateMachineState[DEVICE_AREA_C-1] = STATE_CHANGE_SUSPENDING;   
         }
-        else
+//        else
         {
+
             DeviceControlParaGet()->isClickStart = TRUE;
-            DeviceControlParaGet()->isClickStop = FALSE;
 			DeviceControlParaGet()->controlArea[(DEVICE_AREA_C - 1)] = TRUE;
+			DeviceControlParaGet()->controlStopArea[(DEVICE_AREA_C - 1)] = FALSE;
+			DeviceControlParaGet()->controlShutdownArea[(DEVICE_AREA_C - 1)] = FALSE;
+			DeviceControlParaGet()->controlIndexMemory[(DEVICE_AREA_C - 1)] = 0;
+			OS_MsgBoxSend(gControlStartRe_Queue, &evt, OS_NO_DELAY, FALSE);			
         }
     }
     if(addr == PAGE18_STOP_BUTTON)
     {
-        DeviceControlParaGet()->isClickStart = FALSE;
         DeviceControlParaGet()->isClickStop = TRUE;
         DeviceControlParaGet()->isClickShutdown = FALSE;
 		DeviceControlParaGet()->controlStopArea[(DEVICE_AREA_C - 1)] = TRUE;
+		DeviceControlParaGet()->controlArea[(DEVICE_AREA_C - 1)] = FALSE;
+		DeviceControlParaGet()->controlShutdownArea[(DEVICE_AREA_C - 1)] = FALSE;	
+		OS_MsgBoxSend(gControlStopRe_Queue, &evt, OS_NO_DELAY, FALSE);	
+		DeviceControlParaGet()->controlIndexMemory[(DEVICE_AREA_C - 1)]	= SING_LINK_DEVICE_TOTAL_NUMBER - 1;		
     }
     if(addr == PAGE18_EMERGENCY_STOP_BUTTON)
     {
@@ -104,127 +112,130 @@ void Page18C2ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
 void Page18C2ControlRefresh(void)
 {
     u8 i;
-    for(i = AreaC1Num + 1; i < SING_LINK_DEVICE_TOTAL_NUMBER; i++)
+    for(i = AreaC1Num + 1 ; i < SING_LINK_DEVICE_TOTAL_NUMBER; i++)
     {
-		if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cDevice.place.mainLine != 1&&
-			AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cDevice.place.mainLine != 0)
+		if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cDevice.placeNew.useID != 0)
 		{
-			if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cDevice.place.type == DEVICE_NAME_FLINE
-				||AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cDevice.place.type == DEVICE_NAME_VICE_FLINE)
+			if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cDevice.place.mainLine != 1&&
+				AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cDevice.place.mainLine != 0)
 			{
-				if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == FOODLINE_PARA_CLOSE)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_CLOSE;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == FOODLINE_PARA_OPEN)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_OPEN;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == FOODLINE_PARA_JUSTSTART)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_CLOSE;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == FOODLINE_PARA_OVERTIME)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_AREA;
-				
-				if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->isCommAlarm )         //
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 5;          // 通讯故障
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->alarmByte & 0x01)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 1;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->alarmByte & 0x02)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 2;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->alarmByte & 0x04)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 3;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->alarmByte & 0x08)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 4;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->manualAuto != AUTO_GEARS)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 6;                 
-				else 
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 0;
-			}
-			else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cDevice.place.type == DEVICE_NAME_IN_TOWERS 
-				|| AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cDevice.place.type == DEVICE_NAME_MAIN_VICE)
-			{
-				if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == SWITCH_VALVE_PARA_FREE)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_CLOSE;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == SWITCH_VALVE_PARA_OPEN)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_OPEN;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == SWITCH_VALVE_PARA_CLOSE)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_CLOSE;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == SWITCH_VALVE_PARA_OPENING)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_OPEN;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == SWITCH_VALVE_PARA_CLOSING)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_OPEN;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == SWITCH_VALVE_PARA_OPENALARM)
+				if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cDevice.place.type == DEVICE_NAME_FLINE
+					||AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cDevice.place.type == DEVICE_NAME_VICE_FLINE)
 				{
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_AREA;
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 1;   // 阀开异常
+					if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == FOODLINE_PARA_CLOSE)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_CLOSE;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == FOODLINE_PARA_OPEN)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_OPEN;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == FOODLINE_PARA_JUSTSTART)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_CLOSE;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == FOODLINE_PARA_OVERTIME)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_AREA;
+					
+					if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->isCommAlarm )         //
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 5;          // 通讯故障
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->alarmByte & 0x01)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 1;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->alarmByte & 0x02)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 2;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->alarmByte & 0x04)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 3;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->alarmByte & 0x08)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 4;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->manualAuto != AUTO_GEARS)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 6;                 
+					else 
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 0;
 				}
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == SWITCH_VALVE_PARA_CLOSEALARM)
+				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cDevice.place.type == DEVICE_NAME_IN_TOWERS 
+					|| AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cDevice.place.type == DEVICE_NAME_MAIN_VICE)
 				{
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_AREA;
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 2;    // 阀关异常
+					if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == SWITCH_VALVE_PARA_FREE)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_CLOSE;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == SWITCH_VALVE_PARA_OPEN)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_OPEN;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == SWITCH_VALVE_PARA_CLOSE)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_CLOSE;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == SWITCH_VALVE_PARA_OPENING)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_OPEN;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == SWITCH_VALVE_PARA_CLOSING)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_OPEN;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == SWITCH_VALVE_PARA_OPENALARM)
+					{
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_AREA;
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 1;   // 阀开异常
+					}
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == SWITCH_VALVE_PARA_CLOSEALARM)
+					{
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_AREA;
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 2;    // 阀关异常
+					}
+					
+					if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->isCommAlarm )         //
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 3;          // 通讯故障            
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->alarmByte & 0x01)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 1;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->alarmByte & 0x02)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 2;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->manualAuto != AUTO_GEARS)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 4;                 
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte != SWITCH_VALVE_PARA_OPENALARM&&
+							AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte != SWITCH_VALVE_PARA_CLOSEALARM )
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 0;
 				}
-				
-				if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->isCommAlarm )         //
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 3;          // 通讯故障            
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->alarmByte & 0x01)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 1;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->alarmByte & 0x02)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 2;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->manualAuto != AUTO_GEARS)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 4;                 
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte != SWITCH_VALVE_PARA_OPENALARM&&
-						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte != SWITCH_VALVE_PARA_CLOSEALARM )
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 0;
-			}
-			else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cDevice.place.type == DEVICE_NAME_TOWERS_OUT)
-			{
-				if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == TOWERSOUT_PARA_SOTP)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_CLOSE;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == TOWERSOUT_PARA_FOREWARD)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_OPEN;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == TOWERSOUT_PARA_REVERSAL)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_OPEN;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == TOWERSOUT_PARA_FOREWARDING)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_OPEN;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == TOWERSOUT_PARA_REVERSALING)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_OPEN;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == TOWERSOUT_PARA_FOREWARD_OVERTIME)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_AREA;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == TOWERSOUT_PARA_REVERSAL_OVERTIME)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_AREA;
+				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cDevice.place.type == DEVICE_NAME_TOWERS_OUT)
+				{
+					if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == TOWERSOUT_PARA_SOTP)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_CLOSE;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == TOWERSOUT_PARA_FOREWARD)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_OPEN;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == TOWERSOUT_PARA_REVERSAL)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_OPEN;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == TOWERSOUT_PARA_FOREWARDING)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_OPEN;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == TOWERSOUT_PARA_REVERSALING)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_OPEN;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == TOWERSOUT_PARA_FOREWARD_OVERTIME)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_AREA;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->stateByte == TOWERSOUT_PARA_REVERSAL_OVERTIME)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState = DEVICE_STATE_AREA;
 
-				if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->isCommAlarm )         //
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 7;          // 通讯故障            
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->alarmByte & 0x01)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 1;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->alarmByte & 0x02)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 2;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->alarmByte & 0x04)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 3;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->alarmByte & 0x08)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 4;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->alarmByte & 0x10)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 5;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->alarmByte & 0x20)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 6;
-				else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->manualAuto != AUTO_GEARS)
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 8;            
-				else 
-					AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 0;
-			}
-		
-			if(i <= (AreaC1Num+0x10))
-			{
-				DisplayCommIconSend((PAGE18_CONTROL_C2|PAGE18_SELECT) + i - AreaC1Num - 1 , AllTheControlParaGet((DEVICE_AREA_C - 1),i)->isSelect);
-				DisplayCommIconSend((PAGE18_CONTROL_C2|PAGE18_STATE) + i - AreaC1Num - 1  , AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState);
-				DisplayCommIconSend((PAGE18_CONTROL_C2|PAGE18_ALARM) + i - AreaC1Num - 1  , AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm);
-			}
-			else
-			{
-				DisplayCommIconSend((PAGE18_CONTROL_C2|PAGE18_SELECT) + 0x40 + i - AreaC1Num - 1 , AllTheControlParaGet((DEVICE_AREA_C - 1),i)->isSelect);
-				DisplayCommIconSend((PAGE18_CONTROL_C2|PAGE18_STATE) + 0x40 + i - AreaC1Num - 1  , AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState);
-				DisplayCommIconSend((PAGE18_CONTROL_C2|PAGE18_ALARM) + 0x40 + i - AreaC1Num - 1  , AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm);			
-			}
-			DisplayCommIconSend(PAGE18_STATE_MACHINE_STATE     , DeviceControlParaGet()->stateMachineState[DEVICE_AREA_C-1]);
+					if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->isCommAlarm )         //
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 7;          // 通讯故障            
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->alarmByte & 0x01)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 1;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->alarmByte & 0x02)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 2;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->alarmByte & 0x04)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 3;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->alarmByte & 0x08)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 4;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->alarmByte & 0x10)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 5;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->alarmByte & 0x20)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 6;
+					else if(AllTheControlParaGet((DEVICE_AREA_C - 1),i)->manualAuto != AUTO_GEARS)
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 8;            
+					else 
+						AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm = 0;
+				}
 			
-			
-			OSTimeDly(2);
+				if(i <= (AreaC1Num+0x10))
+				{
+					DisplayCommIconSend((PAGE18_CONTROL_C2|PAGE18_SELECT) + i - AreaC1Num -1 , AllTheControlParaGet((DEVICE_AREA_C - 1),i)->isSelect);
+					DisplayCommIconSend((PAGE18_CONTROL_C2|PAGE18_STATE) + i - AreaC1Num -1  , AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState);
+					DisplayCommIconSend((PAGE18_CONTROL_C2|PAGE18_ALARM) + i - AreaC1Num -1  , AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm);
+				}
+				else
+				{
+					DisplayCommIconSend((PAGE18_CONTROL_C2|PAGE18_SELECT) + 0x40 + i - AreaC1Num -1 , AllTheControlParaGet((DEVICE_AREA_C - 1),i)->isSelect);
+					DisplayCommIconSend((PAGE18_CONTROL_C2|PAGE18_STATE) + 0x40 + i - AreaC1Num -1  , AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cState);
+					DisplayCommIconSend((PAGE18_CONTROL_C2|PAGE18_ALARM) + 0x40 + i - AreaC1Num -1  , AllTheControlParaGet((DEVICE_AREA_C - 1),i)->cAlarm);			
+				}
+				DisplayCommIconSend(PAGE18_STATE_MACHINE_STATE     , DeviceControlParaGet()->stateMachineState[DEVICE_AREA_C-1]);
+				
+				
+				OSTimeDly(2);
+			}
 		}
     }
 	DisplayCommIconSend(PAGE18_START_BUTTON, (u8)DeviceControlParaGet()->isClickStart);

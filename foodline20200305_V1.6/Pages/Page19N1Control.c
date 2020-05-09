@@ -22,6 +22,7 @@ void Page19N1ControlInit(void)
 void Page19N1ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
 {
     u32 data;
+	INPUT_EVENT evt;	
 //    u16 tempSelect, tempState, tempButton, tempAlarm;
     u16 tempEffect, tempIndex,areaIndex;   //areaIndex  需要得到代表区域的地址
 
@@ -64,19 +65,25 @@ void Page19N1ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
         {
             DeviceControlParaGet()->stateMachineState[DEVICE_AREA_N-1] = STATE_CHANGE_SUSPENDING;   
         }
-        else
+		
         {
             DeviceControlParaGet()->isClickStart = TRUE;
-            DeviceControlParaGet()->isClickStop = FALSE;
 			DeviceControlParaGet()->controlArea[(DEVICE_AREA_N - 1)] = TRUE;
+			DeviceControlParaGet()->controlStopArea[(DEVICE_AREA_N - 1)] = FALSE;
+			DeviceControlParaGet()->controlShutdownArea[(DEVICE_AREA_N - 1)] = FALSE;
+			DeviceControlParaGet()->controlIndexMemory[(DEVICE_AREA_N - 1)] = 0;
+			OS_MsgBoxSend(gControlStartRe_Queue, &evt, OS_NO_DELAY, FALSE);	
         }
     }
     if(addr == PAGE19_STOP_BUTTON)
     {
-        DeviceControlParaGet()->isClickStart = FALSE;
         DeviceControlParaGet()->isClickStop = TRUE;
         DeviceControlParaGet()->isClickShutdown = FALSE;
 		DeviceControlParaGet()->controlStopArea[(DEVICE_AREA_N - 1)] = TRUE;
+		DeviceControlParaGet()->controlArea[(DEVICE_AREA_N - 1)] = FALSE;
+		DeviceControlParaGet()->controlShutdownArea[(DEVICE_AREA_N - 1)] = FALSE;	
+		OS_MsgBoxSend(gControlStopRe_Queue, &evt, OS_NO_DELAY, FALSE);	
+		DeviceControlParaGet()->controlIndexMemory[(DEVICE_AREA_N - 1)]	= SING_LINK_DEVICE_TOTAL_NUMBER - 1;			
     }
     if(addr == PAGE19_EMERGENCY_STOP_BUTTON)
     {
@@ -93,9 +100,10 @@ void Page19N1ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
     }       
     if(addr == PAGE19_N1_DELAYTIME)
     {
-        AllTheControlParaGet((DEVICE_AREA_N - 1), 0x04)->time = data;
+        AllTheControlParaGet((DEVICE_AREA_N - 1),0x05)->time = data;
+		AllTheControlParaGet((DEVICE_AREA_N - 1),0x05)->setStopTime = data;
 		*FoodLineTimeGet(N1_FOOD_LINE_TIME) = data;
-		ParaDelayParaSave();
+		ParaDelayParaSave();		
     }    
     	
    

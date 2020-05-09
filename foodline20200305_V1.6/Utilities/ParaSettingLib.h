@@ -253,7 +253,8 @@ typedef struct
 	bool isMyself;		//是否属于本机控制区域	
     u8   cAlarm;
     u8   cState;        // 图标位置
-    u16  time;          // 多少s后停止
+    u16  time;          // 多少s后停
+	u16  setStopTime;    //设置的延时停机时间
 	u32  startStopTime;  // 开始停止时间
     u8   prevGetAlarm;      // 关联设备发出的警告
     u8   commTimes;     // 发送次数

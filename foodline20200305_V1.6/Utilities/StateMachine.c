@@ -9,12 +9,16 @@
 #include "StateMachine.h"
 #include "FoodlineControl.h"
 
+extern u8 AreaN1Num ;
 
 extern OS_MsgBoxHandle gControlStartRe_Queue;
 extern OS_MsgBoxHandle gControlStopRe_Queue;
+extern u8 AreaW1Num ;
 
 bool NormalStopFlag = FALSE;   // 正常停止标志位
 bool foodDownPlaceArrivalFlag = FALSE;     // 副料线
+
+static void InitDelayHalt(void);
 
 
 // 定义状态参数
@@ -61,6 +65,7 @@ static void IdleStateEntry(void)
 			DeviceControlParaGet()->stateMachineState[i] = STATE_CHANGE_IDLE;
 		}
 	}
+
 }
 
 static void IdleStateExit(void)
@@ -240,7 +245,7 @@ static void DeviceNormalStopCondition(void)
     if(NormalStopFlag == TRUE)   //缺料满料引起的正常关闭标志位
     {
         DeviceControlParaGet()->isClickStop = TRUE;
-        DeviceControlParaGet()->isClickStart = FALSE;
+//        DeviceControlParaGet()->isClickStart = FALSE;
         NormalStopFlag = FALSE;
     }
 }
@@ -367,25 +372,29 @@ static void StateShow(void)
 			{
 				if(AllTheControlParaGet(j,i)->cDevice.place.type != DEVICE_NAME_CONTROL)  //非主机设备才进行判断
 				{
-					if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID != 0 
-						&& AllTheControlParaGet(j,i)->cDevice.place.type != 0)
+					if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID != 0) 
+//						&& AllTheControlParaGet(j,i)->cDevice.place.type != 0)
 					{
-						
-						if(AllTheControlParaGet(j,i)->isSelect == TRUE)					
-							selectNum++;
-						
-						if(AllTheControlParaGet(j,i)->cState == DEVICE_STATE_OPEN)													
-							deviceStartNum++;
-						else if(AllTheControlParaGet(j,i)->cState == DEVICE_STATE_CLOSE)
-							deviceCloseNum++;
+						if(AllTheControlParaGet(j,i)->cDevice.place.type != 0)
+						{
+							if(AllTheControlParaGet(j,i)->isSelect == TRUE)					
+								selectNum++;
 							
-						deviceNum++;
+							if(AllTheControlParaGet(j,i)->cState == DEVICE_STATE_OPEN)													
+								deviceStartNum++;
+							else if(AllTheControlParaGet(j,i)->cState == DEVICE_STATE_CLOSE)
+								deviceCloseNum++;
+								
+							deviceNum++;
+						}
 					}
 					else 
 					{
 						if(selectNum == 0)
 						{
 							DeviceControlParaGet()->stateMachineState[j] = STATE_CHANGE_IDLE;      // 没有选择设备，则为待机状态																							
+							DeviceControlParaGet()->controlArea[j] = FALSE;
+							DeviceControlParaGet()->controlStopArea[j] = FALSE;
 						}			
 						else if(selectNum != 0 &&  (deviceCloseNum == deviceNum)) //有选择但都是关闭状态则是准备状态
 						{
@@ -402,7 +411,6 @@ static void StateShow(void)
 					}
 				}
 			}
-
 		}
 	}	
 }
@@ -438,15 +446,7 @@ static void RunningStateEntry(void)
     INPUT_EVENT evt;
     OS_MsgBoxSend(gControlStartRe_Queue, &evt, OS_NO_DELAY, FALSE);
 //    OS_MsgBoxSend(gControlStopRe_Queue, &evt, OS_NO_DELAY, FALSE);
-    if(AllTheControlParaGet(DEVICE_AREA_S-1,0x03)->time == 0)
-    {
-        AllTheControlParaGet(DEVICE_AREA_S-1,0x03)->time = *FoodLineTimeGet(S1_FOOD_LINE_TIME);
-    }
-    if(AllTheControlParaGet(DEVICE_AREA_S-1,0x05)->time == 0)
-    {
-        AllTheControlParaGet(DEVICE_AREA_S-1,0x05)->time = *FoodLineTimeGet(S2_FOOD_LINE_TIME);
-    }          
-//    DeviceControlParaGet()->stateMachineState[DEVICE_AREA_S-1] = STATE_CHANGE_RUNNING;
+	InitDelayHalt();
 }
 
 static void RunningStateExit(void)
@@ -553,4 +553,61 @@ void StateMachineProcess(void)
 			gState->Process(); 
 	}
 }
+static void InitDelayHalt(void)
+{
+    if(AllTheControlParaGet(DEVICE_AREA_S-1,0x03)->time == 0)
+    {
+        AllTheControlParaGet(DEVICE_AREA_S-1,0x03)->time = *FoodLineTimeGet(S1_FOOD_LINE_TIME);
+		AllTheControlParaGet((DEVICE_AREA_S - 1),0x03)->setStopTime = *FoodLineTimeGet(S1_FOOD_LINE_TIME);
+    }
+    if(AllTheControlParaGet(DEVICE_AREA_S-1,0x05)->time == 0)
+    {
+        AllTheControlParaGet(DEVICE_AREA_S-1,0x05)->time = *FoodLineTimeGet(S2_FOOD_LINE_TIME);
+		AllTheControlParaGet((DEVICE_AREA_S - 1),0x05)->setStopTime = *FoodLineTimeGet(S2_FOOD_LINE_TIME);
+    }  
+	
+    if(AllTheControlParaGet(DEVICE_AREA_C-1,0x04)->time == 0)
+    {
+        AllTheControlParaGet((DEVICE_AREA_C - 1),0x04)->time = *FoodLineTimeGet(C1_FOOD_LINE_TIME);
+		AllTheControlParaGet((DEVICE_AREA_C - 1),0x04)->setStopTime = *FoodLineTimeGet(C1_FOOD_LINE_TIME);
+    }   		
+    if(AllTheControlParaGet(DEVICE_AREA_C-1,0x0c)->time == 0)
+    {
+        AllTheControlParaGet((DEVICE_AREA_C - 1),0x0c)->time = *FoodLineTimeGet(C2_FOOD_LINE_TIME);
+		AllTheControlParaGet((DEVICE_AREA_C - 1),0x0c)->setStopTime = *FoodLineTimeGet(C2_FOOD_LINE_TIME);
+    }   	
+	
+    if(AllTheControlParaGet(DEVICE_AREA_W-1,0x02)->time == 0)
+    {
+        AllTheControlParaGet((DEVICE_AREA_W - 1),0x02)->time = *FoodLineTimeGet(W1_FOOD_LINE_TIME);
+		AllTheControlParaGet((DEVICE_AREA_W - 1),0x02)->setStopTime = *FoodLineTimeGet(W1_FOOD_LINE_TIME);
+    }   
+	if(AllTheControlParaGet(DEVICE_AREA_W-1,(AreaW1Num + 0x02))->time == 0)
+    {
+        AllTheControlParaGet((DEVICE_AREA_W - 1),(AreaW1Num + 0x02))->time = *FoodLineTimeGet(W2_FOOD_LINE_TIME);
+		AllTheControlParaGet((DEVICE_AREA_W - 1),(AreaW1Num + 0x02))->setStopTime = *FoodLineTimeGet(W2_FOOD_LINE_TIME);
+    }
+	
+    if(AllTheControlParaGet(DEVICE_AREA_E-1,0x02)->time == 0)
+    {
+        AllTheControlParaGet((DEVICE_AREA_E - 1),0x02)->time = *FoodLineTimeGet(E1_FOOD_LINE_TIME);
+		AllTheControlParaGet((DEVICE_AREA_E - 1),0x02)->setStopTime = *FoodLineTimeGet(E1_FOOD_LINE_TIME);
+    }   
+	if(AllTheControlParaGet(DEVICE_AREA_E-1,0x04)->time == 0)
+    {
+        AllTheControlParaGet((DEVICE_AREA_E - 1),0x04)->time = *FoodLineTimeGet(E2_FOOD_LINE_TIME);
+		AllTheControlParaGet((DEVICE_AREA_E - 1),0x04)->setStopTime = *FoodLineTimeGet(E2_FOOD_LINE_TIME);
+    }	
 
+    if(AllTheControlParaGet(DEVICE_AREA_N-1,0x05)->time == 0)
+    {
+        AllTheControlParaGet((DEVICE_AREA_N - 1),0x05)->time = *FoodLineTimeGet(N1_FOOD_LINE_TIME);
+		AllTheControlParaGet((DEVICE_AREA_N - 1),0x05)->setStopTime = *FoodLineTimeGet(N1_FOOD_LINE_TIME);
+    }   
+	if(AllTheControlParaGet(DEVICE_AREA_N-1,(AreaN1Num + 0x01))->time == 0)
+    {
+        AllTheControlParaGet((DEVICE_AREA_N - 1),(AreaN1Num + 0x01))->time = *FoodLineTimeGet(N2_FOOD_LINE_TIME);
+		AllTheControlParaGet((DEVICE_AREA_N - 1),(AreaN1Num + 0x01))->setStopTime = *FoodLineTimeGet(N2_FOOD_LINE_TIME);
+    }	
+	
+}

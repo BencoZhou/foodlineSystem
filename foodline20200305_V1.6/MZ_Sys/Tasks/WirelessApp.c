@@ -256,30 +256,7 @@ void WirelessApp_RcvMsg(u8 cmd, u16 seq, u8 *msg, u16 len, u32 saddr, u32 daddr,
                     evt.Info.b[0] = msg[4];
                     evt.Num = 1;
                     OS_MsgBoxSend(gControlSendNotify_Queue, &evt, OS_NO_DELAY, FALSE);
-//					for(j = 0; j < AREA_DEVICE_TOTAL_NUMBER; j++)
-//					{
-//						if(AllTheControlParaGet(j,0)->cDevice.placeNew.useID != 0)
-//						{
-//							for(i = 0; i < SING_LINK_DEVICE_TOTAL_NUMBER; i++)
-//							{
-//								if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID != 0 )
-//								{
-//									if(AllTheControlParaGet(j,i)->cDevice.placeNew.useID == tempDevice.placeNew.useID)
-//									{
-//										deviceConfirmFlag = 1;
-//										break;
-//									}
-//								}
-//								else
-//									break;
-//							}
-//							if(deviceConfirmFlag)
-//							{
-//								deviceConfirmFlag = 0;
-//								break;
-//							}
-//						}
-//					}
+
                     if(tempDevice.place.type == DEVICE_NAME_FLINE || tempDevice.place.type == DEVICE_NAME_VICE_FLINE)
                         FoodlineControlGet()->rcAlarm = msg[7];
                     else if(tempDevice.place.type == DEVICE_NAME_IN_TOWERS || tempDevice.place.type == DEVICE_NAME_MAIN_VICE)
@@ -345,10 +322,9 @@ void WirelessApp_RcvMsg(u8 cmd, u16 seq, u8 *msg, u16 len, u32 saddr, u32 daddr,
                                 FoodlineControlGet()->manualAuto = msg[index++];
                             }
                             if(i != SING_LINK_DEVICE_TOTAL_NUMBER)
-                            {                                      
-//                                AllTheControlParaGet(i)->stateByte = FoodlineControlGet()->state;
+                            {                   								
                                 AllTheControlParaGet(j,i)->stateByte = msg[14];
-//                                AllTheControlParaGet(i)->alarmByte = FoodlineControlGet()->alarm.buf;
+								AllTheControlParaGet(j,i)->onoff.buf = msg[15];
                                 AllTheControlParaGet(j,i)->alarmByte = msg[17];
                                 AllTheControlParaGet(j,i)->manualAuto = msg [18];
 
@@ -406,51 +382,35 @@ void WirelessApp_RcvMsg(u8 cmd, u16 seq, u8 *msg, u16 len, u32 saddr, u32 daddr,
 //                                AllTheControlParaGet(i)->stateByte = TowersOutControlGet()->motorState;
 //                                AllTheControlParaGet(i)->alarmByte = TowersOutControlGet()->alarm.buf;
                                 AllTheControlParaGet(j,i)->stateByte = msg[14];
-                                AllTheControlParaGet(j,i)->alarmByte = msg[15];  
-                                AllTheControlParaGet(j,i)->manualAuto = msg [16];                                
+                                AllTheControlParaGet(j,i)->alarmByte = msg[15];
+								AllTheControlParaGet(j,i)->onoff.buf = msg[15];								
+                                AllTheControlParaGet(j,i)->manualAuto = msg [16];  
+								if(AllTheControlParaGet((DEVICE_AREA_C - 1),1)->cDevice.placeNew.useID != 0
+									&& AllTheControlParaGet((DEVICE_AREA_W - 1),1)->cDevice.placeNew.useID != 0)
+								{
+									AllTheControlParaGet((DEVICE_AREA_W - 1),1)->stateByte = AllTheControlParaGet((DEVICE_AREA_C - 1),1)->stateByte;						
+									AllTheControlParaGet((DEVICE_AREA_W - 1),1)->alarmByte = AllTheControlParaGet((DEVICE_AREA_C - 1),1)->alarmByte;	
+									AllTheControlParaGet((DEVICE_AREA_W - 1),1)->manualAuto = AllTheControlParaGet((DEVICE_AREA_C - 1),1)->manualAuto;	
+								}
+								if(AllTheControlParaGet((DEVICE_AREA_C - 1),2)->cDevice.placeNew.useID != 0
+									&& AllTheControlParaGet((DEVICE_AREA_W - 1),2)->cDevice.placeNew.useID != 0)
+								{
+									AllTheControlParaGet((DEVICE_AREA_W - 1),2)->stateByte = AllTheControlParaGet((DEVICE_AREA_C - 1),1)->stateByte;						
+									AllTheControlParaGet((DEVICE_AREA_W - 1),2)->alarmByte = AllTheControlParaGet((DEVICE_AREA_C - 1),1)->alarmByte;	
+									AllTheControlParaGet((DEVICE_AREA_W - 1),2)->manualAuto = AllTheControlParaGet((DEVICE_AREA_C - 1),1)->manualAuto;	
+								}
+								if(AllTheControlParaGet((DEVICE_AREA_C - 1),3)->cDevice.placeNew.useID != 0
+									&& AllTheControlParaGet((DEVICE_AREA_W - 1),3)->cDevice.placeNew.useID != 0)
+								{
+									AllTheControlParaGet((DEVICE_AREA_W - 1),3)->stateByte = AllTheControlParaGet((DEVICE_AREA_C - 1),1)->stateByte;						
+									AllTheControlParaGet((DEVICE_AREA_W - 1),3)->alarmByte = AllTheControlParaGet((DEVICE_AREA_C - 1),1)->alarmByte;	
+									AllTheControlParaGet((DEVICE_AREA_W - 1),3)->manualAuto = AllTheControlParaGet((DEVICE_AREA_C - 1),1)->manualAuto;	
+								}
 
                             }
                         } 
                     }
-//					else if(tempDevice.place.type == DEVICE_NAME_VICE_FLINE)   // 副料线驱动
-//					{
-//						if(TOWERS_OUT_RC_DATA_LEN == msg[7])
-//						{
-//							 u8 index = 8;
-//							if(PageXIdGet()->placeNew.useID == tempDevice.placeNew.useID)
-//							{
-//								FoodlineControlGet()->currentA = (msg[index]<<8 | msg[index+1]);
-//								index += 2;
-//								FoodlineControlGet()->currentB = (msg[index]<<8 | msg[index+1]);
-//								index += 2;
-//								FoodlineControlGet()->currentC = (msg[index]<<8 | msg[index+1]);
-//								index += 2;
-//								FoodlineControlGet()->state = msg[index++];
-//								FoodlineControlGet()->sensorState.buf = msg[index++];
-//								FoodlineControlGet()->sensorComm.buf = msg[index++];
-//								FoodlineControlGet()->alarm.buf = msg[index++];
-//								FoodlineControlGet()->manualAuto = msg[index++];
-//							}
-//							if(i != SING_LINK_DEVICE_TOTAL_NUMBER)
-//							{                       
-//								AllTheControlParaGet(j,i)->onoff.buf = msg[8];
-//								if(AllTheControlParaGet(j,i)->onoff.b.b0 == 1)
-//								{
-//								  //  foodUpPlaceArrivalFlag = TRUE;
-//								}
-//								if(AllTheControlParaGet(j,i)->onoff.b.b1 == 1)
-//								{
-//								  //  foodDownPlaceArrivalFlag = TRUE;
-//								} 
-//	//                                AllTheControlParaGet(i)->stateByte = FoodlineControlGet()->state;
-//								AllTheControlParaGet(j,i)->stateByte = msg[14];
-//	//                                AllTheControlParaGet(i)->alarmByte = FoodlineControlGet()->alarm.buf;
-//								AllTheControlParaGet(j,i)->alarmByte = msg[17];
-//								AllTheControlParaGet(j,i)->manualAuto = msg [18];
-
-//							}
-//						} 
-//					}						
+						
 										
                     break;
             }

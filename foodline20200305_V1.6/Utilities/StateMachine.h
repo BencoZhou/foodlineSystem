@@ -19,6 +19,8 @@ typedef enum
 	STATE_CHANGE_SUSPENDING,
 }STATE_CHANGE;
 
+extern OS_MsgBoxHandle gControlStopRe_Queue;
+extern OS_MsgBoxHandle gControlStartRe_Queue;
 void StateMachineInit(void);
 void StateMachineProcess(void);
 

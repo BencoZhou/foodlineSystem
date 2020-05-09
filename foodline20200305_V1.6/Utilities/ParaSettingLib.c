@@ -71,6 +71,7 @@ void S1S2ParaInit(void)
 			gAllTheControlPara[j][i].cDevice.placeNew.device = FOODLINE_STATE;
 			gAllTheControlPara[j][i].isSelect = FALSE;
 			gAllTheControlPara[j][i].time = 0;
+			gAllTheControlPara[j][i].startStopTime = 0;
 		}
 	}
 }
@@ -326,7 +327,7 @@ typedef enum			// ¥Ê¥¢Œª÷√∞≤≈≈
 }MASS_STORAGE_PARA_SAVE;
 
 #define SECTOR_SIZE										(4*1024)
-#define VERSON_HISTORY						            (0x0C)
+#define VERSON_HISTORY						            (0x0d)
 #define HISTORY_MAGIC_NUMBER				            (0xA5)
 
 static ParaMassStorageHead gHead;

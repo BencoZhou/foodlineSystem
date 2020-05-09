@@ -22,6 +22,7 @@ void Page20N2ControlInit(void)
 void Page20N2ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
 {
     u32 data;
+	INPUT_EVENT evt;	
 //    u16 tempSelect, tempState, tempButton, tempAlarm;
     u16 tempEffect, tempIndex,areaIndex;   //areaIndex  需要得到代表区域的地址
 
@@ -67,16 +68,22 @@ void Page20N2ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
         else
         {
             DeviceControlParaGet()->isClickStart = TRUE;
-            DeviceControlParaGet()->isClickStop = FALSE;
 			DeviceControlParaGet()->controlArea[(DEVICE_AREA_N - 1)] = TRUE;
+			DeviceControlParaGet()->controlStopArea[(DEVICE_AREA_N - 1)] = FALSE;
+			DeviceControlParaGet()->controlShutdownArea[(DEVICE_AREA_N - 1)] = FALSE;
+			DeviceControlParaGet()->controlIndexMemory[(DEVICE_AREA_N - 1)] = 0;
+			OS_MsgBoxSend(gControlStartRe_Queue, &evt, OS_NO_DELAY, FALSE);	
         }
     }
     if(addr == PAGE20_STOP_BUTTON)
     {
-        DeviceControlParaGet()->isClickStart = FALSE;
         DeviceControlParaGet()->isClickStop = TRUE;
         DeviceControlParaGet()->isClickShutdown = FALSE;
 		DeviceControlParaGet()->controlStopArea[(DEVICE_AREA_N - 1)] = TRUE;
+		DeviceControlParaGet()->controlArea[(DEVICE_AREA_N - 1)] = FALSE;
+		DeviceControlParaGet()->controlShutdownArea[(DEVICE_AREA_N - 1)] = FALSE;	
+		OS_MsgBoxSend(gControlStopRe_Queue, &evt, OS_NO_DELAY, FALSE);	
+		DeviceControlParaGet()->controlIndexMemory[(DEVICE_AREA_N - 1)]	= SING_LINK_DEVICE_TOTAL_NUMBER - 1;
     }
     if(addr == PAGE20_EMERGENCY_STOP_BUTTON)
     {
@@ -94,8 +101,9 @@ void Page20N2ControlProcess(u8 reg, u16 addr, u8 *pbuf, u8 len)
     if(addr == PAGE20_N2_DELAYTIME)
     {
         AllTheControlParaGet((DEVICE_AREA_N - 1),(AreaN1Num + 0x01))->time = data;
+		AllTheControlParaGet((DEVICE_AREA_N - 1),(AreaN1Num + 0x01))->setStopTime = data;
 		*FoodLineTimeGet(N2_FOOD_LINE_TIME) = data;
-		ParaDelayParaSave();
+		ParaDelayParaSave();		
     }    
    
 

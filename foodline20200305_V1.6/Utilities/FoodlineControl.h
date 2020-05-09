@@ -21,7 +21,12 @@
 #define FOOD_DOWN_PLACE_NO					(0)
 
 #define FOOD_TOWER_LACK_FOOD				(1)
+#define FOOD_TOWER_FULL_FOOD				(2)
+#define FOOD_TOWER_NORMAL_FOOD				(0)
+#define FOOD_TOWER_ERR_FOOD					(4)
 
+#define FOOD_TOWER_FOREWARD_FULL_FOOD		(1)
+#define FOOD_TOWER_REVERSAL_FULL_FOOD		(2)
 
 typedef enum
 {
